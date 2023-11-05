@@ -13,6 +13,8 @@ import PlayIcon from '../PlayIcon'
 import { getReleaseDate } from '../../../../../utils/getReleaseDate'
 import { imageUpload } from '../../../../../utils/imageUpload'
 import Spinner from '../../spinner/Spinner'
+import { formatDate } from '../../../../../utils/helpers'
+import Select from 'react-select'
 
 const DetailsBannerDex = ({ data, meta }) => {
   const [manga, setManga] = useState(null)
@@ -24,6 +26,11 @@ const DetailsBannerDex = ({ data, meta }) => {
       getReleaseDate(data?.uploadedDate)
     }
   }, [data])
+
+  const selectOptions = [
+    { value: 'asc', label: 'Ascending' },
+    { value: 'desc', label: 'Descending' },
+  ]
 
   const downloadImage = () => {
     console.log('download image')
@@ -64,6 +71,16 @@ const DetailsBannerDex = ({ data, meta }) => {
     const minutes = totalMinutes % 60
     return `${hours}h${minutes > 0 ? ` ${minutes}m` : ''}`
   }
+
+  // const formDate = () => {
+  //   const originalDate = '2018-12-23T01:55:29+00:00'
+  //   const date = new Date(originalDate)
+
+  //   const options = { day: '2-digit', month: 'short', year: 'numeric' }
+  //   const formattedDate = date.toLocaleDateString('en-US', options)
+
+  //   console.log('formatted date', formattedDate)
+  // }
 
   return (
     <>
@@ -128,21 +145,7 @@ const DetailsBannerDex = ({ data, meta }) => {
                     Synopsis:{' '}
                     <span style={{ opacity: 0.7 }}>{manga.title}</span>
                   </div>
-                  {/* <div className='description'>{manga.overview}</div> */}
-                  <div className='description'>
-                    Nobility, dazzling appearance, and talent unparalleled. She
-                    had met all the conditions for the life of a princess. She
-                    could not be humbled as she walked the royal path. I’m being
-                    selfish? So what? She lived her life without caring about
-                    what others had thought of her. “Look at this white fur.
-                    It’s like a snowball. It’s fluffy.” Have you no shame?! You
-                    dare touch me?! No matter how much she yelled, her maids
-                    stood dazed. Princess Eristella, an archmage of unprecented
-                    abilities, was cursed and turned into a small fox. It wasn’t
-                    so bad for the princess to be showered with affection by her
-                    dukedom. The same people who used to grit their teeth.
-                    “Eristella”
-                  </div>
+                  <div className='description'>{manga.description}</div>
                 </div>
 
                 <div className='info'>
@@ -164,7 +167,7 @@ const DetailsBannerDex = ({ data, meta }) => {
                     <div className='infoItem'>
                       <span className='text bold'>Uploaded Date: </span>
                       <span className='text'>
-                        {getReleaseDate(manga.uploadedDate)}
+                        {formatDate(manga.uploadedDate)}
                       </span>
                     </div>
                   )}
@@ -180,10 +183,10 @@ const DetailsBannerDex = ({ data, meta }) => {
                 </div>
 
                 <div className='info'>
-                  {data?.author && (
+                  {manga?.author && (
                     <div className='infoItem'>
                       <span className='text bold'>Author: </span>
-                      <div className='text'>{data?.author}</div>
+                      <div className='text'>{manga?.author}</div>
                     </div>
                   )}
 
@@ -212,14 +215,37 @@ const DetailsBannerDex = ({ data, meta }) => {
                     </div>
                   </div>
                 )}
-                <div>
-                  <h1 className='text-[30px]' onClick={imageUpload}>
-                    Download Image
-                  </h1>
-                  {
-                    // meta.chapterData[0].chapter_data[0].src_origin
-                  }
+                {/* Chapters Section */}
+                <div className='mt-8'>
+                  <h1 className='text-[28px] mb-4'>Chapters</h1>
+                  <div className='filter mb-12'>
+                    <Select
+                      className='basic-single'
+                      classNamePrefix='select'
+                      defaultValue={selectOptions[1]}
+                      name='color'
+                      options={selectOptions}
+                    />
+                  </div>
+                  <div
+                    className='max-h-[350px] overflow-y-auto chapters-wrapper'
+                    id='style-6'
+                  >
+                    <ul className=''>
+                      {manga.chapters.slice(0, 15).map((x, idx) => {
+                        return (
+                          <li
+                            key={idx}
+                            className='bg-[#173D77] mb-4 p-3 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'
+                          >
+                            Chapter {idx + 1}
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
                 </div>
+                {/* Chapters Section */}
               </div>
             </div>
             {/* <VideoPopup

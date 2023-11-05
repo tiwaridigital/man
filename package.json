@@ -12,7 +12,6 @@
     "axios": "^1.6.0",
     "dayjs": "^1.11.10",
     "form-data": "^4.0.0",
-    "imgur": "^2.3.0",
     "manga-lib": "^1.1.2",
     "next": "14.0.1",
     "puppeteer": "^21.4.1",
@@ -20,6 +19,7 @@
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18",
     "react-lazy-load-image-component": "^1.6.0",
+    "react-select": "^5.7.7",
     "sass": "^1.69.5"
   },
   "devDependencies": {

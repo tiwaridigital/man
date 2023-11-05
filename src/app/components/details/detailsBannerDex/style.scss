@@ -220,4 +220,11 @@
       }
     }
   }
+
+  .chapters-wrapper > ul > li:hover {
+    background-color: #0a2955;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  
 }
