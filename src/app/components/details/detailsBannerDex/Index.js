@@ -85,7 +85,7 @@ const DetailsBannerDex = ({ data, meta }) => {
                   <Img className='posterImg' src={manga.coverImage} />
                 ) : (
                   <Img className='posterImg' src={manga.coverImage} />
-                  //hello
+
                   // <Img
                   //   className='posterImg'
                   //   src={
