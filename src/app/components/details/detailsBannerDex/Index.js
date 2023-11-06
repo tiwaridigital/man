@@ -15,22 +15,46 @@ import { imageUpload } from '../../../../../utils/imageUpload'
 import Spinner from '../../spinner/Spinner'
 import { formatDate } from '../../../../../utils/helpers'
 import Select from 'react-select'
+import Date from '../../../../../public/assets/icons/Date'
+import Link from 'next/link'
+import Header from '../../header/Header'
 
 const DetailsBannerDex = ({ data, meta }) => {
   const [manga, setManga] = useState(null)
-  console.log('data', data)
+  const [chapters, setChapters] = useState(null)
+  // console.log('data', data)
 
   useEffect(() => {
     setManga(data.detail_manga)
+    if (data) {
+      setChapters(data.detail_manga.chapters)
+    }
     if (data) {
       getReleaseDate(data?.uploadedDate)
     }
   }, [data])
 
+  console.log('chapters', chapters)
+
   const selectOptions = [
     { value: 'asc', label: 'Ascending' },
     { value: 'desc', label: 'Descending' },
   ]
+
+  const sortOrder = (e) => {
+    console.log('sortOrder called', e)
+
+    if (e.value === 'desc') {
+      const arr = chapters.sort((a, b) => b.chapter - a.chapter)
+      console.log('desc', arr)
+      setChapters([...arr])
+      // setChapters([...chapters.sort((a, b) => a - b)])
+    } else {
+      const arr = chapters.sort((a, b) => a.chapter - b.chapter)
+      setChapters([...arr])
+      console.log('asc', arr)
+    }
+  }
 
   const downloadImage = () => {
     console.log('download image')
@@ -87,7 +111,6 @@ const DetailsBannerDex = ({ data, meta }) => {
       {manga ? (
         <div className='detailsBanner'>
           <div className='backdrop-img'>
-            {/* <Img src={url.backdrop + manga.backdrop_path} /> */}
             <Img
               src={
                 'https://image.tmdb.org/t/p/original/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg'
@@ -217,29 +240,40 @@ const DetailsBannerDex = ({ data, meta }) => {
                 )}
                 {/* Chapters Section */}
                 <div className='mt-8'>
-                  <h1 className='text-[28px] mb-4'>Chapters</h1>
-                  <div className='filter mb-12'>
-                    <Select
-                      className='basic-single'
-                      classNamePrefix='select'
-                      defaultValue={selectOptions[1]}
-                      name='color'
-                      options={selectOptions}
-                    />
+                  <div className='flex justify-between items-center mb-6'>
+                    <h1 className='text-[28px]'>Chapters</h1>
+                    <div className='filter'>
+                      <Select
+                        name='sortby'
+                        options={selectOptions}
+                        placeholder='Sort by'
+                        className='react-select-container sortbyDD'
+                        classNamePrefix='react-select'
+                        onChange={sortOrder}
+                      />
+                    </div>
                   </div>
                   <div
                     className='max-h-[350px] overflow-y-auto chapters-wrapper'
                     id='style-6'
                   >
                     <ul className=''>
-                      {manga.chapters.slice(0, 15).map((x, idx) => {
+                      {chapters?.slice(0, 10).map((x, idx) => {
                         return (
-                          <li
+                          <Link
                             key={idx}
-                            className='bg-[#173D77] mb-4 p-3 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'
+                            href={`/details/chapter-${x.chapter}/`}
+                            target='_blank'
                           >
-                            Chapter {idx + 1}
-                          </li>
+                            <li className='bg-[#173D77] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
+                              <p className='mb-[5px] text-[14px]'>
+                                Chapter {x.chapter}
+                              </p>
+                              <span className='text-[12px] opacity-70'>
+                                {formatDate(x.publishedAt)}
+                              </span>
+                            </li>
+                          </Link>
                         )
                       })}
                     </ul>

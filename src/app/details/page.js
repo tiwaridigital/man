@@ -6,7 +6,7 @@ import BannerSkelton from '../components/details/detailsBannerDex/BannerSkelton'
 
 const Details = async () => {
   const details = await getMangaDex()
-  console.log('details', details)
+  // console.log('details', details)
   return (
     // <h1>hello</h1>
     // <div>
