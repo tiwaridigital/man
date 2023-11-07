@@ -4,7 +4,10 @@ import dayjs from 'dayjs'
 
 import './style.scss'
 
-import ContentWrapper from '../../contentWrapper/ContentWrapper'
+// import ContentWrapper from '../../contentWrapper/ContentWrapper'
+const ContentWrapper = dynamic(() =>
+  import('@/app/components/contentWrapper/ContentWrapper')
+)
 import Genres from '../../genres/Genres'
 import CircleRating from '../../circleRating/CircleRating'
 import Img from '../../lazyLoadImage/Img.jsx'
@@ -18,6 +21,7 @@ import Select from 'react-select'
 import Date from '../../../../../public/assets/icons/Date'
 import Link from 'next/link'
 import Header from '../../header/Header'
+import dynamic from 'next/dynamic'
 
 const DetailsBannerDex = ({ data, meta }) => {
   const [manga, setManga] = useState(null)
@@ -34,7 +38,7 @@ const DetailsBannerDex = ({ data, meta }) => {
     }
   }, [data])
 
-  console.log('chapters', chapters)
+  console.log('chapters', manga)
 
   const selectOptions = [
     { value: 'asc', label: 'Ascending' },
@@ -89,12 +93,6 @@ const DetailsBannerDex = ({ data, meta }) => {
   const writers = crew?.filter(
     (w) => w.job === 'Screenplay' || w.job === 'Writer' || w.job === 'Story'
   )
-
-  const toHoursAndMinutes = (totalMinutes) => {
-    const hours = Math.floor(totalMinutes / 60)
-    const minutes = totalMinutes % 60
-    return `${hours}h${minutes > 0 ? ` ${minutes}m` : ''}`
-  }
 
   // const formDate = () => {
   //   const originalDate = '2018-12-23T01:55:29+00:00'
@@ -215,7 +213,7 @@ const DetailsBannerDex = ({ data, meta }) => {
 
                   <div className='infoItem'>
                     <span className='text bold'>Artist: </span>
-                    <span className='text'>{data?.artist}</span>
+                    <span className='text'>{manga?.artist}</span>
                   </div>
                 </div>
 
@@ -270,7 +268,7 @@ const DetailsBannerDex = ({ data, meta }) => {
                                 Chapter {x.chapter}
                               </p>
                               <span className='text-[12px] opacity-70'>
-                                {formatDate(x.publishedAt)}
+                                {formatDate(x.uploadedDate)}
                               </span>
                             </li>
                           </Link>

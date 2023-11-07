@@ -1,0 +1,41 @@
+mutation SingleMangaInsert(
+  $Id: Int
+  $title: String
+  $alternativeName: String
+  $artist: String
+  $author: String
+  $genres: jsonb
+  $chapters: jsonb
+  $coverImg: String
+  $description: String
+  $slug: String
+  $status: String
+) {
+  insert_single_man_one(
+    object: {
+      id: $Id
+      title: $title
+      alternativeName: $alternativeName
+      artist: $artist
+      author: $author
+      genres: $genres
+      chapters: $chapters
+      coverImg: $coverImg
+      description: $description
+      slug: $slug
+      status: $status
+    }
+  ) {
+    id
+    title
+    alternativeName
+    artist
+    author
+    genres
+    chapters
+    coverImg
+    description
+    slug
+    status
+  }
+}

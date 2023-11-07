@@ -1,0 +1,15 @@
+query SingleMangaQuery($Id: Int!) {
+  single_man_by_pk(id: $Id) {
+    id
+    title
+    alternativeName
+    artist
+    author
+    coverImg
+    genres
+    chapters
+    description
+    slug
+    status
+  }
+}

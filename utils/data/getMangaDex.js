@@ -8,7 +8,8 @@ export const getMangaDex = async () => {
 
   // Retrieve the manga details
   const detail_manga = await manga.getDetailManga(
-    '71a621f8-c2bc-496e-aa34-f4b91e9874ac'
+    // '71a621f8-c2bc-496e-aa34-f4b91e9874ac'
+    '05bd710c-d94a-45eb-be99-2109d58f1006'
   )
 
   // get all chapters data
