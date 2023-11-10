@@ -4,8 +4,11 @@ import ContentWrapper from '../contentWrapper/ContentWrapper'
 import Link from 'next/link'
 import Select from 'react-select'
 import Modal from '../modal/Modal'
-const Admin = () => {
+
+const Admin = ({ data }) => {
+  console.log('data', data)
   const [open, setOpen] = useState(false)
+  const [srcUrl, setSrcUrl] = useState(null)
   const options = [
     { value: 'manga', label: 'Create Single Manga' },
     { value: 'chapter', label: 'Create Chapter' },
@@ -20,11 +23,18 @@ const Admin = () => {
   ]
 
   const handleActions = (e) => {
-    if (e.value === 'manga') {
+    if (e.value === 'manga' || e.value === 'chapter') {
+      setOpen(true)
+    }
+  }
+
+  const handleSources = (e) => {
+    if (e.value === 'mangadex') {
+      console.log('mangadex')
       /*
        * First Fetch The Manga Using getManga Function
        */
-      setOpen(true)
+
     }
   }
 
@@ -38,14 +48,8 @@ const Admin = () => {
             onChange={handleActions}
           />
         </div>
-        <button
-          className='text-[30px] text-gray-100'
-          onClick={() => setOpen(true)}
-        >
-          Open Modal
-        </button>
 
-        <Modal setOpen={setOpen} open={open} options={mangaSources} />
+        <Modal setOpen={setOpen} open={open} options={mangaSources} onChange={handleSources} setSrcUrl={setSrcUrl}/>
       </ContentWrapper>
     </div>
   )

@@ -1,15 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 
-const Modal = ({ open, setOpen, options }) => {
-  // const options = [
-  //   { value: 'mangadex', label: 'Mangadex' },
-  //   { value: 'asuratoon', label: 'Asuratoon' },
-  //   { value: 'toonily', label: 'Toonily' },
-  //   { value: 'nettruyen', label: 'Nettruyen' },
-  //   { value: 'blogtruyen', label: 'Blogtruyen' },
-  // ]
-
+const Modal = ({ open, setOpen, options, onChange, setSrcUrl }) => {
   return (
     <>
       {open && (
@@ -23,7 +15,8 @@ const Modal = ({ open, setOpen, options }) => {
 
           <div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
             <div className='flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0'>
-              <div className='flex flex-col justify-between relative h-[70vh] transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg'>
+              <div
+                className='flex flex-col justify-between relative h-[70vh] transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg'>
                 <div className='bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4'>
                   <div className='sm:flex sm:items-start'>
                     <div className='mt-3 mx-auto w-full sm:ml-4 sm:mt-0 sm:text-left'>
@@ -37,9 +30,21 @@ const Modal = ({ open, setOpen, options }) => {
                         <Select
                           options={options}
                           placeholder='Select Source...'
-                          //   onChange={handleActions}
+                          onChange={onChange}
                         />
                       </div>
+
+                      {/*Input*/}
+                      <div
+                        className="flex mt-4 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                        <input
+                          type="text" name="username" id="username" autoComplete="username"
+                          className="block flex-1 border-0 outline-none bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                          placeholder="Enter Url..."
+                          onChange={(e) => setSrcUrl(e.target.value)}
+                        />
+                      </div>
+                      {/*Input*/}
                     </div>
                   </div>
                 </div>
