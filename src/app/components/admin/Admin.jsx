@@ -48,7 +48,6 @@ const Admin = ({ data }) => {
             onChange={handleActions}
           />
         </div>
-
         <Modal setOpen={setOpen} open={open} options={mangaSources} onChange={handleSources} setSrcUrl={setSrcUrl}/>
       </ContentWrapper>
     </div>
