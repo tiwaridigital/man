@@ -11,10 +11,10 @@ const Menu = ({ width = 24, height = 24 }) => {
       <g
         fill='none'
         stroke='currentColor'
-        stroke-dasharray='24'
-        stroke-dashoffset='24'
-        stroke-linecap='round'
-        stroke-width='2'
+        strokeDasharray='24'
+        strokeDashoffset='24'
+        strokeLinecap='round'
+        strokeWidth='2'
       >
         <path d='M5 5H19'>
           <animate
