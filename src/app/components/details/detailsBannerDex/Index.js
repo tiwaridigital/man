@@ -36,7 +36,7 @@ const DetailsBannerDex = () => {
   }, [])
 
   const fetchManga = async () => {
-    const data = await fetchDataServerAction('mangadex')
+    const data = await fetchDataServerAction('mangadex', 'dca7181a-b747-49d1-90fc-34802906e465')
     setManga(data)
   }
 
@@ -49,7 +49,7 @@ const DetailsBannerDex = () => {
     }
   }, [manga])
 
-  console.log('chapters', chapters)
+  console.log('chapters', manga)
 
   const selectOptions = [
     { value: 'asc', label: 'Ascending' },
@@ -126,7 +126,7 @@ const DetailsBannerDex = () => {
               }
             />
           </div>
-          <div className='opacity-layer' />
+          <div className='opacity-layer'/>
           <ContentWrapper>
             <div className='content'>
               <div className='left'>
@@ -164,9 +164,9 @@ const DetailsBannerDex = () => {
                   {/* if src is toonily then replace text  */}
                   {manga?.alterNativeName}
                 </div>
-                <Genres data={manga.detail_manga.genres} />
+                <Genres data={manga.detail_manga.genres}/>
                 <div className='row'>
-                  <CircleRating rating={manga?.rate} />
+                  <CircleRating rating={manga?.rate}/>
                   <div
                     className='playbtn'
                     onClick={() => {
@@ -174,7 +174,7 @@ const DetailsBannerDex = () => {
                       setVideoId(video.key)
                     }}
                   >
-                    <PlayIcon />
+                    <PlayIcon/>
                     <div className='span'>Watch Trailer</div>
                   </div>
                 </div>
@@ -226,16 +226,16 @@ const DetailsBannerDex = () => {
                 </div>
 
                 <div className='info'>
-                  {manga?.author && (
+                  {manga?.detail_manga.author && (
                     <div className='infoItem'>
                       <span className='text bold'>Author: </span>
-                      <div className='text'>{manga?.author}</div>
+                      <div className='text'>{manga?.detail_manga.author}</div>
                     </div>
                   )}
 
                   <div className='infoItem'>
                     <span className='text bold'>Artist: </span>
-                    <span className='text'>{manga?.artist}</span>
+                    <span className='text'>{manga?.detail_manga.artist}</span>
                   </div>
                 </div>
 
@@ -285,7 +285,8 @@ const DetailsBannerDex = () => {
                             href={`/details/chapter-${x.chapter}/`}
                             target='_blank'
                           >
-                            <li className='bg-[#173D77] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
+                            <li
+                              className='bg-[#173D77] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
                               <p className='mb-[5px] text-[14px]'>
                                 Chapter {x.chapter}
                               </p>
@@ -303,15 +304,15 @@ const DetailsBannerDex = () => {
               </div>
             </div>
             {/* <VideoPopup
-              show={show}
-              setShow={setShow}
-              videoId={videoId}
-              setVideoId={setVideoId}
-            /> */}
+             show={show}
+             setShow={setShow}
+             videoId={videoId}
+             setVideoId={setVideoId}
+             /> */}
           </ContentWrapper>
         </div>
       ) : (
-        <BannerSkelton />
+        <BannerSkelton/>
       )}
     </>
   )

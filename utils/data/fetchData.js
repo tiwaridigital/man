@@ -2,7 +2,7 @@ const { Manga, MangaType } = require('manga-lib')
 const FormData = require('form-data')
 import axios from 'axios'
 
-export const fetchData = async (src) => {
+export const fetchData = async (src, url) => {
   if (src === 'mangadex') {
     try {
       // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
@@ -10,8 +10,8 @@ export const fetchData = async (src) => {
 
       // Retrieve the manga details
       const detail_manga = await manga.getDetailManga(
-        // '71a621f8-c2bc-496e-aa34-f4b91e9874ac'
-        '05bd710c-d94a-45eb-be99-2109d58f1006'
+        // '05bd710c-d94a-45eb-be99-2109d58f1006'
+        url
       )
 
       // get all chapters data
@@ -23,7 +23,7 @@ export const fetchData = async (src) => {
       )
 
       return { detail_manga, chapterData }
-    } catch (err) {
+    } catch ( err ) {
       throw new Error(`An error occurred while fetching from Mangadex ${err}`)
     }
   } else if (src === 'asuratoon') {
@@ -48,7 +48,7 @@ export const fetchData = async (src) => {
       )
 
       return { detail_manga, chapterData }
-    } catch (err) {
+    } catch ( err ) {
       throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
     }
   } else if (src === 'nettruyenus') {
@@ -73,7 +73,7 @@ export const fetchData = async (src) => {
       )
 
       return { detail_manga, chapterData }
-    } catch (err) {
+    } catch ( err ) {
       throw new Error(`An error occurred while fetching from Mangadex ${err}`)
     }
   }
