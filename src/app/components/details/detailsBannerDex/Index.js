@@ -22,23 +22,34 @@ import Date from '../../../../../public/assets/icons/Date'
 import Link from 'next/link'
 import Header from '../../header/Header'
 import dynamic from 'next/dynamic'
+import { fetchDataServerAction } from '@/app/actions/fetchDataFromServer'
+import BannerSkelton from './BannerSkelton'
 
-const DetailsBannerDex = ({ data, meta }) => {
+const DetailsBannerDex = () => {
+  // const [data, setData] = useState(null)
   const [manga, setManga] = useState(null)
   const [chapters, setChapters] = useState(null)
   // console.log('data', data)
 
   useEffect(() => {
-    setManga(data.detail_manga)
-    if (data) {
-      setChapters(data.detail_manga.chapters)
-    }
-    if (data) {
-      getReleaseDate(data?.uploadedDate)
-    }
-  }, [data])
+    fetchManga()
+  }, [])
 
-  console.log('chapters', manga)
+  const fetchManga = async () => {
+    const data = await fetchDataServerAction('mangadex')
+    setManga(data)
+  }
+
+  useEffect(() => {
+    if (manga) {
+      setChapters(manga.detail_manga.chapters)
+    }
+    if (manga) {
+      getReleaseDate(manga?.uploadedDate)
+    }
+  }, [manga])
+
+  console.log('chapters', chapters)
 
   const selectOptions = [
     { value: 'asc', label: 'Ascending' },
@@ -119,10 +130,16 @@ const DetailsBannerDex = ({ data, meta }) => {
           <ContentWrapper>
             <div className='content'>
               <div className='left'>
-                {manga.poster_path ? (
-                  <Img className='posterImg' src={manga.coverImage} />
+                {manga.detail_manga.poster_path ? (
+                  <Img
+                    className='posterImg'
+                    src={manga.detail_manga.coverImage}
+                  />
                 ) : (
-                  <Img className='posterImg' src={manga.coverImage} />
+                  <Img
+                    className='posterImg'
+                    src={manga.detail_manga.coverImage}
+                  />
 
                   // <Img
                   //   className='posterImg'
@@ -134,9 +151,10 @@ const DetailsBannerDex = ({ data, meta }) => {
               </div>
               <div className='right'>
                 <div className='title'>
-                  {`${manga.title || manga.original_title} (${dayjs(
-                    manga.release_date
-                  ).format('YYYY')})`}
+                  {`${
+                    manga.detail_manga.title ||
+                    manga.detail_manga.original_title
+                  } (${dayjs(manga.detail_manga.release_date).format('YYYY')})`}
                 </div>
 
                 <div
@@ -146,9 +164,9 @@ const DetailsBannerDex = ({ data, meta }) => {
                   {/* if src is toonily then replace text  */}
                   {manga?.alterNativeName}
                 </div>
-                <Genres data={manga.genres} />
+                <Genres data={manga.detail_manga.genres} />
                 <div className='row'>
-                  <CircleRating rating={data?.rate} />
+                  <CircleRating rating={manga?.rate} />
                   <div
                     className='playbtn'
                     onClick={() => {
@@ -164,16 +182,20 @@ const DetailsBannerDex = ({ data, meta }) => {
                 <div className='overview'>
                   <div className='heading' style={{ marginBottom: 20 }}>
                     Synopsis:{' '}
-                    <span style={{ opacity: 0.7 }}>{manga.title}</span>
+                    <span style={{ opacity: 0.7 }}>
+                      {manga.detail_manga.title}
+                    </span>
                   </div>
-                  <div className='description'>{manga.description}</div>
+                  <div className='description'>
+                    {manga.detail_manga.description}
+                  </div>
                 </div>
 
                 <div className='info'>
-                  {manga.status && (
+                  {manga.detail_manga.status && (
                     <div className='infoItem'>
                       <span className='text bold'>Status: </span>
-                      <span className='text'>{manga.status}</span>
+                      <span className='text'>{manga.detail_manga.status}</span>
                     </div>
                   )}
 
@@ -184,20 +206,20 @@ const DetailsBannerDex = ({ data, meta }) => {
                 </div>
 
                 <div className='info'>
-                  {manga.uploadedDate && (
+                  {manga.detail_manga.uploadedDate && (
                     <div className='infoItem'>
                       <span className='text bold'>Uploaded Date: </span>
                       <span className='text'>
-                        {formatDate(manga.uploadedDate)}
+                        {formatDate(manga.detail_manga.uploadedDate)}
                       </span>
                     </div>
                   )}
 
-                  {manga.uploadedDate && (
+                  {manga.detail_manga.uploadedDate && (
                     <div className='infoItem'>
                       <span className='text bold'>Updated Date: </span>
                       <span className='text'>
-                        {getReleaseDate(manga.uploadedDate)}
+                        {getReleaseDate(manga.detail_manga.uploadedDate)}
                       </span>
                     </div>
                   )}
@@ -218,7 +240,7 @@ const DetailsBannerDex = ({ data, meta }) => {
                 </div>
 
                 {/* Creator in case of Tv Series */}
-                {data?.created_by?.length > 0 && (
+                {manga?.created_by?.length > 0 && (
                   <div className='info'>
                     <span className='text bold'>Creator: </span>
                     <div className='text'>
@@ -288,7 +310,9 @@ const DetailsBannerDex = ({ data, meta }) => {
             /> */}
           </ContentWrapper>
         </div>
-      ) : null}
+      ) : (
+        <BannerSkelton />
+      )}
     </>
   )
 }
