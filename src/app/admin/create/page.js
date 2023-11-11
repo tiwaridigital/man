@@ -8,6 +8,7 @@ import { console } from 'next/dist/compiled/@edge-runtime/primitives';
 const Page = async () => {
   // const data = await fetchData('mangadex')
   // console.log('data', data)
+  var val = null
 
   async function create(formData){
     'use server'
@@ -15,19 +16,29 @@ const Page = async () => {
     // Access the value using the get method
     const manga = formData.get('source')
     const chapter = formData.get('chapter');
-    console.log('sourceValue', manga)
+
     // mutate data
     // revalidate cache
 
     if (manga === 'mangadex') {
-      const data = await fetchData('mangadex')
-      console.log('mangadex', data)
+      // const data = await fetchData('mangadex')
+      // console.log('mangadex', data)
+      fetchData('mangadex').then(res => {
+        // console.log('res', res)
+        formData.append('manga', res)
+        console.log('sourceValue', formData)
+      })
     }
+
+
   }
 
   return (
     <>
-      {/*<Admin data={data}/>*/}
+      {/*{*/}
+      {/*  val && <Admin data={val}/>*/}
+      {/*}*/}
+      {/*<Admin data={val} />*/}
       <div className='pt-[100px]'>
         <form action={create}>
           <InputComponent name={'source'} placeholder={'Enter URL...'}/>
