@@ -3,7 +3,6 @@ const FormData = require('form-data')
 import axios from 'axios'
 
 export const fetchData = async (src) => {
-
   if (src === 'mangadex') {
     try {
       // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
@@ -24,7 +23,7 @@ export const fetchData = async (src) => {
       )
 
       return { detail_manga, chapterData }
-    } catch ( err ) {
+    } catch (err) {
       throw new Error(`An error occurred while fetching from Mangadex ${err}`)
     }
   } else if (src === 'asuratoon') {
@@ -40,12 +39,16 @@ export const fetchData = async (src) => {
       const chapterData = await Promise.all(
         detail_manga.chapters.slice(0, 2).map(async (chapter) => {
           const data = await manga.getDataChapter(chapter.url)
-          return data.chapter_data.filter(x => x.src_origin !== 'https://www.asurascans.com/wp-content/uploads/2021/04/page100-10.jpg')
+          return data.chapter_data.filter(
+            (x) =>
+              x.src_origin !==
+              'https://www.asurascans.com/wp-content/uploads/2021/04/page100-10.jpg'
+          )
         })
       )
 
       return { detail_manga, chapterData }
-    } catch ( err ) {
+    } catch (err) {
       throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
     }
   } else if (src === 'nettruyenus') {
@@ -70,7 +73,7 @@ export const fetchData = async (src) => {
       )
 
       return { detail_manga, chapterData }
-    } catch ( err ) {
+    } catch (err) {
       throw new Error(`An error occurred while fetching from Mangadex ${err}`)
     }
   }
