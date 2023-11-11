@@ -1,5 +1,5 @@
 'use client'
-import { myAction } from '@/app/actions/actions'
+import { myAction } from '@/app/actions/fetchDataFromServer'
 import React from 'react'
 const Test = () => {
   const handleClik = async (e) => {
