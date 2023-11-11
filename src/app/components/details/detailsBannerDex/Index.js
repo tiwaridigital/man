@@ -36,7 +36,7 @@ const DetailsBannerDex = () => {
   }, [])
 
   const fetchManga = async () => {
-    const data = await fetchDataServerAction('mangadex', 'dca7181a-b747-49d1-90fc-34802906e465')
+    const data = await fetchDataServerAction('asuratoon', 'https://asuratoon.com/manga/6849480105-surviving-the-game-as-a-barbarian/')
     setManga(data)
   }
 

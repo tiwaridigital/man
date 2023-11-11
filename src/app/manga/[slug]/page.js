@@ -2,6 +2,7 @@
 import { fetchDataServerAction } from '@/app/actions/fetchDataFromServer'
 import DetailsBannerDex from '@/app/components/details/detailsBannerDex/Index'
 import React, { useEffect, useState } from 'react'
+import DetailsBanner from '@/app/components/details/detailsBanner';
 
 const Page = () => {
   // const [data, setData] = useState(null)
@@ -17,7 +18,8 @@ const Page = () => {
 
   return (
     <div>
-      <DetailsBannerDex />
+      {/*<DetailsBannerDex />*/}
+      <DetailsBanner/>
     </div>
   )
 }

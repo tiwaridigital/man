@@ -1,33 +1,75 @@
-// import React, { useState } from 'react'
 'use client'
 import React, { useState, useEffect } from 'react'
-// import { useParams } from 'react-router-dom'
-// import { useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 
 import './style.scss'
 
-import ContentWrapper from '../../../components/contentWrapper/ContentWrapper'
-// import useFetch from '../../../hooks/useFetch'
-import Genres from '../../../components/genres/Genres'
-import CircleRating from '../../../components/circleRating/CircleRating'
-import Img from '../../../components/lazyLoadImage/Img.jsx'
+// import ContentWrapper from '../../contentWrapper/ContentWrapper'
+const ContentWrapper = dynamic(() =>
+  import('@/app/components/contentWrapper/ContentWrapper')
+)
+import Genres from '../../genres/Genres'
+import CircleRating from '../../circleRating/CircleRating'
+import Img from '../../lazyLoadImage/Img.jsx'
 import PosterFallback from '../../../../assets/no-poster.png'
 import PlayIcon from '../PlayIcon'
 import { getReleaseDate } from '../../../../../utils/getReleaseDate'
 import { imageUpload } from '../../../../../utils/imageUpload'
-// import VideoPopup from '../../../components/videoPopUp/VideoPopUp'
+import Spinner from '../../spinner/Spinner'
+import { formatDate } from '../../../../../utils/helpers'
+import Select from 'react-select'
+import Date from '../../../../../public/assets/icons/Date'
+import Link from 'next/link'
+import Header from '../../header/Header'
+import dynamic from 'next/dynamic'
+import { fetchDataServerAction } from '@/app/actions/fetchDataFromServer'
+import BannerSkelton from '@/app/components/details/detailsBannerDex/BannerSkelton';
 
-const DetailsBanner = ({ data, meta }) => {
+const DetailsBanner = () => {
+  // const [data, setData] = useState(null)
   const [manga, setManga] = useState(null)
-  console.log('data', meta)
+  const [chapters, setChapters] = useState(null)
+  // console.log('data', data)
 
   useEffect(() => {
+    fetchManga()
+  }, [])
+
+  const fetchManga = async () => {
+    const data = await fetchDataServerAction('asuratoon', 'https://asuratoon.com/manga/6849480105-surviving-the-game-as-a-barbarian/')
     setManga(data)
-    if (data) {
-      getReleaseDate(data?.uploadedDate)
+  }
+
+  useEffect(() => {
+    if (manga) {
+      setChapters(manga.detail_manga.chapters)
     }
-  }, [data])
+    if (manga) {
+      getReleaseDate(manga?.uploadedDate)
+    }
+  }, [manga])
+
+  console.log('chapters', manga)
+
+  const selectOptions = [
+    { value: 'asc', label: 'Ascending' },
+    { value: 'desc', label: 'Descending' },
+  ]
+
+  const sortOrder = (e) => {
+    console.log('sortOrder called', e)
+
+    if (e.value === 'desc') {
+      const arr = chapters.sort((a, b) => b.chapter - a.chapter)
+      console.log('desc', arr)
+      setChapters([...arr])
+      // setChapters([...chapters.sort((a, b) => a - b)])
+    } else {
+      const arr = chapters.sort((a, b) => a.chapter - b.chapter)
+      setChapters([...arr])
+      console.log('asc', arr)
+    }
+  }
 
   const downloadImage = () => {
     console.log('download image')
@@ -63,51 +105,56 @@ const DetailsBanner = ({ data, meta }) => {
     (w) => w.job === 'Screenplay' || w.job === 'Writer' || w.job === 'Story'
   )
 
-  const toHoursAndMinutes = (totalMinutes) => {
-    const hours = Math.floor(totalMinutes / 60)
-    const minutes = totalMinutes % 60
-    return `${hours}h${minutes > 0 ? ` ${minutes}m` : ''}`
-  }
+  // const formDate = () => {
+  //   const originalDate = '2018-12-23T01:55:29+00:00'
+  //   const date = new Date(originalDate)
+
+  //   const options = { day: '2-digit', month: 'short', year: 'numeric' }
+  //   const formattedDate = date.toLocaleDateString('en-US', options)
+
+  //   console.log('formatted date', formattedDate)
+  // }
 
   return (
-    <div className='detailsBanner'>
+    <>
       {manga ? (
-        <>
+        <div className='detailsBanner'>
           <div className='backdrop-img'>
-            {/* <Img src={url.backdrop + data.backdrop_path} /> */}
             <Img
               src={
                 'https://image.tmdb.org/t/p/original/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg'
               }
             />
           </div>
-          <div className='opacity-layer' />
+          <div className='opacity-layer'/>
           <ContentWrapper>
             <div className='content'>
               <div className='left'>
-                {data.poster_path ? (
+                {manga.detail_manga.poster_path ? (
                   <Img
                     className='posterImg'
-                    // src={url.backdrop + data.poster_path}
-                    src={
-                      'https://toonily.com/wp-content/uploads/2023/10/The-Duke-and-The-Fox-Princess-537x768.webp'
-                    }
+                    src={manga.detail_manga.coverImage}
                   />
                 ) : (
-                  //   <Img className='posterImg' src={PosterFallback} />
                   <Img
                     className='posterImg'
-                    src={
-                      'https://toonily.com/wp-content/uploads/2023/10/The-Duke-and-The-Fox-Princess-537x768.webp'
-                    }
+                    src={manga.detail_manga.coverImage}
                   />
+
+                  // <Img
+                  //   className='posterImg'
+                  //   src={
+                  //     'https://toonily.com/wp-content/uploads/2023/10/The-Duke-and-The-Fox-Princess-537x768.webp'
+                  //   }
+                  // />
                 )}
               </div>
               <div className='right'>
                 <div className='title'>
-                  {`${data.title || data.original_title} (${dayjs(
-                    data.release_date
-                  ).format('YYYY')})`}
+                  {`${
+                    manga.detail_manga.title ||
+                    manga.detail_manga.original_title
+                  } (${dayjs(manga.detail_manga.release_date).format('YYYY')})`}
                 </div>
 
                 <div
@@ -115,11 +162,11 @@ const DetailsBanner = ({ data, meta }) => {
                   style={{ fontSize: 16, marginTop: 20 }}
                 >
                   {/* if src is toonily then replace text  */}
-                  {data.alterNativeName.replace('Alt Name(s)', '')}
+                  {manga?.alterNativeName}
                 </div>
-                <Genres data={data.genres} />
+                <Genres data={manga.detail_manga.genres}/>
                 <div className='row'>
-                  <CircleRating rating={data?.rate} />
+                  <CircleRating rating={manga?.detail_manga.rate}/>
                   <div
                     className='playbtn'
                     onClick={() => {
@@ -127,37 +174,28 @@ const DetailsBanner = ({ data, meta }) => {
                       setVideoId(video.key)
                     }}
                   >
-                    <PlayIcon />
+                    <PlayIcon/>
                     <div className='span'>Watch Trailer</div>
                   </div>
                 </div>
 
                 <div className='overview'>
                   <div className='heading' style={{ marginBottom: 20 }}>
-                    Synopsis: <span style={{ opacity: 0.7 }}>{data.title}</span>
+                    Synopsis:{' '}
+                    <span style={{ opacity: 0.7 }}>
+                      {manga.detail_manga.title}
+                    </span>
                   </div>
-                  {/* <div className='description'>{data.overview}</div> */}
                   <div className='description'>
-                    Nobility, dazzling appearance, and talent unparalleled. She
-                    had met all the conditions for the life of a princess. She
-                    could not be humbled as she walked the royal path. I’m being
-                    selfish? So what? She lived her life without caring about
-                    what others had thought of her. “Look at this white fur.
-                    It’s like a snowball. It’s fluffy.” Have you no shame?! You
-                    dare touch me?! No matter how much she yelled, her maids
-                    stood dazed. Princess Eristella, an archmage of unprecented
-                    abilities, was cursed and turned into a small fox. It wasn’t
-                    so bad for the princess to be showered with affection by her
-                    dukedom. The same people who used to grit their teeth.
-                    “Eristella”
+                    {manga.detail_manga.description}
                   </div>
                 </div>
 
                 <div className='info'>
-                  {data.status && (
+                  {manga.detail_manga.status && (
                     <div className='infoItem'>
                       <span className='text bold'>Status: </span>
-                      <span className='text'>{data.status}</span>
+                      <span className='text'>{manga.detail_manga.status}</span>
                     </div>
                   )}
 
@@ -168,41 +206,41 @@ const DetailsBanner = ({ data, meta }) => {
                 </div>
 
                 <div className='info'>
-                  {data.uploadedDate && (
+                  {manga.detail_manga.uploadedDate && (
                     <div className='infoItem'>
                       <span className='text bold'>Uploaded Date: </span>
                       <span className='text'>
-                        {getReleaseDate(data.uploadedDate)}
+                        {formatDate(manga.detail_manga.uploadedDate)}
                       </span>
                     </div>
                   )}
 
-                  {data.uploadedDate && (
+                  {manga.detail_manga.updatedDate && (
                     <div className='infoItem'>
                       <span className='text bold'>Updated Date: </span>
                       <span className='text'>
-                        {getReleaseDate(data.uploadedDate)}
+                        {formatDate(manga.detail_manga.updatedDate)}
                       </span>
                     </div>
                   )}
                 </div>
 
                 <div className='info'>
-                  {data?.author && (
+                  {manga?.detail_manga.author && (
                     <div className='infoItem'>
                       <span className='text bold'>Author: </span>
-                      <div className='text'>{data?.author}</div>
+                      <div className='text'>{manga?.detail_manga.author}</div>
                     </div>
                   )}
 
                   <div className='infoItem'>
                     <span className='text bold'>Artist: </span>
-                    <span className='text'>{data?.artist}</span>
+                    <span className='text'>{manga?.detail_manga.artist}</span>
                   </div>
                 </div>
 
                 {/* Creator in case of Tv Series */}
-                {data?.created_by?.length > 0 && (
+                {manga?.created_by?.length > 0 && (
                   <div className='info'>
                     <span className='text bold'>Creator: </span>
                     <div className='text'>
@@ -220,41 +258,63 @@ const DetailsBanner = ({ data, meta }) => {
                     </div>
                   </div>
                 )}
-                <div>
-                  <h1 className='text-[30px]' onClick={imageUpload}>
-                    Download Image
-                  </h1>
-                  {
-                    // meta.chapterData[0].chapter_data[0].src_origin
-                  }
+                {/* Chapters Section */}
+                <div className='mt-8'>
+                  <div className='flex justify-between items-center mb-6'>
+                    <h1 className='text-[28px]'>Chapters</h1>
+                    <div className='filter'>
+                      <Select
+                        name='sortby'
+                        options={selectOptions}
+                        placeholder='Sort by'
+                        className='react-select-container sortbyDD'
+                        classNamePrefix='react-select'
+                        onChange={sortOrder}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className='max-h-[350px] overflow-y-auto chapters-wrapper'
+                    id='style-6'
+                  >
+                    <ul className=''>
+                      {chapters?.slice(0, 10).map((x, idx) => {
+                        return (
+                          <Link
+                            key={idx}
+                            href={`/details/chapter-${x.chapter}/`}
+                            target='_blank'
+                          >
+                            <li
+                              className='bg-[#173D77] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
+                              <p className='mb-[5px] text-[14px]'>
+                                {x.title}
+                              </p>
+                              <span className='text-[12px] opacity-70'>
+                                {x.last_update}
+                              </span>
+                            </li>
+                          </Link>
+                        )
+                      })}
+                    </ul>
+                  </div>
                 </div>
+                {/* Chapters Section */}
               </div>
             </div>
             {/* <VideoPopup
-              show={show}
-              setShow={setShow}
-              videoId={videoId}
-              setVideoId={setVideoId}
-            /> */}
-          </ContentWrapper>
-        </>
-      ) : (
-        <div className='detailsBannerSkeleton'>
-          <ContentWrapper>
-            <div className='left skeleton'></div>
-            <div className='right'>
-              <div className='row skeleton'></div>
-              <div className='row skeleton'></div>
-              <div className='row skeleton'></div>
-              <div className='row skeleton'></div>
-              <div className='row skeleton'></div>
-              <div className='row skeleton'></div>
-              <div className='row skeleton'></div>
-            </div>
+             show={show}
+             setShow={setShow}
+             videoId={videoId}
+             setVideoId={setVideoId}
+             /> */}
           </ContentWrapper>
         </div>
+      ) : (
+        <BannerSkelton/>
       )}
-    </div>
+    </>
   )
 }
 

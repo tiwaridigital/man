@@ -16,7 +16,9 @@ export const fetchData = async (src, url) => {
 
       // get all chapters data
       const chapterData = await Promise.all(
-        detail_manga.chapters.slice(0, 1).map(async (chapter) => {
+        detail_manga.chapters.map(async (chapter) => {
+          // Introduce a delay of 1 second between each iteration
+          await new Promise(resolve => setTimeout(resolve, 3000))
           const data = await manga.getDataChapter(chapter.path)
           return data
         })
