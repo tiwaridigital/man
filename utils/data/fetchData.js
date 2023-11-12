@@ -18,14 +18,14 @@ export const fetchData = async (src, url) => {
       const chapterData = await Promise.all(
         detail_manga.chapters.map(async (chapter) => {
           // Introduce a delay of 1 second between each iteration
-          await new Promise(resolve => setTimeout(resolve, 3000))
+          await new Promise((resolve) => setTimeout(resolve, 3000))
           const data = await manga.getDataChapter(chapter.path)
           return data
         })
       )
 
       return { detail_manga, chapterData }
-    } catch ( err ) {
+    } catch (err) {
       throw new Error(`An error occurred while fetching from Mangadex ${err}`)
     }
   } else if (src === 'asuratoon') {
@@ -39,7 +39,7 @@ export const fetchData = async (src, url) => {
 
       // get all chapters data
       const chapterData = await Promise.all(
-        detail_manga.chapters.slice(0, 2).map(async (chapter) => {
+        detail_manga.chapters.map(async (chapter) => {
           const data = await manga.getDataChapter(chapter.url)
           return data.chapter_data.filter(
             (x) =>
@@ -50,7 +50,7 @@ export const fetchData = async (src, url) => {
       )
 
       return { detail_manga, chapterData }
-    } catch ( err ) {
+    } catch (err) {
       throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
     }
   } else if (src === 'nettruyenus') {
@@ -75,7 +75,7 @@ export const fetchData = async (src, url) => {
       )
 
       return { detail_manga, chapterData }
-    } catch ( err ) {
+    } catch (err) {
       throw new Error(`An error occurred while fetching from Mangadex ${err}`)
     }
   }

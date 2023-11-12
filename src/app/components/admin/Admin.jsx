@@ -6,6 +6,7 @@ import Select from 'react-select'
 import Modal from '../modal/Modal'
 import { fetchDataServerAction } from '@/app/actions/fetchDataFromServer'
 import SINGLE_MANGA_MUTATE from '../../admin/graphql/SingleMangaMutation.gql'
+import SINGLE_CHAPTER_MUTATE from '../../admin/graphql/chapters/SingleChapterMutation.gql'
 import client from '../../../../client'
 
 const Admin = () => {
@@ -40,7 +41,10 @@ const Admin = () => {
      * i.e. function based on 'use server' method -> where you can call other server functions
      * and then use those not directly supported server functions/methods -> indirectly
      */
-    const data = await fetchDataServerAction(e.value, 'https://asuratoon.com/manga/6849480105-surviving-the-game-as-a-barbarian/')
+    const data = await fetchDataServerAction(
+      e.value,
+      'https://asuratoon.com/manga/6849480105-surviving-the-game-as-a-barbarian/'
+    )
     setManga(data)
 
     /*
@@ -55,37 +59,72 @@ const Admin = () => {
         coverImage,
         status,
         description,
+        genres,
+        // chapters,
       } = data.detail_manga
 
-      const genres = data.detail_manga.genres.map((x) => x.name)
+      // const genres = data.detail_manga.genres.map((x) => x.name)
+
+      // console.log('chapters', chapters)
+      const result = await client.mutate({
+        mutation: SINGLE_MANGA_MUTATE,
+        variables: {
+          title,
+          alternativeName: 'alterNativeName',
+          artist,
+          author,
+          coverImage,
+          genres,
+          chapters: 'chapters',
+          status,
+          description: 'description',
+          src: e.value,
+        },
+      })
+      console.log('result', result)
+
+      /*
+       * Create Chapter Now After Manga is Created
+       */
+      // const chapterObj = {
+      //   name: chapters[0].title,
+      //   data: chapters[0].chapter_data,
+      //   url: result.insert_singleMang_one.id
+      // }
 
       const chapters = data.detail_manga.chapters.map((x, idx) => {
         return {
-          chapter: x.chapter,
           title: x.title,
-          uploadedDate: x.uploadedDate,
-          chapter_data: data.chapterData[idx]
+          url: result.data.insert_singleMang_one.id,
+          chapter_data: data.chapterData[idx],
         }
       })
 
       console.log('chapters', chapters)
-      // const result = await client.mutate({
-      //   mutation: SINGLE_MANGA_MUTATE,
+
+      chapters.forEach(async (x, idx) => {
+        const chapterResult = await client.mutate({
+          mutation: SINGLE_CHAPTER_MUTATE,
+          variables: {
+            title: x.title,
+            url: x.url,
+            data: x.chapter_data,
+          },
+        })
+        console.log('chapterResult', chapterResult)
+      })
+
+      // const chapterResult = await client.mutate({
+      //   mutation: SINGLE_CHAPTER_MUTATE,
       //   variables: {
-      //     title,
-      //     alternativeName: alterNativeName,
-      //     artist,
-      //     author,
-      //     coverImage,
-      //     genres,
-      //     chapters,
-      //     status,
-      //     description,
-      //     src: e.value,
+      //     name: chapters[0].title,
+      //     data: chapters[0].chapter_data,
+      //     url: result.data.insert_singleMang_one.id,
       //   },
       // })
-      // console.log('result', result)
-    } catch ( err ) {
+
+      // console.log('chapterResult', chapterResult)
+    } catch (err) {
       throw new Error(`Error Creating Single Manga to DB: ${err}`)
     }
   }

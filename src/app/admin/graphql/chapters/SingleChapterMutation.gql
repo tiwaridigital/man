@@ -1,0 +1,8 @@
+mutation SingleChapterInsert($title: String, $url: uuid, $data: jsonb) {
+  insert_chapters_one(object: { title: $title, url: $url, data: $data }) {
+    id
+    title
+    url
+    data
+  }
+}
