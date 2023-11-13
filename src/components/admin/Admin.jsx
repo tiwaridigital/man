@@ -6,6 +6,8 @@ import Modal from '../modal/Modal'
 import {fetchDataServerAction} from '@/app/actions/fetchDataFromServer'
 import SINGLE_MANGA_MUTATE from '../../app/admin/graphql/SingleMangaMutation.gql'
 import SINGLE_CHAPTER_MUTATE from '../../app/admin/graphql/chapters/SingleChapterMutation.gql'
+import COMPLETE_CHAPTER_MUTATION from '@/graphql/chapter_tracker/completeChapterMutation.gql'
+import INCOMPLETE_CHAPTER_MUTATION from '@/graphql/chapter_tracker/inCompleteChapterMutation.gql'
 import client from '../../../client'
 import {slugify} from '../../../utils/helpers'
 import gql from 'graphql-tag';
@@ -44,8 +46,8 @@ const Admin = () => {
          */
         const data = await fetchDataServerAction(
             e.value,
-            // 'https://asuratoon.com/manga/6849480105-i-killed-an-academy-player/'
-            'https://asuratoon.com/manga/6849480105-the-max-level-players-100th-regression/'
+            'https://asuratoon.com/manga/6849480105-i-killed-an-academy-player/'
+            // 'https://asuratoon.com/manga/6849480105-the-max-level-players-100th-regression/'
         )
         setManga(data)
 
@@ -139,18 +141,7 @@ const Admin = () => {
          */
         if (count === chaptersArr.length) {
             const chapterTrackerResult = await client.mutate({
-                mutation: gql`
-                    mutation ChapterTrackerMutation($chapterId: uuid!) {
-                        insert_chapter_tracker_one(
-                            object: {
-                                complete: $chapterId
-                            }
-                        ) {
-                            id
-                            complete
-                        }
-                    }
-                `,
+                mutation: COMPLETE_CHAPTER_MUTATION,
                 variables: {
                     chapterId: mangaResult.data.insert_singleMang_one.id,
                 }
@@ -158,18 +149,7 @@ const Admin = () => {
             console.log('chapterTracker Complete', chapterTrackerResult)
         } else {
             const chapterTrackerResult = await client.mutate({
-                mutation: gql`
-                    mutation ChapterTrackerMutation($chapterId: uuid!) {
-                        insert_chapter_tracker_one(
-                            object: {
-                                incomplete: $chapterId
-                            }
-                        ) {
-                            id
-                            incomplete
-                        }
-                    }
-                `,
+                mutation: INCOMPLETE_CHAPTER_MUTATION,
                 variables: {
                     chapterId: mangaResult.data.insert_singleMang_one.id
                 }

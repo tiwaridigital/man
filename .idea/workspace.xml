@@ -5,21 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="707898a2-cb76-4285-b390-c03aed2ac5dc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/graphql/SingleMangaQuery.gql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/data/fetchSingleManga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/actions/fetchDataFromServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/actions/fetchDataFromServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/graphql/SingleMangaQuery.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/graphql/SingleMangaQuery.gql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/graphql/chapters/SingleChapterQuery.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/graphql/chapters/SingleChapterQuery.gql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/details/[chapter]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/details/[chapter]/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/details/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/details/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/manga/[slug]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/manga/[slug]/page.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/graphql/chapter_tracker/completeChapterMutation.gql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/graphql/chapter_tracker/inCompleteChapterMutation.gql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/Admin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/details/detailsBanner/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBanner/Index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/details/singleChapter/SingleChapter.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/singleChapter/SingleChapter.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data/fetchData.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/admin/data/fetchData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data/getData.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/admin/data/getData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data/getMangaDex.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/admin/data/getMangaDex.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +80,7 @@
       <workItem from="1699864520972" duration="245000" />
       <workItem from="1699864773380" duration="99000" />
       <workItem from="1699864880490" duration="2719000" />
-      <workItem from="1699884705004" duration="11416000" />
+      <workItem from="1699884705004" duration="11794000" />
     </task>
     <servers />
   </component>
