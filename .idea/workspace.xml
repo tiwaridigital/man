@@ -5,43 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="707898a2-cb76-4285-b390-c03aed2ac5dc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/admin/graphql/chapters/SingleChapterQuery.gql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/man.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/graphql/SingleMangaQuery.gql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/data/fetchSingleManga.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/create/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/create/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/Imgur/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Imgur/Index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/Admin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/circleRating/CircleRating.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/circleRating/CircleRating.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/circleRating/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/circleRating/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/contentWrapper/ContentWrapper.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/contentWrapper/ContentWrapper.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/contentWrapper/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/contentWrapper/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/details/PlayIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/PlayIcon.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/details/detailsBanner/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBanner/Index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/details/detailsBanner/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBanner/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/details/detailsBannerDex/BannerSkelton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBannerDex/BannerSkelton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/details/detailsBannerDex/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBannerDex/Index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/details/detailsBannerDex/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBannerDex/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/details/singleChapter/SingleChapter.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/singleChapter/SingleChapter.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/details/singleChapter/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/singleChapter/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/footer/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/genres/Genres.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/genres/Genres.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/genres/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/genres/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/header/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/lazyLoadImage/Img.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/lazyLoadImage/Img.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/modal/Modal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal/Modal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/spinner/Spinner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/spinner/Spinner.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/spinner/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/spinner/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/actions/fetchDataFromServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/actions/fetchDataFromServer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/graphql/SingleMangaQuery.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/graphql/SingleMangaQuery.gql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/graphql/chapters/SingleChapterQuery.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/graphql/chapters/SingleChapterQuery.gql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/details/[chapter]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/details/[chapter]/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/details/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/details/loading.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/details/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/details/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/imgur/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/imgur/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/manga/[slug]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/manga/[slug]/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data/fetchData.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data/fetchData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/Admin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/details/detailsBanner/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBanner/Index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/details/singleChapter/SingleChapter.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/singleChapter/SingleChapter.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/data/fetchData.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/admin/data/fetchData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/data/getData.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/admin/data/getData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/data/getMangaDex.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/admin/data/getMangaDex.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,14 +35,14 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="OptimizeOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2Y4jKFuLzgjszoZzH0pRFgA30Vz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -76,6 +54,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tiwar/OneDrive/Desktop/man&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -83,13 +62,13 @@
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tiwar\OneDrive\Desktop\man\utils\admin" />
       <recent name="C:\Users\tiwar\OneDrive\Desktop\man\src" />
     </key>
   </component>
@@ -108,6 +87,12 @@
       <workItem from="1699853041238" duration="1975000" />
       <workItem from="1699862386852" duration="830000" />
       <workItem from="1699863230763" duration="91000" />
+      <workItem from="1699863330202" duration="347000" />
+      <workItem from="1699864458817" duration="42000" />
+      <workItem from="1699864520972" duration="245000" />
+      <workItem from="1699864773380" duration="99000" />
+      <workItem from="1699864880490" duration="2719000" />
+      <workItem from="1699884705004" duration="11416000" />
     </task>
     <servers />
   </component>

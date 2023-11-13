@@ -1,11 +1,11 @@
 query SingleMangaQuery($slug: String!) {
-    single_man_by_pk(id: $slug) {
+    singleMang( where: { slug: { _eq: $slug } } ) {
         id
         title
         alternativeName
         artist
         author
-        coverImg
+        coverImage
         genres
         chapters
         description

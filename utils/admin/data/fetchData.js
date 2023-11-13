@@ -1,6 +1,5 @@
 const { Manga, MangaType } = require('manga-lib')
 const FormData = require('form-data')
-import axios from 'axios'
 
 export const fetchData = async (src, url) => {
   if (src === 'mangadex') {
