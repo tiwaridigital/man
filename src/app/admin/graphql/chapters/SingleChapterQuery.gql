@@ -1,0 +1,11 @@
+query SingleChapterQuery($url: uuid!) {
+  chapters(where: { url: { _eq: $url } }) {
+    data
+    title
+    url
+    id
+    singleMang {
+      id
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import '../index.scss'
-import Footer from './components/footer/Footer'
-import Header from './components/header/Header'
+import Footer from '@/components/footer/Footer'
+import Header from '@/components/header/Header'
 
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({

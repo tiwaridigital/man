@@ -5,14 +5,14 @@ import { useState } from 'react'
 // import { useNavigate } from "react-router-dom";
 // import { useLocation } from "react-router-dom";
 import ContentWrapper from '../contentWrapper/ContentWrapper'
-import logo from '../../../assets/movix-logo.svg'
+import logo from '../../assets/movix-logo.svg'
 // import { HiOutlineSearch } from 'react-icons/hi'
 // import { VscChromeClose } from 'react-icons/vsc'
 // import { SlMenu } from 'react-icons/sl'
 import { useEffect } from 'react'
-import Search from '../../../../public/assets/icons/Search'
-import Close from '../../../../public/assets/icons/Close'
-import Menu from '../../../../public/assets/icons/Menu'
+import Search from '../../../public/assets/icons/Search'
+import Close from '../../../public/assets/icons/Close'
+import Menu from '../../../public/assets/icons/Menu'
 
 const Header = () => {
   const [show, setShow] = useState('top')

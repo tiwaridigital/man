@@ -5,9 +5,10 @@ import Link from 'next/link'
 import Select from 'react-select'
 import Modal from '../modal/Modal'
 import { fetchDataServerAction } from '@/app/actions/fetchDataFromServer'
-import SINGLE_MANGA_MUTATE from '../../admin/graphql/SingleMangaMutation.gql'
-import SINGLE_CHAPTER_MUTATE from '../../admin/graphql/chapters/SingleChapterMutation.gql'
-import client from '../../../../client'
+import SINGLE_MANGA_MUTATE from '../../app/admin/graphql/SingleMangaMutation.gql'
+import SINGLE_CHAPTER_MUTATE from '../../app/admin/graphql/chapters/SingleChapterMutation.gql'
+import client from '../../../client'
+import { slugify } from '../../../utils/helpers'
 
 const Admin = () => {
   const [manga, setManga] = useState(null)
@@ -43,7 +44,7 @@ const Admin = () => {
      */
     const data = await fetchDataServerAction(
       e.value,
-      'https://asuratoon.com/manga/6849480105-surviving-the-game-as-a-barbarian/'
+      'https://asuratoon.com/manga/6849480105-i-killed-an-academy-player/'
     )
     setManga(data)
 
@@ -63,6 +64,8 @@ const Admin = () => {
         // chapters,
       } = data.detail_manga
 
+      const slug = slugify(title)
+
       // const genres = data.detail_manga.genres.map((x) => x.name)
 
       // console.log('chapters', chapters)
@@ -79,24 +82,20 @@ const Admin = () => {
           status,
           description: 'description',
           src: e.value,
+          slug
         },
       })
       console.log('result', result)
 
       /*
-       * Create Chapter Now After Manga is Created
+       * Create Chapter Now => After Manga is Created
        */
-      // const chapterObj = {
-      //   name: chapters[0].title,
-      //   data: chapters[0].chapter_data,
-      //   url: result.insert_singleMang_one.id
-      // }
-
       const chapters = data.detail_manga.chapters.map((x, idx) => {
         return {
           title: x.title,
           url: result.data.insert_singleMang_one.id,
           chapter_data: data.chapterData[idx],
+          slug: slugify(`${result.data.insert_singleMang_one.slug} chapter ${data.detail_manga.chapters.length - idx}`)
         }
       })
 
@@ -109,21 +108,11 @@ const Admin = () => {
             title: x.title,
             url: x.url,
             data: x.chapter_data,
+            slug: x.slug
           },
         })
         console.log('chapterResult', chapterResult)
       })
-
-      // const chapterResult = await client.mutate({
-      //   mutation: SINGLE_CHAPTER_MUTATE,
-      //   variables: {
-      //     name: chapters[0].title,
-      //     data: chapters[0].chapter_data,
-      //     url: result.data.insert_singleMang_one.id,
-      //   },
-      // })
-
-      // console.log('chapterResult', chapterResult)
     } catch (err) {
       throw new Error(`Error Creating Single Manga to DB: ${err}`)
     }

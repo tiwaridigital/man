@@ -6,19 +6,19 @@ import './style.scss'
 
 // import ContentWrapper from '../../contentWrapper/ContentWrapper'
 const ContentWrapper = dynamic(() =>
-  import('@/app/components/contentWrapper/ContentWrapper')
+  import('@/components/contentWrapper/ContentWrapper')
 )
 import Genres from '../../genres/Genres'
 import CircleRating from '../../circleRating/CircleRating'
 import Img from '../../lazyLoadImage/Img.jsx'
-import PosterFallback from '../../../../assets/no-poster.png'
+import PosterFallback from '../../../assets/no-poster.png'
 import PlayIcon from '../PlayIcon'
-import { getReleaseDate } from '../../../../../utils/getReleaseDate'
-import { imageUpload } from '../../../../../utils/imageUpload'
+import { getReleaseDate } from '../../../../utils/getReleaseDate'
+import { imageUpload } from '../../../../utils/imageUpload'
 import Spinner from '../../spinner/Spinner'
-import { formatDate } from '../../../../../utils/helpers'
+import { formatDate } from '../../../../utils/helpers'
 import Select from 'react-select'
-import Date from '../../../../../public/assets/icons/Date'
+import Date from '../../../../public/assets/icons/Date'
 import Link from 'next/link'
 import Header from '../../header/Header'
 import dynamic from 'next/dynamic'

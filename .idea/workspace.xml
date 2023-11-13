@@ -1,55 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="78f26980-6acc-420e-8648-b57a10b0b3c8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/admin/graphql/chapters/SingleChapterMutation.gql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
+    <list default="true" id="707898a2-cb76-4285-b390-c03aed2ac5dc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/admin/graphql/chapters/SingleChapterQuery.gql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/man.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/admin/Admin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/create/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/create/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/Imgur/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Imgur/Index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/Admin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/circleRating/CircleRating.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/circleRating/CircleRating.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/circleRating/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/circleRating/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/contentWrapper/ContentWrapper.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/contentWrapper/ContentWrapper.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/contentWrapper/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/contentWrapper/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/details/PlayIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/PlayIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/details/detailsBanner/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBanner/Index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/details/detailsBanner/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBanner/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/details/detailsBannerDex/BannerSkelton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBannerDex/BannerSkelton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/details/detailsBannerDex/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBannerDex/Index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/details/detailsBannerDex/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBannerDex/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/details/singleChapter/SingleChapter.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/singleChapter/SingleChapter.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/details/singleChapter/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/singleChapter/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/footer/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/genres/Genres.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/genres/Genres.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/genres/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/genres/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/header/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/lazyLoadImage/Img.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/lazyLoadImage/Img.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/modal/Modal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal/Modal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/spinner/Spinner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/spinner/Spinner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/spinner/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/spinner/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/details/[chapter]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/details/[chapter]/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/details/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/details/loading.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/details/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/details/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/imgur/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/imgur/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/manga/[slug]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/manga/[slug]/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/data/fetchData.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data/fetchData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/helpers.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
-  <component name="ProjectId" id="2Y3qkF56EYRiCoIklPPjJQjvgAT" />
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2Y4jKFuLzgjszoZzH0pRFgA30Vz" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tiwar\OneDrive\Desktop\man\src" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="78f26980-6acc-420e-8648-b57a10b0b3c8" name="Changes" comment="" />
-      <created>1699764753250</created>
+      <changelist id="707898a2-cb76-4285-b390-c03aed2ac5dc" name="Changes" comment="" />
+      <created>1699791680602</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1699764753250</updated>
-      <workItem from="1699764756480" duration="2000" />
+      <updated>1699791680602</updated>
+      <workItem from="1699791683801" duration="635000" />
+      <workItem from="1699792335956" duration="82000" />
+      <workItem from="1699851305538" duration="60000" />
+      <workItem from="1699851375907" duration="629000" />
+      <workItem from="1699853041238" duration="1975000" />
+      <workItem from="1699862386852" duration="830000" />
+      <workItem from="1699863230763" duration="91000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

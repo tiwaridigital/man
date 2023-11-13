@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react'
-import DetailsBannerDex from '../components/details/detailsBannerDex/Index'
+import DetailsBannerDex from '@/components/details/detailsBannerDex/Index'
 import { getData } from '../../../utils/data/getData'
 import { getMangaDex } from '../../../utils/data/getMangaDex'
-import BannerSkelton from '../components/details/detailsBannerDex/BannerSkelton'
+import BannerSkelton from '@/components/details/detailsBannerDex/BannerSkelton'
 
 const Details = async () => {
   const details = await getMangaDex()

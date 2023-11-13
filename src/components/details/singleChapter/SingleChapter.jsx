@@ -11,10 +11,10 @@ const SingleChapter = ({ chapter }) => {
       <ContentWrapper>
         <div className='mt-12 chapter-wrapper'>
           <h1 className='text-center text-[25px] text-gray-100'>
-            {chapter.title}
+            {chapter?.title}
           </h1>
           <div className='subtitle' style={{ marginTop: 20 }}>
-            Read the latest manga {chapter.title}
+            Read the latest manga {chapter?.title}
             at Asura Scans . Manga The Dark Mage’s Return to Enlistment is
             always updated at Asura Scans . Dont forget to read the other manga
             updates. A list of manga collections Asura Scans is in the Manga
@@ -23,7 +23,7 @@ const SingleChapter = ({ chapter }) => {
 
           <div className='flex flex-col items-center'>
             {/* Images */}
-            {chapter.chapter_data.map((item, idx) => {
+            {chapter?.[0].data.map((item, idx) => {
               return (
                 <div key={idx} className='backdrop-img w-[800px] mb-6'>
                   <Img src={item.src_origin} alt='' />

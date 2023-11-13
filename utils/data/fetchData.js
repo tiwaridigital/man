@@ -33,8 +33,8 @@ export const fetchData = async (src, url) => {
     try {
       // Retrieve the manga details
       const detail_manga = await manga.getDetailManga(
-        // '71a621f8-c2bc-496e-aa34-f4b91e9874ac'
-        'https://asuratoon.com/manga/6849480105-revenge-of-the-iron-blooded-sword-hound/'
+        // 'https://asuratoon.com/manga/6849480105-revenge-of-the-iron-blooded-sword-hound/'
+        url
       )
 
       // get all chapters data
