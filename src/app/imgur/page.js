@@ -2,7 +2,7 @@
 import React from 'react'
 const FormData = require('form-data')
 
-import Imgur from '../components/Imgur/Index'
+import Imgur from '@/components/Imgur/Index'
 import axios from 'axios'
 const Page = () => {
   let htmlContent = ''

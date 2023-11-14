@@ -1,5 +1,5 @@
 import React from 'react'
-import Admin from '@/app/components/admin/Admin'
+import Admin from '@/components/admin/Admin'
 
 const Page = async () => {
   return (

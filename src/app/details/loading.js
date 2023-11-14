@@ -1,5 +1,5 @@
 import React from 'react'
-import BannerSkelton from '../components/details/detailsBannerDex/BannerSkelton'
+import BannerSkelton from '@/components/details/detailsBannerDex/BannerSkelton'
 
 const Loading = () => {
   return <BannerSkelton />

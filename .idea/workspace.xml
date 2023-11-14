@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="707898a2-cb76-4285-b390-c03aed2ac5dc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/graphql/SingleMangaMutation.gql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/graphql/SingleMangaQuery.gql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/graphql/chapters/SingleChapterMutation.gql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/graphql/chapters/SingleChapterQuery.gql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/details/[chapter]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/details/[chapter]/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/manga/[slug]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/manga/[slug]/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/admin/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/Admin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/details/detailsBanner/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/details/detailsBanner/Index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/genres/Genres.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/genres/Genres.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/SingleMangaQuery.gql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/chapter_tracker/completeChapterMutation.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/client/chapter_tracker/completeChapterMutation.gql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/chapter_tracker/inCompleteChapterMutation.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/client/chapter_tracker/inCompleteChapterMutation.gql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/data/fetchSingleManga.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data/fetchSingleManga.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2Y4jKFuLzgjszoZzH0pRFgA30Vz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tiwar/OneDrive/Desktop/man&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tiwar\OneDrive\Desktop\man\src\graphql\adm" />
+      <recent name="C:\Users\tiwar\OneDrive\Desktop\man\src\graphql" />
+      <recent name="C:\Users\tiwar\OneDrive\Desktop\man\src\graphql\admin" />
+      <recent name="C:\Users\tiwar\OneDrive\Desktop\man\src\graphql\client" />
+      <recent name="C:\Users\tiwar\OneDrive\Desktop\man\utils\admin" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="707898a2-cb76-4285-b390-c03aed2ac5dc" name="Changes" comment="" />
+      <created>1699791680602</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699791680602</updated>
+      <workItem from="1699791683801" duration="635000" />
+      <workItem from="1699792335956" duration="82000" />
+      <workItem from="1699851305538" duration="60000" />
+      <workItem from="1699851375907" duration="629000" />
+      <workItem from="1699853041238" duration="1975000" />
+      <workItem from="1699862386852" duration="830000" />
+      <workItem from="1699863230763" duration="91000" />
+      <workItem from="1699863330202" duration="347000" />
+      <workItem from="1699864458817" duration="42000" />
+      <workItem from="1699864520972" duration="245000" />
+      <workItem from="1699864773380" duration="99000" />
+      <workItem from="1699864880490" duration="2719000" />
+      <workItem from="1699884705004" duration="11905000" />
+      <workItem from="1699937026914" duration="819000" />
+      <workItem from="1699937897906" duration="1267000" />
+      <workItem from="1699939324349" duration="45000" />
+      <workItem from="1699939627060" duration="99000" />
+      <workItem from="1699942159254" duration="497000" />
+      <workItem from="1699950264546" duration="1040000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

@@ -1,0 +1,15 @@
+query SingleMangaQuery($slug: String!) {
+    singleMang( where: { slug: { _eq: $slug } } ) {
+        id
+        title
+        alternativeName
+        artist
+        author
+        coverImage
+        genres
+        chapters
+        description
+        slug
+        status
+    }
+}
