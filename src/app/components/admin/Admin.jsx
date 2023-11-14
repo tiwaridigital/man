@@ -40,7 +40,10 @@ const Admin = () => {
      * i.e. fucntion based on 'use server' method -> where you can call other server functions
      * and then use those not directly supported server functions/methods -> indirectly
      */
-    const data = await fetchDataServerAction(e.value)
+    const data = await fetchDataServerAction(
+      e.value,
+      'f8e3a350-6d64-4585-8e12-af0a601662f7'
+    )
     setManga(data)
 
     /*
@@ -59,33 +62,44 @@ const Admin = () => {
 
       const genres = data.detail_manga.genres.map((x) => x.name)
       console.log('genres', genres)
-      const chapters = data.detail_manga.chapters.map((x) => {
+      const chapters = data.detail_manga.chapters.map((x, idx) => {
         return {
           chapter: x.chapter,
           title: x.title,
           uploadedDate: x.uploadedDate,
-          url: '',
+          chapterData: data.chapterData[idx],
         }
       })
       console.log('chapters', chapters)
-      const result = await client.mutate({
-        mutation: SINGLE_MANGA_MUTATE,
-        variables: {
-          title,
-          alternativeName: alterNativeName,
-          artist,
-          author,
-          coverImage,
-          genres,
-          chapters,
-          status,
-          description,
-          src: e.value,
-        },
-      })
-      console.log('result', result)
+      // const result = await client.mutate({
+      //   mutation: SINGLE_MANGA_MUTATE,
+      //   variables: {
+      //     title,
+      //     alternativeName: alterNativeName,
+      //     artist,
+      //     author,
+      //     coverImage,
+      //     genres,
+      //     chapters,
+      //     status,
+      //     description,
+      //     src: e.value,
+      //   },
+      // })
+      // console.log('result', result)
     } catch (err) {
       throw new Error(`Error Creating Single Manga to DB: ${err}`)
+    }
+  }
+
+  const createChapters = async () => {
+    console.log('createChapters called')
+    try {
+      const result = await client.mutate({
+        // mutation
+      })
+    } catch (err) {
+      throw new Error('Error Creating Chapters', err)
     }
   }
 
