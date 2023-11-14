@@ -1,5 +1,5 @@
 import client from '../../client';
-import SINGLE_MANGA_QUERY from '@/graphql/SingleMangaQuery.gql'
+import SINGLE_MANGA_QUERY from '@/graphql/client/manga/SingleMangaQuery.gql'
 
 const fetchSingleManga = async (slug) => {
     try {

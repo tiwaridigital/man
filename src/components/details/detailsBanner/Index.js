@@ -132,13 +132,6 @@ const DetailsBanner = ({manga}) => {
                                         className='posterImg'
                                         src={manga.coverImage}
                                     />
-
-                                    // <Img
-                                    //   className='posterImg'
-                                    //   src={
-                                    //     'https://toonily.com/wp-content/uploads/2023/10/The-Duke-and-The-Fox-Princess-537x768.webp'
-                                    //   }
-                                    // />
                                 )}
                             </div>
                             <div className='right'>

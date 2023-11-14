@@ -4,10 +4,10 @@ import ContentWrapper from '../contentWrapper/ContentWrapper'
 import Select from 'react-select'
 import Modal from '../modal/Modal'
 import {fetchDataServerAction} from '@/app/actions/fetchDataFromServer'
-import SINGLE_MANGA_MUTATE from '../../app/admin/graphql/SingleMangaMutation.gql'
-import SINGLE_CHAPTER_MUTATE from '../../app/admin/graphql/chapters/SingleChapterMutation.gql'
-import COMPLETE_CHAPTER_MUTATION from '@/graphql/chapter_tracker/completeChapterMutation.gql'
-import INCOMPLETE_CHAPTER_MUTATION from '@/graphql/chapter_tracker/inCompleteChapterMutation.gql'
+import SINGLE_MANGA_MUTATE from '../../graphql/admin/SingleMangaMutation.gql'
+import SINGLE_CHAPTER_MUTATE from '@/graphql/admin/chapters/SingleChapterMutation.gql'
+import COMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/completeChapterMutation.gql'
+import INCOMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/inCompleteChapterMutation.gql'
 import client from '../../../client'
 import {slugify} from '../../../utils/helpers'
 import gql from 'graphql-tag';
@@ -46,8 +46,7 @@ const Admin = () => {
          */
         const data = await fetchDataServerAction(
             e.value,
-            'https://asuratoon.com/manga/6849480105-i-killed-an-academy-player/'
-            // 'https://asuratoon.com/manga/6849480105-the-max-level-players-100th-regression/'
+            'https://asuratoon.com/manga/6849480105-demonic-spirit-king//'
         )
         setManga(data)
 
@@ -136,6 +135,7 @@ const Admin = () => {
         }
 
         /*
+        * Chapters Completion Tracker
         * Push manga id into chapter_tracker's => complete col if all chapters are inserted
         * else push into => incomplete col
          */

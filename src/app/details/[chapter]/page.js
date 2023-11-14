@@ -1,7 +1,7 @@
 'use client'
 import React, {useEffect, useState} from 'react'
 import client from '../../../../client'
-import SINGLE_CHAPTER_QUERY from '@/app/admin/graphql/chapters/SingleChapterQuery.gql'
+import SINGLE_CHAPTER_QUERY from '@/graphql/adm/chapters/SingleChapterQuery.gql'
 import SingleChapter from '@/components/details/singleChapter/SingleChapter';
 
 const Page = () => {
