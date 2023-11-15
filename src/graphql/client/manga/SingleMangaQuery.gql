@@ -11,5 +11,7 @@ query SingleMangaQuery($slug: String!) {
         description
         slug
         status
+        rating
+        dates
     }
 }

@@ -4,7 +4,6 @@ import fetchAllMangas from '../../utils/data/fetchAllMangas'
 
 export default async function Home() {
   const data = await fetchAllMangas()
-  console.log('data', data)
   return (
     <div>
       <HeroBanner />

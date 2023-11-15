@@ -46,7 +46,7 @@ const Admin = () => {
      */
     const data = await fetchDataServerAction(
       e.value,
-      'https://asuratoon.com/manga/6849480105-regressing-with-the-kings-power/'
+      'https://asuratoon.com/manga/6849480105-the-dark-mages-return-to-enlistment/'
     )
     setManga(data)
 
@@ -62,12 +62,17 @@ const Admin = () => {
         coverImage,
         status,
         description,
+        rate: rating,
+        uploadedDate,
+        updatedDate,
       } = data.detail_manga
 
       const slug = slugify(title)
-
       const genres = data.detail_manga.genres.map((x) => x.name)
-
+      const dates = {
+        uploadedDate: uploadedDate,
+        updatedDate,
+      }
       /*
        * Create Chapter in Single Manga => To get chapter details for later user => for fetching the chapters
        */
@@ -77,6 +82,7 @@ const Admin = () => {
           slug: slugify(
             `${slug} chapter ${data.detail_manga.chapters.length - idx}`
           ),
+          last_update: x.last_update,
         }
       })
 
@@ -94,6 +100,8 @@ const Admin = () => {
           src: e.value,
           slug,
           chapters,
+          rating,
+          dates,
         },
       })
       console.log('mangaResult', mangaResult)
@@ -118,6 +126,7 @@ const Admin = () => {
             data.detail_manga.chapters.length - idx
           }`
         ),
+        last_update: x.last_update,
       }
     })
 
