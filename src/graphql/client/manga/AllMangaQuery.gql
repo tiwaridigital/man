@@ -13,5 +13,6 @@ query AllMangaQuery {
     src
     status
     title
+    rating
   }
 }

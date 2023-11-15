@@ -46,7 +46,7 @@ const Admin = () => {
      */
     const data = await fetchDataServerAction(
       e.value,
-      'https://asuratoon.com/manga/6849480105-the-dark-mages-return-to-enlistment/'
+      'https://asuratoon.com/manga/6849480105-killer-pietro/'
     )
     setManga(data)
 

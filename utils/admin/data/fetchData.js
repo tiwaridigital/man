@@ -29,12 +29,14 @@ export const fetchData = async (src, url) => {
     }
   } else if (src === 'asuratoon') {
     const manga = new Manga().build(MangaType.ASURASCANS)
-    try {
+    // try {
       // Retrieve the manga details
       const detail_manga = await manga.getDetailManga(
         // 'https://asuratoon.com/manga/6849480105-revenge-of-the-iron-blooded-sword-hound/'
         url
       )
+
+      console.log('detail_manga', detail_manga)
 
       // get all chapters data
       const chapterData = await Promise.all(
@@ -49,11 +51,11 @@ export const fetchData = async (src, url) => {
       )
 
       return { detail_manga, chapterData }
-    } catch (err) {
-      throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
-    }
+    // } catch (err) {
+    //   throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
+    // }
   } else if (src === 'nettruyenus') {
-    try {
+    // try {
       // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
       const manga = new Manga().build(MangaType.NETTRUYEN)
 
@@ -65,6 +67,8 @@ export const fetchData = async (src, url) => {
         'https://www.nettruyenus.com/truyen-tranh/the-reincarnation-magician-of-the-inferior-eyes-215350'
       )
 
+      console.log('detail_manga', detail_manga)
+
       // get all chapters data
       const chapterData = await Promise.all(
         detail_manga.chapters.slice(0, 1).map(async (chapter) => {
@@ -74,9 +78,9 @@ export const fetchData = async (src, url) => {
       )
 
       return { detail_manga, chapterData }
-    } catch (err) {
-      throw new Error(`An error occurred while fetching from Mangadex ${err}`)
-    }
+    // } catch (err) {
+    //   throw new Error(`An error occurred while fetching from Mangadex ${err}`)
+    // }
   }
 
   // Upload Images to Imgur
