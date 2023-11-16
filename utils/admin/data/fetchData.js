@@ -3,40 +3,32 @@ const FormData = require('form-data')
 
 export const fetchData = async (src, url) => {
   if (src === 'mangadex') {
-    // try {
-    // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
-    const manga = new Manga().build(MangaType.MANGADEX)
+    try {
+      // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
+      const manga = new Manga().build(MangaType.MANGADEX)
 
-    // Retrieve the manga details
-    const detail_manga = await manga.getDetailManga(
-      // '05bd710c-d94a-45eb-be99-2109d58f1006'
-      url
-    )
+      // Retrieve the manga details
+      const detail_manga = await manga.getDetailManga(
+        // '05bd710c-d94a-45eb-be99-2109d58f1006'
+        url
+      )
 
-    // get all chapters data
-    const chapterData = await Promise.all(
-      detail_manga.chapters.map(async (chapter) => {
-        // Introduce a delay of 1 second between each iteration
-        await new Promise((resolve) => setTimeout(resolve, 3000))
-        const data = await manga.getDataChapter(chapter.path)
-        return data
-      })
-    )
+      // get all chapters data
+      const chapterData = await Promise.all(
+        detail_manga.chapters.map(async (chapter) => {
+          // Introduce a delay of 1 second between each iteration
+          await new Promise((resolve) => setTimeout(resolve, 3000))
+          const data = await manga.getDataChapter(chapter.path)
+          return data
+        })
+      )
 
-    return { detail_manga, chapterData }
-    // } catch (err) {
-    //   throw new Error(`An error occurred while fetching from Mangadex ${err}`)
-    // }
+      return { detail_manga, chapterData }
+    } catch (err) {
+      throw new Error(`An error occurred while fetching from Mangadex ${err}`)
+    }
   } else if (src === 'asuratoon') {
     const manga = new Manga().build(MangaType.ASURASCANS)
-    // try {
-    // Retrieve the manga details
-    const detail_manga = await manga.getDetailManga(
-      // 'https://asuratoon.com/manga/6849480105-revenge-of-the-iron-blooded-sword-hound/'
-      url
-    )
-
-    console.log('detail_manga', detail_manga)
     // try {
     // Retrieve the manga details
     const detail_manga = await manga.getDetailManga(
@@ -58,10 +50,6 @@ export const fetchData = async (src, url) => {
       })
     )
 
-    return { detail_manga, chapterData }
-    // } catch (err) {
-    //   throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
-    // }
     return { detail_manga, chapterData }
     // } catch (err) {
     //   throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
