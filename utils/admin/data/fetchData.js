@@ -37,6 +37,14 @@ export const fetchData = async (src, url) => {
     )
 
     console.log('detail_manga', detail_manga)
+    // try {
+    // Retrieve the manga details
+    const detail_manga = await manga.getDetailManga(
+      // 'https://asuratoon.com/manga/6849480105-revenge-of-the-iron-blooded-sword-hound/'
+      url
+    )
+
+    console.log('detail_manga', detail_manga)
 
     // get all chapters data
     const chapterData = await Promise.all(
@@ -54,33 +62,37 @@ export const fetchData = async (src, url) => {
     // } catch (err) {
     //   throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
     // }
+    return { detail_manga, chapterData }
+    // } catch (err) {
+    //   throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
+    // }
   } else if (src === 'nettruyenus') {
-    try {
-      // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
-      const manga = new Manga().build(MangaType.NETTRUYEN)
+    // try {
+    // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
+    const manga = new Manga().build(MangaType.NETTRUYEN)
 
-      // Get list latest manga
-      // const latest = await manga.getListLatestUpdate();
-      // Retrieve the manga details
-      const detail_manga = await manga.getDetailManga(
-        // '71a621f8-c2bc-496e-aa34-f4b91e9874ac'
-        'https://www.nettruyenus.com/truyen-tranh/the-reincarnation-magician-of-the-inferior-eyes-215350'
-      )
+    // Get list latest manga
+    // const latest = await manga.getListLatestUpdate();
+    // Retrieve the manga details
+    const detail_manga = await manga.getDetailManga(
+      // '71a621f8-c2bc-496e-aa34-f4b91e9874ac'
+      'https://www.nettruyenus.com/truyen-tranh/the-reincarnation-magician-of-the-inferior-eyes-215350'
+    )
 
-      console.log('detail_manga', detail_manga)
+    console.log('detail_manga', detail_manga)
 
-      // get all chapters data
-      const chapterData = await Promise.all(
-        detail_manga.chapters.slice(0, 1).map(async (chapter) => {
-          const data = await manga.getDataChapter(chapter.url)
-          return data
-        })
-      )
+    // get all chapters data
+    const chapterData = await Promise.all(
+      detail_manga.chapters.slice(0, 1).map(async (chapter) => {
+        const data = await manga.getDataChapter(chapter.url)
+        return data
+      })
+    )
 
-      return { detail_manga, chapterData }
-    } catch (err) {
-      throw new Error(`An error occurred while fetching from Mangadex ${err}`)
-    }
+    return { detail_manga, chapterData }
+    // } catch (err) {
+    //   throw new Error(`An error occurred while fetching from Mangadex ${err}`)
+    // }
   }
 
   // Upload Images to Imgur
