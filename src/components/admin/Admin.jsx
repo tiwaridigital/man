@@ -45,8 +45,9 @@ const Admin = () => {
      * and then use those not directly supported server functions/methods -> indirectly
      */
     const data = await fetchDataServerAction(
-      e.value,
-      'https://asuratoon.com/manga/6849480105-the-dark-mages-return-to-enlistment/'
+      e.value
+      //   'https://asuratoon.com/manga/6849480105-the-dark-mages-return-to-enlistment/'
+      //   '2c9ace30-a0c6-4e87-adbb-4fa4f80f975e'
     )
     setManga(data)
 

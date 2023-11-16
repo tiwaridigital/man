@@ -3,55 +3,57 @@ const FormData = require('form-data')
 
 export const fetchData = async (src, url) => {
   if (src === 'mangadex') {
-    try {
-      // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
-      const manga = new Manga().build(MangaType.MANGADEX)
+    // try {
+    // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
+    const manga = new Manga().build(MangaType.MANGADEX)
 
-      // Retrieve the manga details
-      const detail_manga = await manga.getDetailManga(
-        // '05bd710c-d94a-45eb-be99-2109d58f1006'
-        url
-      )
+    // Retrieve the manga details
+    const detail_manga = await manga.getDetailManga(
+      // '05bd710c-d94a-45eb-be99-2109d58f1006'
+      url
+    )
 
-      // get all chapters data
-      const chapterData = await Promise.all(
-        detail_manga.chapters.map(async (chapter) => {
-          // Introduce a delay of 1 second between each iteration
-          await new Promise((resolve) => setTimeout(resolve, 3000))
-          const data = await manga.getDataChapter(chapter.path)
-          return data
-        })
-      )
+    // get all chapters data
+    const chapterData = await Promise.all(
+      detail_manga.chapters.map(async (chapter) => {
+        // Introduce a delay of 1 second between each iteration
+        await new Promise((resolve) => setTimeout(resolve, 3000))
+        const data = await manga.getDataChapter(chapter.path)
+        return data
+      })
+    )
 
-      return { detail_manga, chapterData }
-    } catch (err) {
-      throw new Error(`An error occurred while fetching from Mangadex ${err}`)
-    }
+    return { detail_manga, chapterData }
+    // } catch (err) {
+    //   throw new Error(`An error occurred while fetching from Mangadex ${err}`)
+    // }
   } else if (src === 'asuratoon') {
     const manga = new Manga().build(MangaType.ASURASCANS)
-    try {
-      // Retrieve the manga details
-      const detail_manga = await manga.getDetailManga(
-        // 'https://asuratoon.com/manga/6849480105-revenge-of-the-iron-blooded-sword-hound/'
-        url
-      )
+    // try {
+    // Retrieve the manga details
+    const detail_manga = await manga.getDetailManga(
+      // 'https://asuratoon.com/manga/6849480105-revenge-of-the-iron-blooded-sword-hound/'
+      url
+    )
 
-      // get all chapters data
-      const chapterData = await Promise.all(
-        detail_manga.chapters.map(async (chapter) => {
-          const data = await manga.getDataChapter(chapter.url)
-          return data.chapter_data.filter(
-            (x) =>
-              x.src_origin !==
-              'https://www.asurascans.com/wp-content/uploads/2021/04/page100-10.jpg'
-          )
-        })
-      )
+    console.log('detail_manga', detail_manga)
 
-      return { detail_manga, chapterData }
-    } catch (err) {
-      throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
-    }
+    // get all chapters data
+    const chapterData = await Promise.all(
+      detail_manga.chapters.map(async (chapter) => {
+        const data = await manga.getDataChapter(chapter.url)
+        return data.chapter_data.filter(
+          (x) =>
+            x.src_origin !==
+            'https://www.asurascans.com/wp-content/uploads/2021/04/page100-10.jpg'
+        )
+      })
+    )
+
+    return { detail_manga, chapterData }
+    // } catch (err) {
+    //   throw new Error(`An error occurred while fetching from Asuratoon ${err}`)
+    // }
   } else if (src === 'nettruyenus') {
     try {
       // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
@@ -64,6 +66,8 @@ export const fetchData = async (src, url) => {
         // '71a621f8-c2bc-496e-aa34-f4b91e9874ac'
         'https://www.nettruyenus.com/truyen-tranh/the-reincarnation-magician-of-the-inferior-eyes-215350'
       )
+
+      console.log('detail_manga', detail_manga)
 
       // get all chapters data
       const chapterData = await Promise.all(
