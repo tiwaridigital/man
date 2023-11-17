@@ -2,7 +2,7 @@ import React from 'react'
 import Home from '../../../public/assets/icons/Home'
 import Book from '../../../public/assets/icons/Book'
 
-const BreadCrumb = () => {
+const BreadCrumb = ({ title }) => {
   return (
     <div className='pl-[20px] p-1.5 mb-[10px] bg-[#0D2851] relative rounded-sm text-gray-50'>
       <ol
@@ -33,9 +33,7 @@ const BreadCrumb = () => {
         >
           <a itemprop='item' href={'/'} className='flex items-center gap-2'>
             <Book color='white' height={20} width={20} />
-            <span itemprop='name'>
-              The Reincarnated Assassin is a Genius Swordsman
-            </span>
+            <span itemprop='name'>{title}</span>
           </a>
           <meta itemprop='position' content='2' />
         </li>

@@ -123,7 +123,7 @@ const DetailsBanner = ({ manga }) => {
           </div>
           <div className='opacity-layer' />
           <ContentWrapper>
-            <BreadCrumb />
+            <BreadCrumb title={manga?.title} />
             <div className='content'>
               <div className='left'>
                 {manga.poster_path ? (
