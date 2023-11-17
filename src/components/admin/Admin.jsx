@@ -10,7 +10,6 @@ import COMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/complete
 import INCOMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/inCompleteChapterMutation.gql'
 import client from '../../../client'
 import { slugify } from '../../../utils/helpers'
-import gql from 'graphql-tag'
 
 const Admin = () => {
   const [manga, setManga] = useState(null)
@@ -46,7 +45,7 @@ const Admin = () => {
      */
     const data = await fetchDataServerAction(
       e.value,
-      'https://asuratoon.com/manga/6849480105-killer-pietro/'
+      'https://asuratoon.com/manga/6849480105-the-reincarnated-assassin-is-a-genius-swordsman/'
     )
     setManga(data)
 

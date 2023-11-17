@@ -15,6 +15,7 @@ import BannerSkelton from '@/components/details/detailsBannerDex/BannerSkelton'
 import Link from 'next/link'
 
 import ContentWrapper from '../../contentWrapper/ContentWrapper'
+import BreadCrumb from '@/components/breadCrumb/BreadCrumb'
 // const ContentWrapper = dynamic(() =>
 //   import('@/components/contentWrapper/ContentWrapper')
 // )
@@ -122,6 +123,7 @@ const DetailsBanner = ({ manga }) => {
           </div>
           <div className='opacity-layer' />
           <ContentWrapper>
+            <BreadCrumb />
             <div className='content'>
               <div className='left'>
                 {manga.poster_path ? (
@@ -257,7 +259,8 @@ const DetailsBanner = ({ manga }) => {
                             href={`/details/chapter/${x.slug}/`}
                             target='_blank'
                           >
-                            <li className='bg-[#173D77] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
+                            {/* <li className='bg-[#173D77] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'> */}
+                            <li className='bg-[#0D2851] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
                               <p className='mb-[5px] text-[14px]'>{x.title}</p>
                               <span className='text-[12px] opacity-70'>
                                 {x.last_update}

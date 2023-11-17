@@ -11,25 +11,31 @@ import Link from 'next/link'
 import LeftArrow from '../../../public/assets/icons/LeftArrow'
 import RightArrow from '../../../public/assets/icons/RightArrow'
 
-const Carousel = ({ data, loading, endpoint, title = 'Ujjwal Tiwari' }) => {
+const Carousel = ({
+  data,
+  loading,
+  endpoint,
+  title = 'Ujjwal Tiwari',
+  carouselContainer,
+}) => {
   console.log('data', data)
-  const carouselContainer = useRef(null)
+  // const carouselContainer = useRef(null)
   // const { url } = useSelector((state) => state.home)
   // const navigate = useNavigate()
 
-  const navigation = (direction) => {
-    const container = carouselContainer.current
+  // const navigation = (direction) => {
+  //   const container = carouselContainer.current
 
-    const scrollAmount =
-      direction === 'left'
-        ? container.scrollLeft - (container.offsetWidth + 20)
-        : container.scrollLeft + (container.offsetWidth + 20)
+  //   const scrollAmount =
+  //     direction === 'left'
+  //       ? container.scrollLeft - (container.offsetWidth + 20)
+  //       : container.scrollLeft + (container.offsetWidth + 20)
 
-    container.scrollTo({
-      left: scrollAmount,
-      behavior: 'smooth',
-    })
-  }
+  //   container.scrollTo({
+  //     left: scrollAmount,
+  //     behavior: 'smooth',
+  //   })
+  // }
   const skeletonItem = () => {
     return (
       <div className='skeletonItem'>
@@ -44,7 +50,7 @@ const Carousel = ({ data, loading, endpoint, title = 'Ujjwal Tiwari' }) => {
   return (
     <div className='carousel'>
       <ContentWrapper>
-        {title && <div className='carouselTitle'>{title}</div>}
+        {/* {title && <div className='carouselTitle'>{title}</div>} */}
         <div
           className='carouselLeftNav arrow'
           onClick={() => navigation('left')}
