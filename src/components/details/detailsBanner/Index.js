@@ -54,16 +54,15 @@ const DetailsBanner = ({ manga }) => {
   const sortOrder = (e) => {
     console.log('sortOrder called', e)
 
-    if (e.value === 'desc') {
-      const arr = chapters.sort((a, b) => b.chapter - a.chapter)
-      console.log('desc', arr)
-      setChapters([...arr])
-      // setChapters([...chapters.sort((a, b) => a - b)])
-    } else {
-      const arr = chapters.sort((a, b) => a.chapter - b.chapter)
-      setChapters([...arr])
-      console.log('asc', arr)
-    }
+    const extractNumber = (title) => parseInt(title.match(/\d+/)?.[0] || 0, 10)
+
+    const compare = (a, b) =>
+      e.value === 'desc'
+        ? extractNumber(b.title) - extractNumber(a.title)
+        : extractNumber(a.title) - extractNumber(b.title)
+
+    const arr = manga.chapters.sort(compare)
+    setChapters([...arr])
   }
 
   const downloadImage = () => {

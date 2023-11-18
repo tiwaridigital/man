@@ -45,7 +45,7 @@ const Admin = () => {
      */
     const data = await fetchDataServerAction(
       e.value,
-      'https://asuratoon.com/manga/6849480105-the-reincarnated-assassin-is-a-genius-swordsman/'
+      'https://asuratoon.com/manga/6849480105-regressing-with-the-kings-power/'
     )
     setManga(data)
 
@@ -85,27 +85,29 @@ const Admin = () => {
         }
       })
 
-      const mangaResult = await client.mutate({
-        mutation: SINGLE_MANGA_MUTATE,
-        variables: {
-          title,
-          alternativeName: 'alterNativeName',
-          artist,
-          author,
-          coverImage,
-          genres,
-          status,
-          description: 'description',
-          src: e.value,
-          slug,
-          chapters,
-          rating,
-          dates,
-        },
-      })
-      console.log('mangaResult', mangaResult)
+      console.log('chapters', chapters)
 
-      await createChapters(data, mangaResult)
+      // const mangaResult = await client.mutate({
+      //   mutation: SINGLE_MANGA_MUTATE,
+      //   variables: {
+      //     title,
+      //     alternativeName: alterNativeName,
+      //     artist,
+      //     author,
+      //     coverImage,
+      //     genres,
+      //     status,
+      //     description: description,
+      //     src: e.value,
+      //     slug,
+      //     chapters,
+      //     rating,
+      //     dates,
+      //   },
+      // })
+      // console.log('mangaResult', mangaResult)
+
+      // await createChapters(data, mangaResult)
     } catch (err) {
       throw new Error(`Error Creating Single Manga to DB: ${err}`)
     }

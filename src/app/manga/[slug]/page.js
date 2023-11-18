@@ -7,7 +7,7 @@ import BreadCrumb from '@/components/breadCrumb/BreadCrumb'
 const Page = async ({ params }) => {
   const manga = await fetchSingleManga(params.slug)
   return (
-    <div className='pt-[100px]'>
+    <div>
       {/*<DetailsBannerDex />*/}
       <DetailsBanner manga={manga} />
     </div>

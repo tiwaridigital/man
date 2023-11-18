@@ -2,41 +2,59 @@ import React from 'react'
 import Home from '../../../public/assets/icons/Home'
 import Book from '../../../public/assets/icons/Book'
 
-const BreadCrumb = ({ title }) => {
+const BreadCrumb = ({ title, type, chapterTitle }) => {
   return (
-    <div className='pl-[20px] p-1.5 mb-[10px] bg-[#0D2851] relative rounded-sm text-gray-50'>
+    <div className='pl-[20px] p-2.5 mb-[20px] bg-[#0D2851] relative rounded-md text-gray-50'>
       <ol
-        itemscope=''
-        itemtype='http://schema.org/BreadcrumbList'
-        className='flex items-center gap-2 cursor-pointer'
+        itemScope=''
+        itemType='http://schema.org/BreadcrumbList'
+        className='flex items-center gap-2 cursor-pointer text-[14px]'
       >
         <li
-          itemprop='itemListElement'
-          itemscope=''
-          itemtype='http://schema.org/ListItem'
+          itemProp='itemListElement'
+          itemScope=''
+          itemType='http://schema.org/ListItem'
         >
           <a
-            itemprop='item'
+            itemProp='item'
             href='https://asuratoon.com/'
             className='flex items-center gap-2'
           >
             <Home color={'white'} height={20} width={20} />
-            <span itemprop='name'>Asura Scans</span>
+            <span itemProp='name'>Asura Scans</span>
           </a>
-          <meta itemprop='position' content='1' />
+          <meta itemProp='position' content='1' />
         </li>
         ›
         <li
-          itemprop='itemListElement'
-          itemscope=''
-          itemtype='http://schema.org/ListItem'
+          itemProp='itemListElement'
+          itemScope=''
+          itemType='http://schema.org/ListItem'
         >
-          <a itemprop='item' href={'/'} className='flex items-center gap-2'>
+          <a itemProp='item' href={'/'} className='flex items-center gap-2'>
             <Book color='white' height={20} width={20} />
-            <span itemprop='name'>{title}</span>
+            <span itemProp='name'>{title}</span>
           </a>
-          <meta itemprop='position' content='2' />
+          <meta itemProp='position' content='2' />
         </li>
+        {type === 'chapter' && (
+          <>
+            ›
+            <li
+              itemProp='itemListElement'
+              itemScope=''
+              itemType='http://schema.org/ListItem'
+            >
+              <a itemProp='item' href={'/'} className='flex items-center gap-2'>
+                <Book color='white' height={20} width={20} />
+                <span itemProp='name'>
+                  {title} {chapterTitle}
+                </span>
+              </a>
+              <meta itemProp='position' content='3' />
+            </li>
+          </>
+        )}
       </ol>
     </div>
   )
