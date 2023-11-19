@@ -7,15 +7,15 @@ import Genres from '../../genres/Genres'
 import CircleRating from '../../circleRating/CircleRating'
 import Img from '../../lazyLoadImage/Img.jsx'
 import PlayIcon from '../PlayIcon'
-import { getReleaseDate } from '../../../../utils/getReleaseDate'
-import { formatDate } from '../../../../utils/helpers'
+import { getReleaseDate } from '../../../utils/getReleaseDate'
+import { formatDate, tagsMaker } from '../../../utils/helpers'
 import Select from 'react-select'
 import dynamic from 'next/dynamic'
 import BannerSkelton from '@/components/details/detailsBannerDex/BannerSkelton'
 import Link from 'next/link'
-
 import ContentWrapper from '../../contentWrapper/ContentWrapper'
 import BreadCrumb from '@/components/breadCrumb/BreadCrumb'
+import Bookmark from '../../../../public/assets/icons/Bookmark'
 // const ContentWrapper = dynamic(() =>
 //   import('@/components/contentWrapper/ContentWrapper')
 // )
@@ -143,23 +143,19 @@ const DetailsBanner = ({ manga }) => {
                   style={{ fontSize: 16, marginTop: 20 }}
                 >
                   {/* if src is toonily then replace text  */}
-                  {manga?.alterNativeName}
+                  {manga?.alternativeName
+                    ? manga?.alternativeName
+                    : manga?.title}
                 </div>
                 <Genres data={manga.genres} />
-                <div className='row'>
+                {/* <div className='row bg-[#0d285193] p-2 rounded-lg'> */}
+                <div className='row p-2 rounded-lg'>
                   <CircleRating rating={manga.rating} />
-                  <div
-                    className='playbtn'
-                    onClick={() => {
-                      setShow(true)
-                      setVideoId(video.key)
-                    }}
-                  >
-                    <PlayIcon />
-                    <div className='span'>Watch Trailer</div>
+                  <div className='playbtn'>
+                    <Bookmark width={80} height={80} />
+                    <div className='span ml-[-10px]'>Bookmark</div>
                   </div>
                 </div>
-
                 <div className='overview'>
                   <div className='heading' style={{ marginBottom: 20 }}>
                     Synopsis:{' '}
@@ -242,6 +238,7 @@ const DetailsBanner = ({ manga }) => {
                         placeholder='Sort by'
                         className='react-select-container sortbyDD'
                         classNamePrefix='react-select'
+                        instanceId={manga?.id}
                         onChange={sortOrder}
                       />
                     </div>
@@ -251,7 +248,7 @@ const DetailsBanner = ({ manga }) => {
                     id='style-6'
                   >
                     <ul className=''>
-                      {manga.chapters?.slice(0, 20).map((x, idx) => {
+                      {manga.chapters?.map((x, idx) => {
                         return (
                           <Link
                             key={idx}
@@ -259,7 +256,7 @@ const DetailsBanner = ({ manga }) => {
                             target='_blank'
                           >
                             {/* <li className='bg-[#173D77] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'> */}
-                            <li className='bg-[#0D2851] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
+                            <li className='bg-[#06396B] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
                               <p className='mb-[5px] text-[14px]'>{x.title}</p>
                               <span className='text-[12px] opacity-70'>
                                 {x.last_update}
@@ -274,12 +271,7 @@ const DetailsBanner = ({ manga }) => {
                 {/* Chapters Section */}
               </div>
             </div>
-            {/* <VideoPopup
-             show={show}
-             setShow={setShow}
-             videoId={videoId}
-             setVideoId={setVideoId}
-             /> */}
+            {tagsMaker(manga?.title)}
           </ContentWrapper>
         </div>
       ) : (

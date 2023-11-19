@@ -13,10 +13,10 @@ import CircleRating from '../../circleRating/CircleRating'
 import Img from '../../lazyLoadImage/Img.jsx'
 import PosterFallback from '../../../assets/no-poster.png'
 import PlayIcon from '../PlayIcon'
-import { getReleaseDate } from '../../../../utils/getReleaseDate'
-import { imageUpload } from '../../../../utils/imageUpload'
+import { getReleaseDate } from '../../../utils/getReleaseDate'
+import { imageUpload } from '../../../utils/imageUpload'
 import Spinner from '../../spinner/Spinner'
-import { formatDate } from '../../../../utils/helpers'
+import { formatDate } from '../../../utils/helpers'
 import Select from 'react-select'
 import Date from '../../../../public/assets/icons/Date'
 import Link from 'next/link'
@@ -36,7 +36,10 @@ const DetailsBannerDex = () => {
   }, [])
 
   const fetchManga = async () => {
-    const data = await fetchDataServerAction('asuratoon', 'https://asuratoon.com/manga/6849480105-surviving-the-game-as-a-barbarian/')
+    const data = await fetchDataServerAction(
+      'asuratoon',
+      'https://asuratoon.com/manga/6849480105-surviving-the-game-as-a-barbarian/'
+    )
     setManga(data)
   }
 
@@ -126,7 +129,7 @@ const DetailsBannerDex = () => {
               }
             />
           </div>
-          <div className='opacity-layer'/>
+          <div className='opacity-layer' />
           <ContentWrapper>
             <div className='content'>
               <div className='left'>
@@ -164,9 +167,9 @@ const DetailsBannerDex = () => {
                   {/* if src is toonily then replace text  */}
                   {manga?.alterNativeName}
                 </div>
-                <Genres data={manga.detail_manga.genres}/>
+                <Genres data={manga.detail_manga.genres} />
                 <div className='row'>
-                  <CircleRating rating={manga?.rate}/>
+                  <CircleRating rating={manga?.rate} />
                   <div
                     className='playbtn'
                     onClick={() => {
@@ -174,7 +177,7 @@ const DetailsBannerDex = () => {
                       setVideoId(video.key)
                     }}
                   >
-                    <PlayIcon/>
+                    <PlayIcon />
                     <div className='span'>Watch Trailer</div>
                   </div>
                 </div>
@@ -285,8 +288,7 @@ const DetailsBannerDex = () => {
                             href={`/details/chapter-${x.chapter}/`}
                             target='_blank'
                           >
-                            <li
-                              className='bg-[#173D77] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
+                            <li className='bg-[#173D77] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
                               <p className='mb-[5px] text-[14px]'>
                                 Chapter {x.chapter}
                               </p>
@@ -312,7 +314,7 @@ const DetailsBannerDex = () => {
           </ContentWrapper>
         </div>
       ) : (
-        <BannerSkelton/>
+        <BannerSkelton />
       )}
     </>
   )

@@ -2,7 +2,6 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 
 const httpLink = createHttpLink({
-  //   uri: 'https://tender-cardinal-77.hasura.app/v1/graphql',
   uri: process.env.NEXT_PUBLIC_HASURA_ENDPOINT,
 })
 

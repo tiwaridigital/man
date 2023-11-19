@@ -9,7 +9,7 @@ import SINGLE_CHAPTER_MUTATE from '@/graphql/admin/chapters/SingleChapterMutatio
 import COMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/completeChapterMutation.gql'
 import INCOMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/inCompleteChapterMutation.gql'
 import client from '../../../client'
-import { slugify } from '../../../utils/helpers'
+import { slugify } from '../../utils/helpers'
 
 const Admin = () => {
   const [manga, setManga] = useState(null)

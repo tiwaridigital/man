@@ -1,0 +1,17 @@
+query SearchMangaQuery($title: String!) {
+  singleMang(where: { title: { _ilike: $title } }) {
+    id
+    title
+    alternativeName
+    artist
+    author
+    coverImage
+    genres
+    chapters
+    description
+    slug
+    status
+    rating
+    dates
+  }
+}

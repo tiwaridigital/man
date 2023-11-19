@@ -4,12 +4,12 @@ import './style.scss'
 import { useEffect } from 'react'
 import Img from '../lazyLoadImage/Img'
 import ContentWrapper from '../contentWrapper/ContentWrapper'
+import { useRouter } from 'next/navigation'
 
 const HeroBanner = () => {
+  const router = useRouter()
   const [background, setBackground] = useState('')
   const [query, setQuery] = useState('')
-  // const {data, setData} = useFetch('')
-  // const { url } = useSelector((state) => state.home)
 
   useEffect(() => {
     const bg =
@@ -20,7 +20,7 @@ const HeroBanner = () => {
 
   const handleSearchQuery = (e) => {
     if (e.key === 'Enter' && query.length > 0) {
-      navigate(`/search/${query}`)
+      router.push(`/search?s=${query}`)
     }
   }
 

@@ -1,6 +1,6 @@
 // 'use client'
 import React from 'react'
-import fetchSingleManga from '../../../../utils/data/fetchSingleManga'
+import fetchSingleManga from '../../../utils/data/fetchSingleManga'
 import DetailsBanner from '@/components/details/detailsBanner/Index'
 import BreadCrumb from '@/components/breadCrumb/BreadCrumb'
 

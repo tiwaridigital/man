@@ -1,5 +1,5 @@
 import { resolve } from 'styled-jsx/css'
-import client from '../../client'
+import client from '../../../client'
 import SINGLE_MANGA_QUERY from '@/graphql/client/manga/SingleMangaQuery.gql'
 
 const fetchSingleManga = async (slug) => {

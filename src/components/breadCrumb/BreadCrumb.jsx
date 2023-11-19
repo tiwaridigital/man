@@ -15,11 +15,7 @@ const BreadCrumb = ({ title, type, chapterTitle }) => {
           itemScope=''
           itemType='http://schema.org/ListItem'
         >
-          <a
-            itemProp='item'
-            href='https://asuratoon.com/'
-            className='flex items-center gap-2'
-          >
+          <a itemProp='item' href='/' className='flex items-center gap-2'>
             <Home color={'white'} height={20} width={20} />
             <span itemProp='name'>Asura Scans</span>
           </a>
