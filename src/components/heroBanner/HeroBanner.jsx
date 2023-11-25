@@ -18,8 +18,10 @@ const HeroBanner = () => {
     setBackground(bg)
   }, [])
 
-  const handleSearchQuery = (e) => {
+  const handleSearchQuery = (e, type = null) => {
     if (e.key === 'Enter' && query.length > 0) {
+      router.push(`/search?s=${query}`)
+    } else if (type == 'clicked' && query.length > 0) {
       router.push(`/search?s=${query}`)
     }
   }
@@ -46,7 +48,9 @@ const HeroBanner = () => {
               onKeyUp={handleSearchQuery}
               onChange={(e) => setQuery(e.target.value)}
             />
-            <button>Search</button>
+            <button onClick={(e) => handleSearchQuery(e, 'clicked')}>
+              Search
+            </button>
           </div>
         </div>
       </ContentWrapper>

@@ -1,140 +1,143 @@
 'use client'
 import React from 'react'
 import './style.scss'
-import {useState} from 'react'
-// import { useNavigate } from "react-router-dom";
-// import { useLocation } from "react-router-dom";
 import ContentWrapper from '../contentWrapper/ContentWrapper'
 import logo from '../../assets/movix-logo.svg'
-// import { HiOutlineSearch } from 'react-icons/hi'
-// import { VscChromeClose } from 'react-icons/vsc'
-// import { SlMenu } from 'react-icons/sl'
-import {useEffect} from 'react'
+import { useEffect, useState } from 'react'
 import Search from '../../../public/assets/icons/Search'
 import Close from '../../../public/assets/icons/Close'
 import Menu from '../../../public/assets/icons/Menu'
-import {usePathname} from 'next/navigation';
+import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const Header = () => {
-    const [show, setShow] = useState('top')
-    const [lastScrollY, setLastScrollY] = useState(0)
-    const [mobileMenu, setMobileMenu] = useState(false)
-    const [query, setQuery] = useState('')
-    const [showSearch, setShowSearch] = useState(false)
-    // const navigate = useNavigate()
-    // const location = useLocation()
-    const pathname = usePathname()
-    useEffect(() => {
-        window.addEventListener('scroll', controlNavbar)
+  const [show, setShow] = useState('top')
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [mobileMenu, setMobileMenu] = useState(false)
+  const [query, setQuery] = useState('')
+  const [showSearch, setShowSearch] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
+  useEffect(() => {
+    window.addEventListener('scroll', controlNavbar)
 
-        return () => {
-            window.removeEventListener('scroll', controlNavbar)
-        }
-    }, [lastScrollY])
-
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [pathname])
-
-    const menuItems = [
-        {name: 'Movies', type: 'movie'},
-        {name: 'TV Shows', type: 'tv'},
-        {name: <Search width={20} height={20}/>, type: 'search'},
-    ]
-
-    const controlNavbar = () => {
-        if (window.scrollY > 200) {
-            if (window.scrollY > lastScrollY && !mobileMenu) {
-                //if current Y co-ordinate is greater than last scrolled Y co-ordinate -> then hide
-                setShow('hide')
-            } else {
-                setShow('show')
-            }
-        } else {
-            setShow('top')
-        }
-        setLastScrollY(window.scrollY)
+    return () => {
+      window.removeEventListener('scroll', controlNavbar)
     }
+  }, [lastScrollY])
 
-    const openSearch = () => {
-        setShowSearch(!showSearch)
-        setMobileMenu(false)
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  const menuItems = [
+    { name: 'Movies', type: 'movie' },
+    { name: 'TV Shows', type: 'tv' },
+    { name: <Search width={20} height={20} />, type: 'search' },
+  ]
+
+  const controlNavbar = () => {
+    if (window.scrollY > 200) {
+      if (window.scrollY > lastScrollY && !mobileMenu) {
+        //if current Y co-ordinate is greater than last scrolled Y co-ordinate -> then hide
+        setShow('hide')
+      } else {
+        setShow('show')
+      }
+    } else {
+      setShow('top')
     }
+    setLastScrollY(window.scrollY)
+  }
 
-    const openMobileMenu = () => {
-        setMobileMenu(true)
+  const openSearch = () => {
+    setShowSearch(!showSearch)
+    setMobileMenu(false)
+  }
+
+  const openMobileMenu = () => {
+    console.log('openMobileMenu')
+    setMobileMenu(true)
+    setShowSearch(false)
+  }
+
+  const handleSearchQuery = (e) => {
+    if (e.key === 'Enter' && query.length > 0) {
+      router.push(`/search?s=${query}`)
+      setTimeout(() => {
         setShowSearch(false)
+      }, 1000)
+    }
+  }
+
+  const navigationHandler = (type) => {
+    if (type === 'movie') {
+      navigate('/explore/movie')
+    } else if (type === 'tv') {
+      navigate('/explore/tv')
     }
 
-    const handleSearchQuery = (e) => {
-        if (e.key === 'Enter' && query.length > 0) {
-            navigate(`/search/${query}`)
-            setTimeout(() => {
-                setShowSearch(false)
-            }, 1000)
-        }
+    //show search bar when search icon is clicked
+    if (type === 'search') {
+      setShowSearch(!showSearch)
     }
+    setMobileMenu(false)
+  }
 
-    const navigationHandler = (type) => {
-        if (type === 'movie') {
-            navigate('/explore/movie')
-        } else if (type === 'tv') {
-            navigate('/explore/tv')
-        }
+  return (
+    <header className={`header ${mobileMenu ? 'mobileView' : ''} ${show}`}>
+      <ContentWrapper>
+        <div className='logo'>
+          <a href='/'>
+            <img src={logo.src} alt='' />
+          </a>
+        </div>
+        <ul className='menuItems'>
+          {menuItems.map((menu, idx) => (
+            <li
+              key={idx}
+              className='menuItem'
+              onClick={() => navigationHandler(menu.type)}
+            >
+              {menu.name}
+            </li>
+          ))}
+        </ul>
 
-        //show search bar when search icon is clicked
-        if (type === 'search') {
-            setShowSearch(!showSearch)
-        }
-        setMobileMenu(false)
-    }
-
-    return (
-        <header className={`header ${mobileMenu ? 'mobileView' : ''} ${show}`}>
-            <ContentWrapper>
-                <div className='logo'>
-                    <a href='/'>
-                        <img src={logo.src} alt=''/>
-                    </a>
-                </div>
-                <ul className='menuItems'>
-                    {menuItems.map((menu, idx) => (
-                        <li
-                            key={idx}
-                            className='menuItem'
-                            onClick={() => navigationHandler(menu.type)}
-                        >
-                            {menu.name}
-                        </li>
-                    ))}
-                </ul>
-
-                <div className='mobileMenuItems'>
-                    <Search onClick={openSearch}/>
-                    {mobileMenu ? (
-                        <Close onClick={() => setMobileMenu(false)}/>
-                    ) : (
-                        <Menu onClick={openMobileMenu}/>
-                    )}
-                </div>
-            </ContentWrapper>
-            {showSearch && (
-                <div className='searchBar'>
-                    <ContentWrapper>
-                        <div className='searchInput'>
-                            <input
-                                type='text'
-                                placeholder='Search for a movie or tv show....'
-                                onKeyUp={handleSearchQuery}
-                                onChange={(e) => setQuery(e.target.value)}
-                            />
-                            <Close onClick={() => setShowSearch(false)}/>
-                        </div>
-                    </ContentWrapper>
-                </div>
-            )}
-        </header>
-    )
+        <div className='mobileMenuItems'>
+          <div onClick={openSearch}>
+            <Search />
+          </div>
+          {mobileMenu ? (
+            <div onClick={() => setMobileMenu(false)}>
+              <Close />
+            </div>
+          ) : (
+            <div onClick={openMobileMenu}>
+              <Menu />
+            </div>
+          )}
+        </div>
+      </ContentWrapper>
+      {showSearch && (
+        <div className='searchBar'>
+          <ContentWrapper>
+            <div className='searchInput'>
+              <input
+                type='text'
+                placeholder='Search for a movie or tv show....'
+                onKeyUp={handleSearchQuery}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <div onClick={() => setShowSearch(false)}>
+                <Close />
+              </div>
+            </div>
+          </ContentWrapper>
+        </div>
+      )}
+    </header>
+  )
 }
 
 export default Header

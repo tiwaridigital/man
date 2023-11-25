@@ -17,8 +17,8 @@ const MovieCard = ({ data, fromSearch, mediaType }) => {
           <Img className='posterImg' src={data.coverImage} />
           {!fromSearch && (
             <>
-              <CircleRating rating={data.vote_average.toFixed(1)} />
-              <Genres data={data.genre_ids.slice(0, 2)} />
+              <CircleRating rating={data?.rating} />
+              <Genres data={data.genres.slice(0, 2)} />
             </>
           )}
         </div>
