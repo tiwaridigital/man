@@ -12,6 +12,7 @@ import MovieCard from '../../components/movieCard/MovieCard'
 import Spinner from '../../components/spinner/Spinner'
 import ContentWrapper from '../contentWrapper/ContentWrapper'
 import genres from '../../lib/genres'
+import Genres from '../filters/Genres/Genres'
 
 let filters = {}
 
@@ -35,19 +36,11 @@ const Explore = ({ manga }) => {
   const [genre, setGenre] = useState(null)
   const [sortby, setSortby] = useState(null)
   const { mediaType } = 'movies'
+  const [selectedGenres, setSelectedGenres] = useState([])
 
   useEffect(() => {
     setData([...manga])
   }, [manga])
-
-  const genresData = [
-    { value: 'action', label: 'Action' },
-    { value: 'adventure', label: 'Adventure' },
-    { value: 'fantasy', label: 'Fantasy' },
-    { value: 'martial arts', label: 'Martial Arts' },
-    { value: 'reincarnation', label: 'Reincarnation' },
-    { value: 'comedy', label: 'Comedy' },
-  ]
 
   // const { data: genresData } = useFetch(`/genre/${mediaType}/list`)
 
@@ -117,83 +110,102 @@ const Explore = ({ manga }) => {
   }
 
   const sortGenres = (e) => {
-    const selectedGenres = e.map((x) => x.label)
-    console.log('sortgenres called', selectedGenres)
+    // const selectedGenres = e.map((x) => x.label)
+    console.log('selectedGenres sortgenres called', selectedGenres)
 
     const filteredData = manga.filter((item) =>
       item.genres.some((genre) => selectedGenres.includes(genre))
     )
 
-    console.log('sortgenres sorted', filteredData)
+    console.log('selectedGenres sortgenres sorted', filteredData)
     setData(filteredData)
+
+    if (selectedGenres.length == 0) {
+      setData([...manga])
+    }
   }
 
-  console.log('genre', genre)
-  console.log('data', data)
+  console.log('selectedGenres', selectedGenres)
+
+  // console.log('genre', genre)
+  // console.log('loading data', data)
 
   return (
-    <div className='explorePage'>
+    <div className='explorePage '>
       <ContentWrapper>
-        <div className='pageHeader'>
-          <div className='pageTitle'>Explore Manga</div>
-          <div className='filters'>
-            <Select
-              isMulti
-              name='genres'
-              // value={genre}
-              closeMenuOnSelect={false}
-              options={genres}
-              // getOptionLabel={(option) => option.name}
-              // getOptionValue={(option) => option.id}
-              onChange={sortGenres}
-              placeholder='Select genres'
-              className='react-select-container genresDD'
-              classNamePrefix='react-select'
-              instanceId={'react-select-1'}
-            />
-            <Select
-              name='sortby'
-              value={sortby}
-              options={sortbyData}
-              onChange={onChange}
-              isClearable={true}
-              placeholder='Sort by'
-              className='react-select-container sortbyDD'
-              classNamePrefix='react-select'
-              instanceId={'react-select-12'}
-            />
+        <div className='relative'>
+          <Genres
+            selectedGenres={selectedGenres}
+            setSelectedGenres={setSelectedGenres}
+            onChange={sortGenres}
+          />
+          <div className='pageHeader'>
+            <div className='pageTitle'>Explore Manga</div>
+            <div className='filters'>
+              <Select
+                isMulti
+                name='genres'
+                // value={genre}
+                closeMenuOnSelect={false}
+                options={genres}
+                // getOptionLabel={(option) => option.name}
+                // getOptionValue={(option) => option.id}
+                onChange={sortGenres}
+                placeholder='Select genres'
+                className='react-select-container genresDD'
+                classNamePrefix='react-select'
+                instanceId={'react-select-1'}
+              />
+              <Select
+                name='sortby'
+                value={sortby}
+                options={sortbyData}
+                onChange={onChange}
+                isClearable={true}
+                placeholder='Sort by'
+                className='react-select-container sortbyDD'
+                classNamePrefix='react-select'
+                instanceId={'react-select-12'}
+              />
+            </div>
           </div>
+          {/* {data && <Spinner initial={true} />} */}
+          {!loading && (
+            <>
+              {data?.length > 0 ? (
+                // <InfiniteScroll
+                //   className='content'
+                //   dataLength={data?.results?.length || []}
+                //   next={fetchNextPageData}
+                //   hasMore={pageNum <= data?.total_pages}
+                //   loader={<Spinner />}
+                // >
+                //   {data?.results?.map((item, index) => {
+                //     if (item.media_type === 'person') return
+                //     return (
+                //       <MovieCard key={index} data={item} mediaType={mediaType} />
+                //     )
+                //   })}
+                // </InfiniteScroll>
+                <div className='content'>
+                  {data?.map((item, index) => {
+                    return (
+                      <MovieCard
+                        key={index}
+                        data={item}
+                        mediaType={mediaType}
+                      />
+                    )
+                  })}
+                </div>
+              ) : (
+                <span className='resultNotFound'>
+                  Sorry, Results not found!
+                </span>
+              )}
+            </>
+          )}
         </div>
-        {loading && <Spinner initial={true} />}
-        {!loading && (
-          <>
-            {data?.length > 0 ? (
-              // <InfiniteScroll
-              //   className='content'
-              //   dataLength={data?.results?.length || []}
-              //   next={fetchNextPageData}
-              //   hasMore={pageNum <= data?.total_pages}
-              //   loader={<Spinner />}
-              // >
-              //   {data?.results?.map((item, index) => {
-              //     if (item.media_type === 'person') return
-              //     return (
-              //       <MovieCard key={index} data={item} mediaType={mediaType} />
-              //     )
-              //   })}
-              // </InfiniteScroll>
-              <div className='content'>
-                {data?.map((item, index) => {
-                  return (
-                    <MovieCard key={index} data={item} mediaType={mediaType} />
-                  )
-                })}
-              </div>
-            ) : (
-              <span className='resultNotFound'>Sorry, Results not found!</span>
-            )}
-          </>
-        )}
       </ContentWrapper>
     </div>
   )
