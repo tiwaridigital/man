@@ -9,6 +9,7 @@ import Close from '../../../public/assets/icons/Close'
 import Menu from '../../../public/assets/icons/Menu'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const Header = () => {
   const [show, setShow] = useState('top')
@@ -97,9 +98,16 @@ const Header = () => {
             <li
               key={idx}
               className='menuItem'
-              onClick={() => navigationHandler(menu.type)}
+              onClick={() => {
+                menu.type === 'search' && setShowSearch(!showSearch)
+                setMobileMenu(false)
+              }}
             >
-              {menu.name}
+              {menu.type === 'search' ? (
+                menu.name
+              ) : (
+                <Link href={'/explore'}>{menu.name}</Link>
+              )}
             </li>
           ))}
         </ul>

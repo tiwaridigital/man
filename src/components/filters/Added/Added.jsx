@@ -1,43 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import { genres } from '@/lib/filterData'
-const Genres = ({ selectedGenres, setSelectedGenres, onChange, show }) => {
-  const handleChange = (e) => {
-    console.log('selectedGenres handleChange called')
+import React, { useEffect } from 'react'
+import { addedList } from '@/lib/filterData'
+const Added = ({ selectedAdded, setSelectedAdded, onChange, show }) => {
+  const handleChange = async (e) => {
+    console.log('selectedAdded handleChange called', selectedAdded)
     if (e.target.checked) {
       /*
        * if checked => set value into state
        */
-      if (!selectedGenres.includes(e.target.value)) {
-        setSelectedGenres([...selectedGenres, e.target.value])
-      }
+      setSelectedAdded(e.target.value)
     } else {
       /*
        * if Not Checked => Remoce value From state
        */
-      setSelectedGenres(
-        selectedGenres.filter((genre) => genre !== e.target.value)
-      )
+      setSelectedAdded(null)
     }
   }
 
   useEffect(() => {
     // This effect will run whenever selectedGenres changes
     onChange()
-  }, [selectedGenres])
+  }, [selectedAdded])
 
   return (
     <>
       {show && (
         <div className='flex flex-col h-[50px] absolute w-full z-50'>
-          {/* <button className='bg-white w-[50px]' onClick={() => setShow(!show)}>
-          Genres
-        </button> */}
           <div
             className={`flex flex-wrap md:justify-center gap-1 p-1 text-white ${
               !show && 'opacity-0'
             } bg-teal-500 rounded-md transition-opacity duration-300 ease-in-out`}
           >
-            {genres.map((genre, idx) => {
+            {addedList.map((status, idx) => {
               return (
                 <div
                   key={idx}
@@ -55,8 +48,8 @@ const Genres = ({ selectedGenres, setSelectedGenres, onChange, show }) => {
                         id='checkbox-2'
                         // onChange={(e) => handleChange(e)}
                         onChange={(e) => handleChange(e)}
-                        value={genre.label}
-                        checked={selectedGenres.includes(genre.label)}
+                        value={status.value}
+                        checked={selectedAdded === status.value}
                       />
                       <div className='absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100'>
                         <svg
@@ -76,7 +69,7 @@ const Genres = ({ selectedGenres, setSelectedGenres, onChange, show }) => {
                       </div>
                     </label>
                   </div>
-                  <p>{genre.label}</p>
+                  <p>{status.label}</p>
                 </div>
               )
             })}
@@ -87,4 +80,4 @@ const Genres = ({ selectedGenres, setSelectedGenres, onChange, show }) => {
   )
 }
 
-export default Genres
+export default Added

@@ -11,8 +11,10 @@ import './style.scss'
 import MovieCard from '../../components/movieCard/MovieCard'
 import Spinner from '../../components/spinner/Spinner'
 import ContentWrapper from '../contentWrapper/ContentWrapper'
-import genres from '../../lib/genres'
 import Genres from '../filters/Genres/Genres'
+import Status from '../filters/Status/Status'
+import DownArrow from '../../../public/assets/icons/DownArrow'
+import Added from '../filters/Added/Added'
 
 let filters = {}
 
@@ -37,6 +39,16 @@ const Explore = ({ manga }) => {
   const [sortby, setSortby] = useState(null)
   const { mediaType } = 'movies'
   const [selectedGenres, setSelectedGenres] = useState([])
+  const [showGenres, setShowGenres] = useState(false)
+  const [selectedStatus, setSelectedStatus] = useState(null)
+  const [showStatus, setShowStatus] = useState(false)
+  const [selectedAdded, setSelectedAdded] = useState(null)
+  const [showAdded, setShowAdded] = useState(false)
+  const [showFilters, setShowFilters] = useState({
+    genres: false,
+    status: false,
+    added: false,
+  })
 
   useEffect(() => {
     setData([...manga])
@@ -109,15 +121,35 @@ const Explore = ({ manga }) => {
     // fetchInitialData()
   }
 
+  const handleShowFilters = (btnName) => {
+    console.log('handleShowFilters', btnName)
+    if (btnName === 'genres') {
+      console.log('genres show')
+      setSelectedStatus(null)
+      setShowFilters((prev) => ({ genres: !prev.genres }))
+    } else if (btnName === 'status') {
+      console.log('status show')
+      setSelectedGenres([])
+      setShowFilters((prev) => ({ status: !prev.status }))
+    } else if (btnName === 'added') {
+      console.log('handleShowFilter added show')
+      setShowFilters((prev) => ({ added: !prev.added }))
+    }
+  }
+
+  console.log('handleShowFilters', showFilters)
+
   const sortGenres = (e) => {
     // const selectedGenres = e.map((x) => x.label)
+    // setData([...manga])
     console.log('selectedGenres sortgenres called', selectedGenres)
+    console.log('selectedGenres manga', manga)
 
     const filteredData = manga.filter((item) =>
       item.genres.some((genre) => selectedGenres.includes(genre))
     )
 
-    console.log('selectedGenres sortgenres sorted', filteredData)
+    console.log('filteredData genres', filteredData)
     setData(filteredData)
 
     if (selectedGenres.length == 0) {
@@ -125,24 +157,117 @@ const Explore = ({ manga }) => {
     }
   }
 
-  console.log('selectedGenres', selectedGenres)
+  const filterStatus = (e) => {
+    // setData([...manga])
+    console.log('filterStatus status', selectedStatus)
+    console.log('filterStatus manga', manga)
+    const filteredData = manga.filter((item) => item.status === selectedStatus)
+    console.log('filteredData status', filteredData)
+    setData(filteredData)
 
-  // console.log('genre', genre)
-  // console.log('loading data', data)
+    if (!selectedStatus) {
+      setData([...manga])
+    }
+  }
+
+  const filterAdded = (e) => {
+    console.log('filterAdded added', selectedAdded)
+    console.log('filterAdded manga', manga)
+    let filteredData = []
+    if (selectedAdded === 'az') {
+      //a-z sorting
+      filteredData = manga.sort((a, b) => {
+        const nameA = a.title.toUpperCase()
+        const nameB = b.title.toUpperCase()
+
+        if (nameA < nameB) {
+          return -1
+        }
+
+        if (nameA > nameB) {
+          return 1
+        }
+
+        // Names are equal
+        return 0
+      })
+    } else if (selectedAdded === 'za') {
+      //a-z sorting
+      filteredData = manga.sort((a, b) => {
+        const nameA = a.title.toUpperCase()
+        const nameB = b.title.toUpperCase()
+
+        if (nameA > nameB) {
+          return -1
+        }
+
+        if (nameA < nameB) {
+          return 1
+        }
+
+        // Names are equal
+        return 0
+      })
+    }
+    console.log('filteredData added', filteredData)
+    setData(filteredData)
+
+    if (!selectedAdded) {
+      setData([...manga])
+    }
+  }
+
+  console.log('selectedAdded', selectedAdded)
 
   return (
     <div className='explorePage '>
       <ContentWrapper>
         <div className='relative'>
+          <div
+            className='filters'
+            style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}
+          >
+            <button
+              className='p-1 bg-white filter'
+              onClick={() => handleShowFilters('genres')}
+            >
+              Show Genres <DownArrow width={20} height={20} />
+            </button>
+            <button
+              className='p-1 bg-white filter'
+              onClick={() => handleShowFilters('status')}
+            >
+              Status <DownArrow width={20} height={20} />
+            </button>
+            <button
+              className='p-1 bg-white filter'
+              onClick={() => handleShowFilters('added')}
+            >
+              Order By Added <DownArrow width={20} height={20} />
+            </button>
+          </div>
           <Genres
             selectedGenres={selectedGenres}
             setSelectedGenres={setSelectedGenres}
             onChange={sortGenres}
+            show={showFilters.genres}
+          />
+          <Status
+            selectedStatus={selectedStatus}
+            setSelectedStatus={setSelectedStatus}
+            onChange={filterStatus}
+            show={showFilters.status}
+          />
+          <Added
+            selectedAdded={selectedAdded}
+            setSelectedAdded={setSelectedAdded}
+            onChange={filterAdded}
+            show={showFilters.added}
           />
           <div className='pageHeader'>
             <div className='pageTitle'>Explore Manga</div>
             <div className='filters'>
-              <Select
+              {/* <Select
                 isMulti
                 name='genres'
                 // value={genre}
@@ -166,7 +291,7 @@ const Explore = ({ manga }) => {
                 className='react-select-container sortbyDD'
                 classNamePrefix='react-select'
                 instanceId={'react-select-12'}
-              />
+              /> */}
             </div>
           </div>
           {/* {data && <Spinner initial={true} />} */}

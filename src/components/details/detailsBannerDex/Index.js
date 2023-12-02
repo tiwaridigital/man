@@ -22,7 +22,7 @@ import Date from '../../../../public/assets/icons/Date'
 import Link from 'next/link'
 import Header from '../../header/Header'
 import dynamic from 'next/dynamic'
-import { fetchDataServerAction } from '@/app/actions/fetchDataFromServer'
+import { fetchDataServerAction } from '@/app/_actions/fetchDataFromServer'
 import BannerSkelton from './BannerSkelton'
 
 const DetailsBannerDex = () => {

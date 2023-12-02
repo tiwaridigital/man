@@ -1,4 +1,4 @@
-import { fetchDataServerAction } from '@/app/actions/fetchDataFromServer'
+import { fetchDataServerAction } from '@/app/_actions/fetchDataFromServer'
 
 const { Manga, MangaType } = require('manga-lib')
 const Page = async () => {

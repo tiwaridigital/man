@@ -16,6 +16,7 @@ import Link from 'next/link'
 import ContentWrapper from '../../contentWrapper/ContentWrapper'
 import BreadCrumb from '@/components/breadCrumb/BreadCrumb'
 import Bookmark from '../../../../public/assets/icons/Bookmark'
+import ChaptersList from '../ChaptersList'
 // const ContentWrapper = dynamic(() =>
 //   import('@/components/contentWrapper/ContentWrapper')
 // )
@@ -240,33 +241,26 @@ const DetailsBanner = ({ manga }) => {
                         classNamePrefix='react-select'
                         instanceId={manga?.id}
                         onChange={sortOrder}
+                        defaultValue={selectOptions[1]}
+                        styles={{
+                          option: (provided, state) => ({
+                            ...provided,
+                            backgroundColor: state.isSelected
+                              ? '#06396A'
+                              : 'white', // Set the background color for selected and non-selected options
+                            color: state.isSelected ? 'white' : 'black', // Set the text color
+                            cursor: 'pointer',
+                          }),
+                        }}
                       />
                     </div>
                   </div>
-                  <div
+                  {/* <div
                     className='max-h-[350px] overflow-y-auto chapters-wrapper'
                     id='style-6'
-                  >
-                    <ul className=''>
-                      {manga.chapters?.map((x, idx) => {
-                        return (
-                          <Link
-                            key={idx}
-                            href={`/details/chapter/${x.slug}/`}
-                            target='_blank'
-                          >
-                            {/* <li className='bg-[#173D77] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'> */}
-                            <li className='bg-[#06396B] mb-4 p-2 cursor-pointer border-[1px] border-gray-500 mr-2 rounded-md hover:shadow-lg'>
-                              <p className='mb-[5px] text-[14px]'>{x.title}</p>
-                              <span className='text-[12px] opacity-70'>
-                                {x.last_update}
-                              </span>
-                            </li>
-                          </Link>
-                        )
-                      })}
-                    </ul>
-                  </div>
+                  > */}
+                  <ChaptersList chapters={manga?.chapters} />
+                  {/* </div> */}
                 </div>
                 {/* Chapters Section */}
               </div>

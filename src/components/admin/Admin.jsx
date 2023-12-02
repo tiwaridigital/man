@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import ContentWrapper from '../contentWrapper/ContentWrapper'
 import Select from 'react-select'
 import Modal from '../modal/Modal'
-import { fetchDataServerAction } from '@/app/actions/fetchDataFromServer'
+import { fetchDataServerAction } from '@/app/_actions/fetchDataFromServer'
 import SINGLE_MANGA_MUTATE from '../../graphql/admin/SingleMangaMutation.gql'
 import SINGLE_CHAPTER_MUTATE from '@/graphql/admin/chapters/SingleChapterMutation.gql'
 import COMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/completeChapterMutation.gql'
@@ -16,6 +16,7 @@ const Admin = () => {
   console.log('manga', manga)
 
   const [open, setOpen] = useState(false)
+  const [selectedSrc, setSelectedSrc] = useState(null)
   const [srcUrl, setSrcUrl] = useState(null)
   const options = [
     { value: 'manga', label: 'Create Single Manga' },
@@ -36,6 +37,8 @@ const Admin = () => {
     }
   }
 
+  console.log('srcUrl', selectedSrc)
+
   const handleDataFetching_Insertion = async (e) => {
     console.log('handleSources')
     /*
@@ -44,8 +47,9 @@ const Admin = () => {
      * and then use those not directly supported server functions/methods -> indirectly
      */
     const data = await fetchDataServerAction(
-      e.value,
-      'https://asuratoon.com/manga/6849480105-regressing-with-the-kings-power/'
+      selectedSrc,
+      // 'https://asuratoon.com/manga/6849480105-regressing-with-the-kings-power/'
+      srcUrl
     )
     setManga(data)
 
@@ -87,27 +91,27 @@ const Admin = () => {
 
       console.log('chapters', chapters)
 
-      // const mangaResult = await client.mutate({
-      //   mutation: SINGLE_MANGA_MUTATE,
-      //   variables: {
-      //     title,
-      //     alternativeName: alterNativeName,
-      //     artist,
-      //     author,
-      //     coverImage,
-      //     genres,
-      //     status,
-      //     description: description,
-      //     src: e.value,
-      //     slug,
-      //     chapters,
-      //     rating,
-      //     dates,
-      //   },
-      // })
-      // console.log('mangaResult', mangaResult)
+      const mangaResult = await client.mutate({
+        mutation: SINGLE_MANGA_MUTATE,
+        variables: {
+          title,
+          alternativeName: alterNativeName,
+          artist,
+          author,
+          coverImage,
+          genres,
+          status,
+          description: description,
+          src: e.value,
+          slug,
+          chapters,
+          rating,
+          dates,
+        },
+      })
+      console.log('mangaResult', mangaResult)
 
-      // await createChapters(data, mangaResult)
+      await createChapters(data, mangaResult)
     } catch (err) {
       throw new Error(`Error Creating Single Manga to DB: ${err}`)
     }
@@ -188,8 +192,10 @@ const Admin = () => {
           setOpen={setOpen}
           open={open}
           options={mangaSources}
-          onChange={handleDataFetching_Insertion}
+          // onChange={handleDataFetching_Insertion}
+          fetchData={handleDataFetching_Insertion}
           setSrcUrl={setSrcUrl}
+          setSelectedSrc={setSelectedSrc}
         />
       </ContentWrapper>
     </div>

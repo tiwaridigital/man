@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 
-const Modal = ({ open, setOpen, options, onChange, setSrcUrl }) => {
+const Modal = ({
+  open,
+  setOpen,
+  options,
+  onChange,
+  setSrcUrl,
+  setSelectedSrc,
+  fetchData,
+}) => {
   return (
     <>
       {open && (
@@ -15,8 +23,7 @@ const Modal = ({ open, setOpen, options, onChange, setSrcUrl }) => {
 
           <div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
             <div className='flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0'>
-              <div
-                className='flex flex-col justify-between relative h-[70vh] transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg'>
+              <div className='flex flex-col justify-between relative h-[70vh] transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg'>
                 <div className='bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4'>
                   <div className='sm:flex sm:items-start'>
                     <div className='mt-3 mx-auto w-full sm:ml-4 sm:mt-0 sm:text-left'>
@@ -30,17 +37,21 @@ const Modal = ({ open, setOpen, options, onChange, setSrcUrl }) => {
                         <Select
                           options={options}
                           placeholder='Select Source...'
-                          onChange={onChange}
+                          // onChange={onChange}
+                          onChange={(e) => setSelectedSrc(e.value)}
+                          onClick={(e) => console.log('e', e)}
                         />
                       </div>
 
                       {/*Input*/}
-                      <div
-                        className="flex mt-4 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                      <div className='flex mt-4 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md'>
                         <input
-                          type="text" name="username" id="username" autoComplete="username"
-                          className="block flex-1 border-0 outline-none bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                          placeholder="Enter Url..."
+                          type='text'
+                          name='username'
+                          id='username'
+                          autoComplete='username'
+                          className='block flex-1 border-0 outline-none bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
+                          placeholder='Enter Url...'
                           onChange={(e) => setSrcUrl(e.target.value)}
                         />
                       </div>
@@ -52,8 +63,9 @@ const Modal = ({ open, setOpen, options, onChange, setSrcUrl }) => {
                   <button
                     type='button'
                     className='inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto'
+                    onClick={fetchData}
                   >
-                    Deactivate
+                    Fetch & Insert
                   </button>
                   <button
                     type='button'
