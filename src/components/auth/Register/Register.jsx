@@ -13,6 +13,7 @@ const Register = () => {
       const response = await fetch('http://localhost:3000/auth', {
         method: 'POST',
         body: JSON.stringify({
+          action: 'register',
           email,
           password,
         }),

@@ -1,0 +1,10 @@
+query SingleUserQuery($email: String!) {
+  users(where: { email: { _eq: $email } }) {
+    email
+    createdAt
+    id
+    name
+    password
+    role
+  }
+}
