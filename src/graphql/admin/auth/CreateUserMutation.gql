@@ -1,0 +1,9 @@
+mutation CreateUserMutation($email: String!, $password: String!) {
+  insert_users_one(object: { email: $email, password: $password }) {
+    id
+    email
+    password
+    role
+    createdAt
+  }
+}
