@@ -4,6 +4,7 @@ import MANAGA_MUTATE from '../../graphql/admin/SingleMangaMutation.gql'
 import MANGA_QUERY from '../../graphql/admin/SingleMangaQuery.gql'
 import React from 'react'
 import client from '../../../client'
+import SignOut from '@/components/auth/SignOut/SignOut'
 
 const Page = () => {
   let he = {
@@ -100,11 +101,9 @@ const Page = () => {
   }
 
   return (
-    <div>
-      Page
-      <button style={{ color: '#fff', fontSize: 40 }} onClick={getHasura}>
-        Click Me
-      </button>
+    <div className='py-[150px]'>
+      Admin
+      <SignOut />
     </div>
   )
 }

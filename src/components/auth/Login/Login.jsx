@@ -1,16 +1,21 @@
 'use client'
 import ContentWrapper from '@/components/contentWrapper/ContentWrapper'
+import { redirect, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const Login = () => {
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null)
+  const router = useRouter()
 
   const handleLogin = async () => {
     console.log('handleLogin called')
     if (email.length > 0 && password.length > 0) {
       const response = await fetch('http://localhost:3000/auth', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           action: 'login',
           email,
@@ -19,6 +24,11 @@ const Login = () => {
       })
       const result = await response.json()
       console.log('result', result)
+
+      if (result) {
+        localStorage.setItem('token', result.token)
+        router.push('/admin')
+      }
     }
   }
 
@@ -60,7 +70,7 @@ const Login = () => {
             ))}
           </div>
           <button
-            className='bg-white p-2 rounded-lg m-auto'
+            className='text-white px-12 py-3 rounded-md m-auto bg-orange-500'
             onClick={handleLogin}
           >
             Click to login{' '}

@@ -1,8 +1,17 @@
 import Register from '@/components/auth/Register/Register'
+import { verifyCookie } from '@/lib/cookies'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
-const page = () => {
+const Page = async () => {
+  const isUserLoggedIn = await verifyCookie()
+  console.log('isUserLoggedIn', isUserLoggedIn)
+
+  if (isUserLoggedIn.user.hasOwnProperty('userId')) {
+    // User is logged in
+    redirect('/admin')
+  }
   return <Register />
 }
 
-export default page
+export default Page
