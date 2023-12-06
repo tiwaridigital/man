@@ -1,5 +1,3 @@
-import { launch } from 'puppeteer'
-
 const { Manga, MangaType } = require('manga-lib')
 
 export const getData = async () => {

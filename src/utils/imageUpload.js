@@ -33,3 +33,13 @@ export const imageUpload = () => {
       console.log(error)
     })
 }
+
+export const imgBBUpload = async (imageUrl) => {
+  const url = `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_SECRET}&image=${imageUrl}`
+  const response = await fetch(url, {
+    method: 'POST',
+  })
+  const result = await response.json()
+  return result
+  // console.log('imgbb upload', result)
+}

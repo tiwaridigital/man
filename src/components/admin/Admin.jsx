@@ -111,7 +111,7 @@ const Admin = () => {
       })
       console.log('mangaResult', mangaResult)
 
-      await createChapters(data, mangaResult)
+      // await createChapters(data, mangaResult)
     } catch (err) {
       throw new Error(`Error Creating Single Manga to DB: ${err}`)
     }

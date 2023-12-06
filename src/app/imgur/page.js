@@ -55,8 +55,9 @@ const Page = () => {
     let data = new FormData()
     data.append(
       'image',
+      'https://img.asuracomics.com/unsafe/fit-in/720x936/https://asuratoon.com/wp-content/uploads/2023/08/CoverFinal.png'
       // 'https://cdn.toonily.com/chapters/manga_62aa6a6a409c9/53f194e03f5316e8274e42091ac7ffc7/001.jpg'
-      'https://uploads.mangadex.org/data/04e12b8f9dcf8a68bec3f61633bfdef0/z1-aa3688f681533e9fa53ede12bb13da0d53d87ea4c7b0232bdc21cfccf83888b5.jpg'
+      // 'https://uploads.mangadex.org/data/04e12b8f9dcf8a68bec3f61633bfdef0/z1-aa3688f681533e9fa53ede12bb13da0d53d87ea4c7b0232bdc21cfccf83888b5.jpg'
     )
     data.append('type', 'url')
     data.append('name', 'macbook.webp')
