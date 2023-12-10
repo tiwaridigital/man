@@ -1,15 +1,31 @@
-export const imageUpload = () => {
-  console.log('uploadImage called')
+import axios from 'axios'
+import sharp from 'sharp'
+export const convertImage = async (format, url) => {
+  console.log('convertImage called')
+  try {
+    // Fetch the image buffer from the URL
+    const { data } = await axios.get(url, { responseType: 'arraybuffer' })
+    console.log('axios buffer', data)
+    // convert Image to png Buffer
+    const convertedImageBuffer = await sharp(data).toFormat(format).toBuffer()
+    // console.log('convertedImageBuffer', convertedImageBuffer)
+    // const image = imageUpload(convertedImageBuffer.toString('base64'))
+    // console.log('image inside convertImage', image)
+    return convertedImageBuffer.toString('base64')
+  } catch (err) {
+    console.log('Error converting image', err)
+  }
+}
+
+export const imageUpload = async (imageBuffer = '', type, url) => {
+  console.log('uploadImage called', type)
   const FormData = require('form-data')
   let data = new FormData()
-  data.append(
-    'image',
-    'https://uploads.mangadex.org/data/04e12b8f9dcf8a68bec3f61633bfdef0/z1-aa3688f681533e9fa53ede12bb13da0d53d87ea4c7b0232bdc21cfccf83888b5.jpg'
-  )
-  data.append('type', 'url')
-  data.append('name', 'macbook.webp')
-  data.append('title', 'Macbook Air M1')
-  data.append('description', 'This is an macbook air m1 image.')
+  data.append('image', type === 'base64' ? imageBuffer : url)
+  data.append('type', type)
+  // data.append('name', 'macbook.png')
+  // data.append('title', 'Macbook Air M1')
+  // data.append('description', 'This is an macbook air m1 image.')
 
   let config = {
     method: 'post',
@@ -21,12 +37,13 @@ export const imageUpload = () => {
     },
     data: data,
   }
-
-  axios
+  // let data =
+  return axios
     .request(config)
     .then((response) => {
-      console.log('response')
-      console.log(JSON.stringify(response.data))
+      // console.log('response')
+      // console.log(JSON.stringify(response.data))
+      return JSON.stringify(response.data)
     })
     .catch((error) => {
       console.log('error')
@@ -41,5 +58,4 @@ export const imgBBUpload = async (imageUrl) => {
   })
   const result = await response.json()
   return result
-  // console.log('imgbb upload', result)
 }

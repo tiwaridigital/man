@@ -4,7 +4,8 @@ const FormData = require('form-data')
 
 import Imgur from '@/components/Imgur/Index'
 import axios from 'axios'
-const Page = () => {
+import { convertImage } from '@/utils/imageUpload'
+const Page = async () => {
   let htmlContent = ''
   const authorizeUser = () => {
     console.log('authorizeUser called')
@@ -86,7 +87,14 @@ const Page = () => {
         console.log(error)
       })
   }
-  uploadImage()
+  // uploadImage()
+
+  const upload = await convertImage(
+    'png',
+    'https://asuratoon.com/wp-content/uploads/2023/11/02-8.webp'
+  )
+
+  console.log('upload', upload)
   return (
     <div>
       <h1 className='text-[40px]'>Imgur</h1>

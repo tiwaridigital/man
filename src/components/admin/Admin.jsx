@@ -111,7 +111,7 @@ const Admin = () => {
       })
       console.log('mangaResult', mangaResult)
 
-      // await createChapters(data, mangaResult)
+      await createChapters(data, mangaResult)
     } catch (err) {
       throw new Error(`Error Creating Single Manga to DB: ${err}`)
     }
@@ -125,7 +125,8 @@ const Admin = () => {
       return {
         title: x.title,
         url: mangaResult.data.insert_singleMang_one.id,
-        chapter_data: data.chapterData[idx],
+        // chapter_data: data.chapterData[idx],
+        chapter_data: data.chapterImages[idx],
         slug: slugify(
           `${mangaResult.data.insert_singleMang_one.slug} chapter ${
             data.detail_manga.chapters.length - idx
