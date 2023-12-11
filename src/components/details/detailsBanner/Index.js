@@ -136,7 +136,12 @@ const DetailsBanner = ({ manga }) => {
           <ContentWrapper>
             <BreadCrumb title={manga?.title} />
             <div className='content'>
-              <div className='left'>
+              <div
+                className='left'
+                itemProp='image'
+                itemScope
+                itemType='https://schema.org/ImageObject'
+              >
                 {manga.poster_path ? (
                   <Img className='posterImg' src={manga.coverImage} />
                 ) : (
@@ -148,6 +153,7 @@ const DetailsBanner = ({ manga }) => {
                     alt=''
                     // sizes='(max-width: 768px) 100vw, (min-width: 640px) 100vw'
                     priority={true}
+                    itemProp='image'
                   />
                 )}
               </div>

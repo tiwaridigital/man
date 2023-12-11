@@ -56,6 +56,10 @@
           max-width: 350px;
         }
       }
+
+      @include md {
+        max-width: 256px;
+      }
     }
     .right {
       color: white;
