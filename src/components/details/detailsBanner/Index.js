@@ -116,10 +116,12 @@ const DetailsBanner = ({ manga }) => {
       {manga ? (
         <div className='detailsBanner'>
           <div className='backdrop-img'>
-            <Img
+            <Image
               src={
                 'https://image.tmdb.org/t/p/original/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg'
               }
+              // sizes='100vw'
+              fill
             />
           </div>
           <div className='opacity-layer' />
