@@ -8,6 +8,9 @@ dependencies:
   '@apollo/client':
     specifier: ^3.8.7
     version: 3.8.7(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+  '@img/sharp-win32-x64':
+    specifier: ^0.33.0
+    version: 0.33.0
   argon2:
     specifier: ^0.31.2
     version: 0.31.2
@@ -546,7 +549,6 @@ packages:
     os: [win32]
     requiresBuild: true
     dev: false
-    optional: true
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}

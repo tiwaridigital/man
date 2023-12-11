@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const path = require('path')
 const nextConfig = {
   webpack: (config, { isServer }) => {
     config.module.rules.push({
@@ -20,6 +21,10 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+  },
+  sassOptions: {
+    fiber: false,
+    includePaths: [path.join(__dirname, 'styles')],
   },
 }
 
