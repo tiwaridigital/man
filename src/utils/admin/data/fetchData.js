@@ -98,67 +98,67 @@ export const fetchData = async (src, url) => {
     //   }
     // }
 
-    for (const chapters of chapterData) {
-      console.log('inside 1st for of loop')
-      let arr = []
-      let chapterIdx = 0
-      for (const chapter of chapters) {
-        console.log('inside child for of loop')
-        const fileName = chapter.src_origin.split('.')
-        const fileFormat = fileName[fileName.length - 1]
-
-        /*
-         * If format is webp => then convert it
-         */
-        if (fileFormat === 'webp') {
-          const imageBuffer = await convertImage('png', chapter.src_origin)
-
-          const image = await imageUpload(imageBuffer, 'base64')
-          console.log('base64', image)
-          arr.push({
-            id: chapterIdx,
-            url: image,
-            type: 'base64',
-          })
-        }
-
-        await new Promise((resolve) => setTimeout(resolve, 3000))
-        console.log('time', new Date())
-        const data = await imageUpload('urlFile', 'url', chapter.src_origin)
-        console.log('urlFile', data)
-        arr.push({
-          id: chapterIdx,
-          url: data,
-          type: 'urlFile',
-        })
-
-        chapterIdx += 1
-      }
-      imagesArr.push(arr)
-    }
-
-    // // Upload Images to imgBB
-    // for (const chapters of chapterData.slice(0, 3)) {
+    // for (const chapters of chapterData) {
+    //   console.log('inside 1st for of loop')
     //   let arr = []
-    //   console.log('inside 1st for of', new Date())
     //   let chapterIdx = 0
     //   for (const chapter of chapters) {
-    //     //convert webp images to jpg before uploading
+    //     console.log('inside child for of loop')
+    //     const fileName = chapter.src_origin.split('.')
+    //     const fileFormat = fileName[fileName.length - 1]
 
-    //     console.log('uploading image')
-    //     const image = await imgBBUpload(chapter.src_origin)
-    //     console.log('image', image)
+    //     /*
+    //      * If format is webp => then convert it
+    //      */
+    //     if (fileFormat === 'webp') {
+    //       const imageBuffer = await convertImage('png', chapter.src_origin)
 
-    //     const arrObj = {
-    //       id: chapterIdx,
-    //       src_origin: image.data.url,
+    //       const image = await imageUpload(imageBuffer, 'base64')
+    //       console.log('base64', image)
+    //       arr.push({
+    //         id: chapterIdx,
+    //         url: image,
+    //         type: 'base64',
+    //       })
     //     }
-    //     arr.push(arrObj)
+
+    //     await new Promise((resolve) => setTimeout(resolve, 3000))
+    //     console.log('time', new Date())
+    //     const data = await imageUpload('urlFile', 'url', chapter.src_origin)
+    //     console.log('urlFile', data)
+    //     arr.push({
+    //       id: chapterIdx,
+    //       url: data,
+    //       type: 'urlFile',
+    //     })
+
     //     chapterIdx += 1
     //   }
-    //   console.log('arr', arr)
     //   imagesArr.push(arr)
     // }
+
+    // // Upload Images to imgBB
+    for (const chapters of chapterData) {
+      let arr = []
+      console.log('inside 1st for of', new Date())
+      let chapterIdx = 0
+      for (const chapter of chapters) {
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+        //convert webp images to jpg before uploading
+        console.log('uploading image', new Date())
+        const image = await imgBBUpload(chapter.src_origin)
+        console.log('image', image)
+
+        const arrObj = {
+          id: chapterIdx,
+          src_origin: image.data.url,
+        }
+        arr.push(arrObj)
+        chapterIdx += 1
+      }
+      console.log('arr', arr)
+      imagesArr.push(arr)
+    }
 
     console.log('imagesArr', imagesArr)
 

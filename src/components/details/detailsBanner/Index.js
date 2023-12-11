@@ -17,6 +17,7 @@ import ContentWrapper from '../../contentWrapper/ContentWrapper'
 import BreadCrumb from '@/components/breadCrumb/BreadCrumb'
 import Bookmark from '../../../../public/assets/icons/Bookmark'
 import ChaptersList from '../ChaptersList'
+import Image from 'next/image'
 // const ContentWrapper = dynamic(() =>
 //   import('@/components/contentWrapper/ContentWrapper')
 // )
@@ -129,7 +130,13 @@ const DetailsBanner = ({ manga }) => {
                 {manga.poster_path ? (
                   <Img className='posterImg' src={manga.coverImage} />
                 ) : (
-                  <Img className='posterImg' src={manga.coverImage} />
+                  <Image
+                    className='posterImg'
+                    src={manga.coverImage}
+                    width={350}
+                    height={500}
+                    alt=''
+                  />
                 )}
               </div>
               <div className='right'>
