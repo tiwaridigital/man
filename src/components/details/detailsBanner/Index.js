@@ -121,7 +121,7 @@ const DetailsBanner = ({ manga }) => {
                 'https://image.tmdb.org/t/p/original/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg'
               }
               // className='lazy-load-image-background'
-              // sizes='100vw'
+              sizes='100vw'
               fill
               alt=''
               style={{
