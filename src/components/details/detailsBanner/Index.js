@@ -116,13 +116,14 @@ const DetailsBanner = ({ manga }) => {
       {manga ? (
         <div className='detailsBanner'>
           <div className='backdrop-img'>
-            <Image
-              src={
-                'https://image.tmdb.org/t/p/original/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg'
-              }
-              // sizes='100vw'
-              fill
-            />
+            {/* <Image
+                src={
+                  'https://image.tmdb.org/t/p/original/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg'
+                }
+                // sizes='100vw'
+                fill
+                alt=''
+              /> */}
           </div>
           <div className='opacity-layer' />
           <ContentWrapper>
@@ -135,8 +136,8 @@ const DetailsBanner = ({ manga }) => {
                   <Image
                     className='posterImg'
                     src={manga.coverImage}
-                    width={350}
-                    height={500}
+                    width={150}
+                    height={300}
                     alt=''
                   />
                 )}
