@@ -11,8 +11,12 @@ import { useEffect } from 'react'
 import MovieCard from '../movieCard/MovieCard'
 import client from '../../../client'
 import SEARCH_MANGA_QUERY from '@/graphql/client/manga/SearchMangaQuery.gql'
+import {useSearchParams} from 'next/navigation';
 
-const SearchResult = ({ params }) => {
+const SearchResult = () => {
+  const params = useSearchParams().get('s')
+  console.log('params', params)
+
   const [data, setData] = useState(null)
   const [pageNum, setPageNum] = useState(1)
   const [loading, setLoading] = useState(false)

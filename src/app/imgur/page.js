@@ -89,12 +89,12 @@ const Page = async () => {
   }
   // uploadImage()
 
-  const upload = await convertImage(
-    'png',
-    'https://asuratoon.com/wp-content/uploads/2023/11/02-8.webp'
-  )
-
-  console.log('upload', upload)
+  // const upload = await convertImage(
+  //   'png',
+  //   'https://asuratoon.com/wp-content/uploads/2023/11/02-8.webp'
+  // )
+  //
+  // console.log('upload', upload)
   return (
     <div>
       <h1 className='text-[40px]'>Imgur</h1>
