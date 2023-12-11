@@ -11,7 +11,8 @@
   "browser": {
     "fs": false,
     "os": false,
-    "path": false
+    "path": false,
+    "child_process": false
   },
   "dependencies": {
     "@apollo/client": "^3.8.7",
