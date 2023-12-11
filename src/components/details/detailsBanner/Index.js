@@ -139,6 +139,8 @@ const DetailsBanner = ({ manga }) => {
                     width={150}
                     height={300}
                     alt=''
+                    // sizes='(max-width: 768px) 100vw, (min-width: 640px) 100vw'
+                    priority={true}
                   />
                 )}
               </div>

@@ -90,7 +90,7 @@ const Header = () => {
       <ContentWrapper>
         <div className='logo'>
           <a href='/'>
-            <img src={logo.src} alt='' />
+            <img height={40} width={131} src={logo.src} alt='' />
           </a>
         </div>
         <ul className='menuItems'>
