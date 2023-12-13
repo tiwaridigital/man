@@ -159,9 +159,11 @@ const DetailsBanner = ({ manga }) => {
               </div>
               <div className='right'>
                 <div className='title'>
-                  {`${manga.title || manga.original_title} (${dayjs(
-                    manga.release_date
-                  ).format('YYYY')})`}
+                  <h1 itemProp='name'>
+                    {`${manga.title || manga.original_title} (${dayjs(
+                      manga.release_date
+                    ).format('YYYY')})`}
+                  </h1>
                 </div>
 
                 <div
@@ -169,9 +171,12 @@ const DetailsBanner = ({ manga }) => {
                   style={{ fontSize: 16, marginTop: 20 }}
                 >
                   {/* if src is toonily then replace text  */}
-                  {manga?.alternativeName
-                    ? manga?.alternativeName
-                    : manga?.title}
+                  <strong>Alternative Titles</strong>
+                  <p>
+                    {manga?.alternativeName
+                      ? manga?.alternativeName
+                      : manga?.title}
+                  </p>
                 </div>
                 <Genres data={manga.genres} />
                 {/* <div className='row bg-[#0d285193] p-2 rounded-lg'> */}
@@ -183,11 +188,13 @@ const DetailsBanner = ({ manga }) => {
                   </div>
                 </div>
                 <div className='overview'>
-                  <div className='heading' style={{ marginBottom: 20 }}>
-                    Synopsis:{' '}
+                  <h2 className='heading' style={{ marginBottom: 20 }}>
+                    Synopsis:
                     <span style={{ opacity: 0.7 }}>{manga.title}</span>
+                  </h2>
+                  <div className='description' itemProp='description'>
+                    {manga.description}
                   </div>
-                  <div className='description'>{manga.description}</div>
                 </div>
 
                 <div className='info'>
@@ -208,14 +215,28 @@ const DetailsBanner = ({ manga }) => {
                   {manga?.dates?.uploadedDate && (
                     <div className='infoItem'>
                       <span className='text bold'>Uploaded Date: </span>
-                      <span className='text'>{manga?.dates?.uploadedDate}</span>
+                      <span
+                        className='text'
+                        itemProp='datePublished'
+                        itemScope
+                        itemType='https://schema.org/Date'
+                      >
+                        {manga?.dates?.uploadedDate}
+                      </span>
                     </div>
                   )}
 
                   {manga?.dates?.updatedDate && (
                     <div className='infoItem'>
                       <span className='text bold'>Updated Date: </span>
-                      <span className='text'>{manga?.dates?.updatedDate}</span>
+                      <span
+                        className='text'
+                        itemProp='dateModified'
+                        itemScope
+                        itemType='https://schema.org/Date'
+                      >
+                        {manga?.dates?.updatedDate}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -224,7 +245,14 @@ const DetailsBanner = ({ manga }) => {
                   {manga?.author && (
                     <div className='infoItem'>
                       <span className='text bold'>Author: </span>
-                      <div className='text'>{manga?.author}</div>
+                      <span
+                        className='text'
+                        itemProp='author'
+                        itemScope
+                        itemType='https://schema.org/Person'
+                      >
+                        {manga?.author}
+                      </span>
                     </div>
                   )}
 
