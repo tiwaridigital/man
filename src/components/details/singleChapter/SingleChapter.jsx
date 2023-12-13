@@ -70,8 +70,10 @@ const SingleChapter = ({ chapter }) => {
                     src={item.src_origin}
                     alt=''
                     // fill
-                    width={imgWidth[idx]?.width || 800}
-                    height={imgHeight[idx]?.height || 500}
+                    // width={imgWidth[idx]?.width || 800}
+                    // height={imgHeight[idx]?.height || 500}
+                    width={800}
+                    height={500}
                     // width='0'
                     // height='0'
                     // sizes='80vw'
