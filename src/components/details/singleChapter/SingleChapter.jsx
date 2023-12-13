@@ -74,7 +74,7 @@ const SingleChapter = ({ chapter }) => {
                     height={imgHeight[idx]?.height || 500}
                     // width='0'
                     // height='0'
-                    sizes='100vw'
+                    // sizes='80vw'
                     style={{ width: '100%', height: 'auto' }}
                     priority={idx === 0 ? true : false}
                     onLoad={(e) => handleimgAspectRatio(e, idx)}
