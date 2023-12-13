@@ -59,3 +59,29 @@ export const imgBBUpload = async (imageUrl) => {
   const result = await response.json()
   return result
 }
+
+export const bunnyCDNUpload = async (fileName, imageUrl) => {
+  // Fetch the image buffer from the URL
+  const { data } = await axios.get(imageUrl, { responseType: 'arraybuffer' })
+  console.log('axios buffer', data)
+  // pass imageBuffer in data
+  let config = {
+    method: 'PUT',
+    maxBodyLength: Infinity,
+    url: `https://sg.storage.bunnycdn.com/manbro/${fileName}`,
+    headers: {
+      AccessKey: '776a97b6-bc36-41e8-911050acf170-91dd-453b',
+      'Content-Type': 'application/octet-stream',
+    },
+    data: data,
+  }
+
+  return axios
+    .request(config)
+    .then((response) => {
+      console.log('uploaded', response.data)
+    })
+    .catch((err) => {
+      console.log('error uploading', err)
+    })
+}

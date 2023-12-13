@@ -1,4 +1,9 @@
-import { convertImage, imageUpload, imgBBUpload } from '@/utils/imageUpload'
+import {
+  bunnyCDNUpload,
+  convertImage,
+  imageUpload,
+  imgBBUpload,
+} from '@/utils/imageUpload'
 import axios from 'axios'
 
 const { Manga, MangaType } = require('manga-lib')
@@ -137,27 +142,37 @@ export const fetchData = async (src, url) => {
     //   imagesArr.push(arr)
     // }
 
-    // // Upload Images to imgBB
+    /*
+     * Upload Images to imgBB
+     */
+    let chapterIdx = 0
     for (const chapters of chapterData) {
       let arr = []
       console.log('inside 1st for of', new Date())
-      let chapterIdx = 0
+      let innerChapterIdx = 0
       for (const chapter of chapters) {
         await new Promise((resolve) => setTimeout(resolve, 2000))
+        const fileSplit = chapter.src_origin.split('.')
+        const fileExtension = fileSplit[fileSplit.length - 1]
         //convert webp images to jpg before uploading
         console.log('uploading image', new Date())
-        const image = await imgBBUpload(chapter.src_origin)
+        // const image = await imgBBUpload(chapter.src_origin)
+        const image = await bunnyCDNUpload(
+          `${detail_manga.title}/chapter-${chapterIdx}/${innerChapterIdx}.${fileExtension}`,
+          chapter.src_origin
+        )
         console.log('image', image)
 
         const arrObj = {
           id: chapterIdx,
-          src_origin: image.data.url,
+          src_origin: `https://mangu.b-cdn.net/${detail_manga.title}/chapter-${chapterIdx}/${innerChapterIdx}.${fileExtension}`,
         }
         arr.push(arrObj)
-        chapterIdx += 1
+        innerChapterIdx += 1
       }
       console.log('arr', arr)
       imagesArr.push(arr)
+      chapterIdx += 1
     }
 
     console.log('imagesArr', imagesArr)

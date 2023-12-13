@@ -1,12 +1,36 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ContentWrapper from '../../contentWrapper/ContentWrapper'
 import './style.scss'
 import Img from '../../lazyLoadImage/Img'
 import BreadCrumb from '@/components/breadCrumb/BreadCrumb'
+import Image from 'next/image'
 
 const SingleChapter = ({ chapter }) => {
+  const [imgHeight, setImgHeight] = useState([])
+  const [imgWidth, setImgWidth] = useState([])
   const mangaTitle = chapter?.singleMang?.title
+
+  const handleimgAspectRatio = (e, idx) => {
+    console.log('idx', idx, e.currentTarget.naturalHeight)
+    setImgHeight((prevImgHeights) => [
+      ...prevImgHeights,
+      { idx: idx, height: e.currentTarget.naturalHeight },
+    ])
+    setImgWidth((prevImgWidths) => [
+      ...prevImgWidths,
+      { idx: idx, width: e.currentTarget.naturalWidth },
+    ])
+  }
+
+  console.log('imgHeight', imgHeight)
+
+  useEffect(() => {
+    // Your logic to set image height and width after loading
+    // console.log('imgHeight', imgHeight)
+    // console.log('imgWidth', imgWidth)
+  }, [imgHeight, imgWidth])
+
   return (
     <div className='pt-[100px]'>
       <ContentWrapper>
@@ -29,12 +53,35 @@ const SingleChapter = ({ chapter }) => {
             of manga collections Asura Scans is in the Manga List menu.
           </div>
 
-          <div className='flex flex-col items-center'>
+          <div className='relative flex flex-col items-center'>
             {/* Images */}
             {chapter?.data.map((item, idx) => {
               return (
-                <div key={idx} className='backdrop-img w-[800px] mb-6'>
-                  <Img src={item.src_origin} alt='' />
+                <div
+                  key={idx}
+                  className='backdrop-img md:w-[800px] mb-6'
+                  // style={{
+                  //   width: imgWidth[idx]?.width || 800,
+                  //   height: imgHeight[idx]?.height || 500,
+                  // }}
+                >
+                  {/* <Img src={item.src_origin} alt='' /> */}
+                  <Image
+                    src={item.src_origin}
+                    alt=''
+                    // fill
+                    // width={imgWidth[idx]?.width || 800}
+                    // height={imgHeight[idx]?.height || 500}
+                    width={800}
+                    height={500}
+                    priority={idx === 0 ? true : false}
+                    onLoad={(e) => handleimgAspectRatio(e, idx)}
+                    style={{
+                      maxWidth: '100%',
+                      width: '100%',
+                      height: 'auto',
+                    }}
+                  />
                 </div>
               )
             })}
