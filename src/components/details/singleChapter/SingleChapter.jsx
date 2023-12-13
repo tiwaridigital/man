@@ -72,15 +72,17 @@ const SingleChapter = ({ chapter }) => {
                     // fill
                     // width={imgWidth[idx]?.width || 800}
                     // height={imgHeight[idx]?.height || 500}
-                    width={800}
-                    height={500}
+                    width='0'
+                    height='0'
+                    sizes='100vw'
+                    style={{ width: '100%', height: 'auto' }}
                     priority={idx === 0 ? true : false}
                     onLoad={(e) => handleimgAspectRatio(e, idx)}
-                    style={{
-                      maxWidth: '100%',
-                      width: '100%',
-                      height: 'auto',
-                    }}
+                    // style={{
+                    //   maxWidth: '100%',
+                    //   width: '100%',
+                    //   height: 'auto',
+                    // }}
                   />
                 </div>
               )
