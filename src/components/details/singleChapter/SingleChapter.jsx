@@ -74,6 +74,8 @@ const SingleChapter = ({ chapter }) => {
                     // height={imgHeight[idx]?.height || 500}
                     width={800}
                     height={500}
+                    placeholder='blur'
+                    blurDataURL='data:image/jpeg...'
                     // width='0'
                     // height='0'
                     // sizes='80vw'
