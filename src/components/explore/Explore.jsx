@@ -15,6 +15,8 @@ import Genres from '../filters/Genres/Genres'
 import Status from '../filters/Status/Status'
 import DownArrow from '../../../public/assets/icons/DownArrow'
 import Added from '../filters/Added/Added'
+import Pagination from '../pagination/Pagination'
+// import Pagination from '../pagination/Pagination'
 
 let filters = {}
 
@@ -32,7 +34,7 @@ const sortbyData = [
 ]
 
 const Explore = ({ manga }) => {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState([])
   const [pageNum, setPageNum] = useState(1)
   const [loading, setLoading] = useState(false)
   const [genre, setGenre] = useState(null)
@@ -49,6 +51,20 @@ const Explore = ({ manga }) => {
     status: false,
     added: false,
   })
+  /*
+   * Pagination
+   */
+  const itemsPerPage = 3
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = Math.ceil(data?.length / itemsPerPage)
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+  const endIdx = currentPage * itemsPerPage
+  const startIdx = endIdx - itemsPerPage
+
+  console.log('paginate data size', totalPages)
+  console.log('paginate start', startIdx)
+  console.log('paginate end', endIdx)
+  console.log('paginate current page', currentPage)
 
   useEffect(() => {
     setData([...manga])
@@ -137,7 +153,7 @@ const Explore = ({ manga }) => {
     }
   }
 
-  console.log('handleShowFilters', showFilters)
+  // console.log('handleShowFilters', showFilters)
 
   const sortGenres = (e) => {
     // const selectedGenres = e.map((x) => x.label)
@@ -217,8 +233,6 @@ const Explore = ({ manga }) => {
     }
   }
 
-  console.log('selectedAdded', selectedAdded)
-
   return (
     <div className='explorePage '>
       <ContentWrapper>
@@ -294,43 +308,29 @@ const Explore = ({ manga }) => {
               /> */}
             </div>
           </div>
-          {/* {data && <Spinner initial={true} />} */}
+          {data.length === 0 && <Spinner initial={true} />}
           {!loading && (
             <>
-              {data?.length > 0 ? (
-                // <InfiniteScroll
-                //   className='content'
-                //   dataLength={data?.results?.length || []}
-                //   next={fetchNextPageData}
-                //   hasMore={pageNum <= data?.total_pages}
-                //   loader={<Spinner />}
-                // >
-                //   {data?.results?.map((item, index) => {
-                //     if (item.media_type === 'person') return
-                //     return (
-                //       <MovieCard key={index} data={item} mediaType={mediaType} />
-                //     )
-                //   })}
-                // </InfiniteScroll>
-                <div className='content'>
-                  {data?.map((item, index) => {
-                    return (
-                      <MovieCard
-                        key={index}
-                        data={item}
-                        mediaType={mediaType}
-                      />
-                    )
-                  })}
-                </div>
-              ) : (
-                <span className='resultNotFound'>
-                  Sorry, Results not found!
-                </span>
-              )}
+              <div className='content'>
+                {data?.slice(startIdx, endIdx).map((item, index) => {
+                  return (
+                    <MovieCard key={index} data={item} mediaType={mediaType} />
+                  )
+                })}
+              </div>
             </>
           )}
         </div>
+
+        <Pagination
+          items={data}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
+          paginate={paginate}
+          totalItems={data?.length}
+        />
       </ContentWrapper>
     </div>
   )

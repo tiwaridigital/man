@@ -5,7 +5,11 @@ import React from 'react'
 const Page = async () => {
   noStore()
   const data = await fetchAllMangas()
-  return <Explore manga={data} />
+  return (
+    <>
+      <Explore manga={data} />
+    </>
+  )
 }
 
 export default Page
