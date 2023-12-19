@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import LeftPaginationArrow from '../../../public/assets/icons/LeftPaginationArrow'
 import RightPaginationArrow from '../../../public/assets/icons/RightPaginationArrow'
