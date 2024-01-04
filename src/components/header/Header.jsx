@@ -10,6 +10,7 @@ import Menu from '../../../public/assets/icons/Menu'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Header = () => {
   const [show, setShow] = useState('top')
@@ -90,7 +91,7 @@ const Header = () => {
       <ContentWrapper>
         <div className='logo'>
           <a href='/'>
-            <img height={40} width={131} src={logo.src} alt='' />
+            <Image priority height={40} width={131} src={logo.src} alt='' />
           </a>
         </div>
         <ul className='menuItems'>

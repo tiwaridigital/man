@@ -3,7 +3,13 @@ import React from 'react'
 import LeftPaginationArrow from '../../../public/assets/icons/LeftPaginationArrow'
 import RightPaginationArrow from '../../../public/assets/icons/RightPaginationArrow'
 
-const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
+const Pagination = ({
+  itemsPerPage,
+  totalItems,
+  paginate,
+  currentPage,
+  style,
+}) => {
   const pageNumbers = []
 
   for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
@@ -64,7 +70,7 @@ const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
   }
 
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center' style={style}>
       <div
         className='pagination flex gap-[5px] md:gap-4 flex-wrap'
         aria-label='Page navigation example'

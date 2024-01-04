@@ -21,7 +21,7 @@ export const slugify = (text) => {
 export const tagsMaker = (title) => {
   return (
     <div
-      className='text-gray-50 text-[16px] mt-8 mb-4'
+      className='text-gray-50 text-[14px] mt-8 mb-4'
       style={{ lineHeight: 1.5, opacity: 0.7 }}
     >
       <strong>Keywords: </strong> read {title}, {title} english, {title} eng,

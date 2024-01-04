@@ -54,7 +54,7 @@ const Explore = ({ manga }) => {
   /*
    * Pagination
    */
-  const itemsPerPage = 3
+  const itemsPerPage = 10
   const [currentPage, setCurrentPage] = useState(1)
   const totalPages = Math.ceil(data?.length / itemsPerPage)
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
@@ -323,13 +323,11 @@ const Explore = ({ manga }) => {
         </div>
 
         <Pagination
-          items={data}
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalPages={totalPages}
           paginate={paginate}
           totalItems={data?.length}
+          style={{ marginBottom: 40 }}
         />
       </ContentWrapper>
     </div>
