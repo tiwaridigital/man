@@ -146,7 +146,7 @@ export const fetchData = async (src, url) => {
      * Upload Images to imgBB
      */
     let chapterIdx = 0
-    for (const chapters of chapterData) {
+    for (const chapters of chapterData.slice(0, 1)) {
       let arr = []
       console.log('inside 1st for of', new Date())
       let innerChapterIdx = 0
