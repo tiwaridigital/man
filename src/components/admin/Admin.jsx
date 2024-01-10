@@ -37,7 +37,7 @@ const Admin = () => {
     }
   }
 
-  console.log('srcUrl', selectedSrc)
+  console.log('srcUrl', srcUrl)
 
   const handleDataFetching_Insertion = async (e) => {
     console.log('handleSources')

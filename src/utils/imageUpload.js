@@ -1,5 +1,6 @@
 import axios from 'axios'
 import sharp from 'sharp'
+import getImageBuffer from '@/app/_actions/getImageBuffer'
 export const convertImage = async (format, url) => {
   console.log('convertImage called')
   try {
@@ -9,9 +10,9 @@ export const convertImage = async (format, url) => {
     // convert Image to png Buffer
     const convertedImageBuffer = await sharp(data).toFormat(format).toBuffer()
     // console.log('convertedImageBuffer', convertedImageBuffer)
-    // const image = imageUpload(convertedImageBuffer.toString('base64'))
-    // console.log('image inside convertImage', image)
-    return convertedImageBuffer.toString('base64')
+    const image = imageUpload(convertedImageBuffer.toString('base64'))
+    console.log('image inside convertImage', image)
+    // return convertedImageBuffer.toString('base64')
   } catch (err) {
     console.log('Error converting image', err)
   }
@@ -51,13 +52,48 @@ export const imageUpload = async (imageBuffer = '', type, url) => {
     })
 }
 
-export const imgBBUpload = async (imageUrl) => {
-  const url = `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_SECRET}&image=${imageUrl}`
-  const response = await fetch(url, {
+export const imgBBUpload = async (imageUrl, uploadType) => {
+  if (uploadType == 'remote') {
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_SECRET}&image=${imageUrl}`
+    const response = await fetch(url, {
+      method: 'POST',
+    })
+    const result = await response.json()
+    return result
+  } else {
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_SECRET}`
+    const data = new FormData()
+    data.append('image')
+  }
+}
+
+export const cloudFlareR2 = async (fileName, imageUrl) => {
+  const bufferResult = await getImageBuffer(imageUrl)
+  const buffer = new Uint8Array(
+    atob(bufferResult)
+      .split('')
+      .map((char) => char.charCodeAt(0))
+  )
+
+  // console.log('buffer', buffer);
+  console.log('fileName', imageUrl)
+
+  const response = await fetch('http://localhost:3000/api/cloudFlareUpload', {
     method: 'POST',
+    body: JSON.stringify({
+      fileName,
+    }),
   })
-  const result = await response.json()
-  return result
+
+  const { url } = await response.json()
+  console.log('response url', url)
+
+  const uploaded = await fetch(url, {
+    method: 'PUT',
+    body: buffer,
+  })
+
+  // console.log('uploaded', uploaded)
 }
 
 export const bunnyCDNUpload = async (fileName, imageUrl) => {

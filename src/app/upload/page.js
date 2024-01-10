@@ -1,9 +1,10 @@
 'use client'
-import React, { useState } from 'react'
-// import { DocumentIcon } from '@heroicons/react/24/solid'
+import axios from 'axios'
+import React from 'react'
+import getImageBuffer from '../_actions/getImageBuffer'
 
-const Admin = () => {
-  const [file, setFile] = useState(null)
+const Page = () => {
+  const [file, setFile] = React.useState(null)
 
   const handleFileChange = (event) => {
     if (event.target.files) {
@@ -12,23 +13,42 @@ const Admin = () => {
     }
   }
 
+  const remoteFileBuffer = async (url) => {
+    return await axios.get(url, { responseType: 'arraybuffer' })
+  }
+
   const handleUpload = async () => {
     console.log('handleUpload called')
-    if (!file) return
+    // if (!file) return
 
-    const formData = new FormData()
-    formData.append('file', file)
-
-    const response = await fetch('/api/upload', {
+    const response = await fetch('/api/cloudFlareUpload', {
       method: 'POST',
+      body: JSON.stringify({
+        fileName: 'file.name.jpg',
+      }),
     })
+
     const { url } = await response.json()
-    console.log('url', url)
-    await fetch(url, {
+    const bufferResult = await getImageBuffer(
+      // eslint-disable-next-line quotes
+      'https://asuratoon.com/wp-content/uploads/custom-upload/212205/60/00 copy.jpg'
+    )
+    const buffer = new Uint8Array(
+      atob(bufferResult)
+        .split('')
+        .map((char) => char.charCodeAt(0))
+    )
+
+    console.log('buffer', buffer)
+    const uploaded = await fetch(url, {
       method: 'PUT',
-      body: formData,
+      body: buffer,
     })
+
+    console.log('uploaded', uploaded)
   }
+
+  console.log('file', file)
 
   return (
     <div className='min-h-screen bg-slate-900 text-white space-y-12'>
@@ -50,7 +70,6 @@ const Admin = () => {
             </label>
             <div className='mt-2 flex justify-center rounded-lg border border-dashed border-white/25 px-6 py-10'>
               <div className='text-center'>
-                DocumentIcon
                 <div className='mt-4 text-sm leading-6 text-gray-400'>
                   <label
                     htmlFor='file-upload'
@@ -59,7 +78,6 @@ const Admin = () => {
                     <span>Upload a file</span>
                     <input
                       type='file'
-                      accept='application/pdf'
                       id='file-upload'
                       name='file-upload'
                       className='sr-only'
@@ -88,4 +106,4 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default Page

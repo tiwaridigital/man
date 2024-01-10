@@ -30,3 +30,9 @@ export const tagsMaker = (title) => {
     </div>
   )
 }
+
+export const getFileExtension = (file) => {
+  const fileSplit = file.split('.')
+  const fileExtension = fileSplit[fileSplit.length - 1]
+  return fileExtension
+}
