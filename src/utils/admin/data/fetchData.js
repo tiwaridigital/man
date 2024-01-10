@@ -1,5 +1,6 @@
 import {
   bunnyCDNUpload,
+  cloudFlareR2,
   convertImage,
   imageUpload,
   imgBBUpload,
@@ -161,11 +162,15 @@ export const fetchData = async (src, url) => {
         //   `${detail_manga.title}/chapter-${chapterIdx}/${innerChapterIdx}.${fileExtension}`,
         //   chapter.src_origin
         // )
-        console.log('image', image)
+        // await cloudFlareR2(
+        //   `${detail_manga.title}/chapter-${chapterIdx}/${innerChapterIdx}.${fileExtension}`,
+        //   chapter.src_origin
+        // )
 
         const arrObj = {
           id: chapterIdx,
-          src_origin: image.data.url,
+          // src_origin: image.data.url,
+          src_origin: `https://gpfasts.xyz/${detail_manga.title}/chapter-${chapterIdx}/${innerChapterIdx}.${fileExtension}`,
           // src_origin: `https://mangu.b-cdn.net/${detail_manga.title}/chapter-${chapterIdx}/${innerChapterIdx}.${fileExtension}`,
         }
         arr.push(arrObj)

@@ -4,8 +4,8 @@ export const r2 = new S3Client({
   region: 'auto',
   endpoint: 'https://d15eb0203fe48da452c69098092ecf46.r2.cloudflarestorage.com',
   credentials: {
-    accessKeyId: '3aefb2c6e1b09b3f002fe1619f507f91',
+    accessKeyId: '2450ff76908a0245b6fc75f45d078483',
     secretAccessKey:
-      '25dd0b7c00a90d6ab31227e81702731de25d4a18b6aec66be818460ee87d8324',
+      '06512b7125106b02372938ba7380b32ff5ab07a9961542f90db33c2bea525afc',
   },
 })
