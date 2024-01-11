@@ -7,5 +7,7 @@ query SingleChapterQuery($slug: String!) {
     singleMang {
       title
     }
+    hasNextEp
+    totalEpisodes
   }
 }

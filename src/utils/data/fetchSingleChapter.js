@@ -1,5 +1,5 @@
-import SINGLE_CHAPTER_QUERY from '@/graphql/admin/chapters/SingleChapterQuery.gql'
-import client from '../../../client'
+import SINGLE_CHAPTER_QUERY from '@/graphql/admin/chapters/SingleChapterQuery.gql';
+import client from '../../../client';
 
 const fetchSingleChapter = async (slug) => {
   try {
@@ -8,12 +8,12 @@ const fetchSingleChapter = async (slug) => {
       variables: {
         slug: slug,
       },
-    })
-    console.log('chapter', result)
-    return result.data.chapters[0]
+    });
+    console.log('chapter', result);
+    return result.data.chapters[0];
   } catch (err) {
-    console.log('Error Fetching Single Chapter', err)
+    console.log('Error Fetching Single Chapter', err);
   }
-}
+};
 
-export default fetchSingleChapter
+export default fetchSingleChapter;

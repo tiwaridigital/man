@@ -152,7 +152,7 @@ export const fetchData = async (src, url) => {
       console.log('inside 1st for of', new Date())
       let innerChapterIdx = 0
       for (const chapter of chapters) {
-        await new Promise((resolve) => setTimeout(resolve, 2000))
+        // await new Promise((resolve) => setTimeout(resolve, 2000))
         const fileSplit = chapter.src_origin.split('.')
         const fileExtension = fileSplit[fileSplit.length - 1]
         //convert webp images to jpg before uploading

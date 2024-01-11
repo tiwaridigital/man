@@ -149,6 +149,8 @@ const Admin = () => {
           url: x.url,
           data: x.chapter_data,
           slug: x.slug,
+          hasNextEp: idx === 0 ? false : true, /* Inserted false for 0th idx => because chaptersArr is reversed in descending order */
+          totalEpisodes: chaptersArr.length
         },
       })
       console.log('chapterResult', chapterResult)
