@@ -52,19 +52,13 @@ export const imageUpload = async (imageBuffer = '', type, url) => {
     })
 }
 
-export const imgBBUpload = async (imageUrl, uploadType) => {
-  if (uploadType == 'remote') {
+export const imgBBUpload = async (imageUrl) => {
     const url = `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_SECRET}&image=${imageUrl}`
     const response = await fetch(url, {
       method: 'POST',
     })
     const result = await response.json()
     return result
-  } else {
-    const url = `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_SECRET}`
-    const data = new FormData()
-    data.append('image')
-  }
 }
 
 export const cloudFlareR2 = async (fileName, imageUrl) => {

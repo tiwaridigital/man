@@ -1,13 +1,13 @@
 import React from 'react'
 
-const RightPaginationArrow = () => {
+const RightPaginationArrow = ({ width = 24, height = 24 }) => {
   return (
     <svg
       data-v-4c681a64=''
       data-v-a31e942f=''
       xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
+      width={width}
+      height={height}
       fill='none'
       stroke='currentColor'
       stroke-linecap='round'
