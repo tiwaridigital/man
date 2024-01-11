@@ -6,9 +6,12 @@ import BreadCrumb from '@/components/breadCrumb/BreadCrumb';
 import Image from 'next/image';
 import RightPaginationArrow from '../../../../public/assets/icons/RightPaginationArrow';
 import LeftPaginationArrow from '../../../../public/assets/icons/LeftPaginationArrow';
-import Select from 'react-select';
+import Link from 'next/link';
+import {usePathname, useRouter} from 'next/navigation';
 
 const SingleChapter = ({ chapter }) => {
+  const router = useRouter()
+  const currentPath = usePathname()
   const [imgHeight, setImgHeight] = useState([]);
   const [imgWidth, setImgWidth] = useState([]);
   const mangaTitle = chapter?.singleMang?.title;
@@ -44,6 +47,19 @@ const SingleChapter = ({ chapter }) => {
 
   console.log('chapterData', chapter);
 
+  const handleSelectedChapter = (e) => {
+    const selectedOption = e.target.options.selectedIndex // gets selected chapter
+    const currentPathArr = currentPath.split('-') // split on basis of '-' so that, it can be replaced with selected chapter
+    const newPath = currentPath.replace(currentPathArr[currentPathArr.length - 1], selectedOption)
+    router.push(newPath)
+  }
+
+  const handlePrevPage = () => {
+    const currentPathArr = currentPath.split('-') // split on basis of '-' so that, it can be replaced with selected chapter
+    const newPath = currentPath.replace(currentPathArr[currentPathArr.length - 1], currentPathArr[currentPathArr.length - 1] - 1)
+    console.log('prev',newPath)
+  }
+
   return (
     <div className="pt-[100px]">
       <ContentWrapper>
@@ -66,38 +82,45 @@ const SingleChapter = ({ chapter }) => {
             of manga collections Asura Scans is in the Manga List menu.
           </div>
           {/*Navigation*/}
-          <div className="flex justify-between mb-8">
-            <h1>Total Episodes</h1>
-            {/* prettier-ignore */}
-            {/* eslint-disable */}{" "}
-            {/*<select className="py-2 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">*/}
-            {/*  <option selected>Open this select menu</option>*/}
-            {/*  {[...Array(chapter.totalEpisodes)].map((x, idx) => {*/}
-            {/*    return (*/}
-            {/*      <>*/}
-            {/*        <option>{idx + 1}</option>*/}
-            {/*      </>*/}
-            {/*    );*/}
-            {/*  })}*/}
-            {/*</select>*/}
-            <Select options={chaptersArr} />
-            <div className="flex gap-2">
-              <span className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white cursor-pointer">
-                <LeftPaginationArrow height={18} width={18} />
-                Prev Chapter
-              </span>
-              <span
-                className={`inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium ${
-                  chapter.hasNextEp
-                    ? "bg-red-500 text-white"
-                    : "bg-gray-800 text-white"
-                } cursor-pointer`}
-              >
-                Next Chapter
-                <RightPaginationArrow height={18} width={18} />
-              </span>
+            <div className="flex justify-between mb-8 relative">
+              {/* prettier-ignore */}
+              {/* eslint-disable */}
+              <div>
+                <select className="py-2 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  onChange={handleSelectedChapter}
+                >
+                  <option selected>Select Chapters</option>
+                  {
+                    [...Array(chapter.totalEpisodes)].map((x, idx) => {
+                      return (
+                        <option>
+                          Chapter {idx + 1}
+                        </option>
+                      )
+                    })
+                  }
+                </select>
+              </div>
+              <div className="flex gap-2">
+                <Link href={``}>
+                <span
+                    className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white cursor-pointer">
+                  <LeftPaginationArrow height={18} width={18}/>
+                  Prev Chapter
+                </span>
+                </Link>
+                <span
+                    className={`inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium ${
+                    chapter.hasNextEp
+                      ? "bg-red-500 text-white"
+                      : "bg-gray-800 text-white"
+                  } cursor-pointer`}
+                >
+                  Next Chapter
+                  <RightPaginationArrow height={18} width={18} />
+                </span>
+              </div>
             </div>
-          </div>
           {/*Navigation*/}
           <div className="relative flex flex-col items-center">
             {/* Images */}
