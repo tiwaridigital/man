@@ -157,15 +157,16 @@ export const fetchData = async (src, url) => {
         const fileExtension = fileSplit[fileSplit.length - 1]
         //convert webp images to jpg before uploading
         console.log('uploading image', new Date())
-        const image = await imgBBUpload(chapter.src_origin)
+        // const image = await imgBBUpload(chapter.src_origin)
+        // console.log('image', image)
         // const image = await bunnyCDNUpload(
         //   `${detail_manga.title}/chapter-${chapterIdx}/${innerChapterIdx}.${fileExtension}`,
         //   chapter.src_origin
         // )
-        // await cloudFlareR2(
-        //   `${detail_manga.title}/chapter-${chapterIdx}/${innerChapterIdx}.${fileExtension}`,
-        //   chapter.src_origin
-        // )
+        await cloudFlareR2(
+          `${detail_manga.title}/chapter-${chapterIdx}/${innerChapterIdx}.${fileExtension}`,
+          chapter.src_origin
+        )
 
         const arrObj = {
           id: chapterIdx,

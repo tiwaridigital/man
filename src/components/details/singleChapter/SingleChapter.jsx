@@ -52,7 +52,15 @@ const SingleChapter = ({ chapter }) => {
             at Asura Scans . Dont forget to read the other manga updates. A list
             of manga collections Asura Scans is in the Manga List menu.
           </div>
-
+          {/*Navigation Start*/}
+          <div className='flex justify-between'>
+            <p>Select Area</p>
+            <div>
+              <span className="inline-flex mr-1.5 items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white">Prev Episode</span>
+              <span className="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white">Next Episode</span>
+            </div>
+          </div>
+          {/*Navigation End*/}
           <div className='relative flex flex-col items-center'>
             {/* Images */}
             {chapter?.data.map((item, idx) => {
