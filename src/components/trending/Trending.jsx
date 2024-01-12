@@ -47,8 +47,8 @@ const Trending = ({ data }) => {
           </div>
           <SwitchTabs
             // data={['Day', 'Week']}
-
             onTabChange={onTabChange}
+            navigation={navigation}
           />
         </div>
       </ContentWrapper>

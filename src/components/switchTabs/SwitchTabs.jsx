@@ -4,17 +4,11 @@ import { useState } from 'react';
 import LeftNavigation from '../../../public/assets/icons/LeftNavigation';
 import RightNavigation from '../../../public/assets/icons/RightNavigation';
 
-const SwitchTabs = ({ data, onTabChange }) => {
+const SwitchTabs = ({ data, onTabChange, navigation }) => {
   // eslint-disable-next-line react/jsx-key
   data = [<LeftNavigation />, <RightNavigation />];
   const [selectedTab, setSelectedTab] = useState(0);
   const [left, setLeft] = useState(0);
-  const [isSmall, setIsSmall] = useState(false);
-
-  const toggleSize = () => {
-    console.log('toggleSize called');
-    setIsSmall(!isSmall);
-  };
 
   //to set which tab is active and onTabChange -> for getting data according to active tab -> like day/week based or movies/shows
   const activeTab = (tab, idx) => {
@@ -35,17 +29,14 @@ const SwitchTabs = ({ data, onTabChange }) => {
               className={`tabItem ${selectedTab === idx ? 'active' : ''}`}
               onClick={() => {
                 activeTab(tab, idx);
-                toggleSize();
+                navigation(idx === 0 ? 'left' : 'right');
               }}
             >
               {tab}
             </span>
           );
         })}
-        <span
-          className={`movingBg ${isSmall ? 'small' : ''}`}
-          style={{ left }}
-        />
+        <span className="movingBg" style={{ left }} />
       </div>
     </div>
   );
