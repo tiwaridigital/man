@@ -1,6 +1,7 @@
 @import '../../../mixins';
 .chapter-wrapper {
   color: white;
+
   .backdrop-img img {
     width: 100%;
     display: block;
@@ -26,6 +27,7 @@
     font-style: italic;
     opacity: 0.5;
     text-align: center;
+    font-weight: 400;
     @include md {
       font-size: 15px;
       line-height: 28px;

@@ -1,119 +1,149 @@
-'use client'
-import React from 'react'
-import './style.scss'
-import ContentWrapper from '../contentWrapper/ContentWrapper'
-import logo from '../../assets/movix-logo.svg'
-import { useEffect, useState } from 'react'
-import Search from '../../../public/assets/icons/Search'
-import Close from '../../../public/assets/icons/Close'
-import Menu from '../../../public/assets/icons/Menu'
-import { usePathname } from 'next/navigation'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import Image from 'next/image'
+'use client';
+import React from 'react';
+import './style.scss';
+import ContentWrapper from '../contentWrapper/ContentWrapper';
+import logo from '../../assets/movix-logo.svg';
+import { useEffect, useState } from 'react';
+import Search from '../../../public/assets/icons/Search';
+import Close from '../../../public/assets/icons/Close';
+import Menu from '../../../public/assets/icons/Menu';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const Header = () => {
-  const [show, setShow] = useState('top')
-  const [lastScrollY, setLastScrollY] = useState(0)
-  const [mobileMenu, setMobileMenu] = useState(false)
-  const [query, setQuery] = useState('')
-  const [showSearch, setShowSearch] = useState(false)
-  const router = useRouter()
-  const pathname = usePathname()
+  const [show, setShow] = useState('top');
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [query, setQuery] = useState('');
+  const [showSearch, setShowSearch] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
   useEffect(() => {
-    window.addEventListener('scroll', controlNavbar)
+    window.addEventListener('scroll', controlNavbar);
 
     return () => {
-      window.removeEventListener('scroll', controlNavbar)
-    }
-  }, [lastScrollY])
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const menuItems = [
     { name: 'Movies', type: 'movie' },
     { name: 'TV Shows', type: 'tv' },
     { name: <Search width={20} height={20} />, type: 'search' },
-  ]
+  ];
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
       if (window.scrollY > lastScrollY && !mobileMenu) {
         //if current Y co-ordinate is greater than last scrolled Y co-ordinate -> then hide
-        setShow('hide')
+        setShow('hide');
       } else {
-        setShow('show')
+        setShow('show');
       }
     } else {
-      setShow('top')
+      setShow('top');
     }
-    setLastScrollY(window.scrollY)
-  }
+    setLastScrollY(window.scrollY);
+  };
 
   const openSearch = () => {
-    setShowSearch(!showSearch)
-    setMobileMenu(false)
-  }
+    setShowSearch(!showSearch);
+    setMobileMenu(false);
+  };
 
   const openMobileMenu = () => {
-    console.log('openMobileMenu')
-    setMobileMenu(true)
-    setShowSearch(false)
-  }
+    console.log('openMobileMenu');
+    setMobileMenu(true);
+    setShowSearch(false);
+  };
 
   const handleSearchQuery = (e) => {
     if (e.key === 'Enter' && query.length > 0) {
-      router.push(`/search?s=${query}`)
+      router.push(`/search?s=${query}`);
       setTimeout(() => {
-        setShowSearch(false)
-      }, 1000)
+        setShowSearch(false);
+      }, 1000);
     }
-  }
+  };
 
   const navigationHandler = (type) => {
     if (type === 'movie') {
-      navigate('/explore/movie')
+      navigate('/explore/movie');
     } else if (type === 'tv') {
-      navigate('/explore/tv')
+      navigate('/explore/tv');
     }
 
     //show search bar when search icon is clicked
     if (type === 'search') {
-      setShowSearch(!showSearch)
+      setShowSearch(!showSearch);
     }
-    setMobileMenu(false)
-  }
+    setMobileMenu(false);
+  };
 
   return (
     <header className={`header ${mobileMenu ? 'mobileView' : ''} ${show}`}>
       <ContentWrapper>
-        <div className='logo'>
-          <a href='/'>
-            <Image priority height={40} width={131} src={logo.src} alt='' />
+        <div className="logo">
+          <a href="/">
+            <Image priority height={40} width={131} src={logo.src} alt="" />
           </a>
         </div>
-        <ul className='menuItems'>
+        {/*<ul className="menuItems">*/}
+        {/*  {menuItems.map((menu, idx) => (*/}
+        {/*    <li*/}
+        {/*      key={idx}*/}
+        {/*      className="menuItem"*/}
+        {/*      onClick={() => {*/}
+        {/*        menu.type === 'search' && setShowSearch(!showSearch);*/}
+        {/*        setMobileMenu(false);*/}
+        {/*      }}*/}
+        {/*    >*/}
+        {/*      {menu.type === 'search' ? (*/}
+        {/*        menu.name*/}
+        {/*      ) : (*/}
+        {/*        <Link href={'/explore'}>{menu.name}</Link>*/}
+        {/*      )}*/}
+        {/*    </li>*/}
+        {/*  ))}*/}
+        {/*</ul>*/}
+
+        <ul className="menuItems">
           {menuItems.map((menu, idx) => (
-            <li
-              key={idx}
-              className='menuItem'
-              onClick={() => {
-                menu.type === 'search' && setShowSearch(!showSearch)
-                setMobileMenu(false)
-              }}
-            >
+            <>
               {menu.type === 'search' ? (
-                menu.name
+                <li
+                  key={idx}
+                  className="menuItem"
+                  onClick={() => {
+                    menu.type === 'search' && setShowSearch(!showSearch);
+                    setMobileMenu(false);
+                  }}
+                >
+                  {menu.name}
+                </li>
               ) : (
-                <Link href={'/explore'}>{menu.name}</Link>
+                <li
+                  key={idx}
+                  className="menuItem"
+                  onClick={() => {
+                    menu.type === 'search' && setShowSearch(!showSearch);
+                    setMobileMenu(false);
+                  }}
+                >
+                  <Link href={'/explore'}>{menu.name}</Link>
+                </li>
               )}
-            </li>
+            </>
           ))}
         </ul>
 
-        <div className='mobileMenuItems'>
+        <div className="mobileMenuItems">
           <div onClick={openSearch}>
             <Search />
           </div>
@@ -129,12 +159,12 @@ const Header = () => {
         </div>
       </ContentWrapper>
       {showSearch && (
-        <div className='searchBar'>
+        <div className="searchBar">
           <ContentWrapper>
-            <div className='searchInput'>
+            <div className="searchInput">
               <input
-                type='text'
-                placeholder='Search for a movie or tv show....'
+                type="text"
+                placeholder="Search for a movie or tv show...."
                 onKeyUp={handleSearchQuery}
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -146,7 +176,7 @@ const Header = () => {
         </div>
       )}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

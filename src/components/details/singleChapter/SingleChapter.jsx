@@ -7,17 +7,23 @@ import Image from 'next/image';
 import RightPaginationArrow from '../../../../public/assets/icons/RightPaginationArrow';
 import LeftPaginationArrow from '../../../../public/assets/icons/LeftPaginationArrow';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import Exclamation from '../../../../public/assets/icons/Exclamation';
 
 const SingleChapter = ({ chapter }) => {
   const router = useRouter();
   const currentPath = usePathname();
+  const params = useParams();
   const [imgHeight, setImgHeight] = useState([]);
   const [imgWidth, setImgWidth] = useState([]);
   const mangaTitle = chapter?.singleMang?.title;
-  // Prev & Next Page URL
+  const paramsArr = params.slug.split('-');
+  const parentPath = paramsArr.slice(0, paramsArr.length - 2).join('-');
+
+  console.log('parentPath', parentPath);
+
   const currentPathArr = currentPath.split('-'); // split on basis of '-' so that, it can be replaced with selected chapter.
+  // Prev & Next Page URL
   const prevPage = currentPath.replace(
     currentPathArr[currentPathArr.length - 1],
     String(currentPathArr[currentPathArr.length - 1] - 1), // didn't had to convert to number because '-' sign is alreadt converting it to number.
@@ -77,11 +83,18 @@ const SingleChapter = ({ chapter }) => {
           title={chapter?.singleMang?.title}
           chapterTitle={chapter?.title}
           type={'chapter'}
+          chapterParentPath={`/manga/${parentPath}`}
         />
         <div className="mt-8 chapter-wrapper">
-          <h1 className="text-center text-[20px] font-semibold text-gray-100">
+          <h1 className="text-center text-[20px] leading-7 font-semibold text-gray-100">
             {mangaTitle} - {chapter?.title}
           </h1>
+          <h3 className="text-center text-[15px] font-bold mt-4 leading-5">
+            <Link href={`/manga/${parentPath}`}>
+              Read All Chapters of -{' '}
+              <span className="text-gray-500"> {mangaTitle}</span>
+            </Link>
+          </h3>
           <div className="subtitle" style={{ marginTop: 20 }}>
             Read the latest manga{' '}
             <strong>
@@ -106,17 +119,23 @@ const SingleChapter = ({ chapter }) => {
                 })}
               </select>
             </div>
-            <div className="flex gap-2 items-center justify-end sm:w-1/2">
+            <div className="chapter-nav flex gap-2 items-center justify-end sm:w-1/2">
               {/* Prev Page */}
               {currentPathArr[currentPathArr.length - 1] != 1 ? (
                 <Link href={prevPage} className="w-1/2 sm:w-fit">
-                  <span className="inline-flex w-full items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white cursor-pointer">
+                  <span
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(98.37deg, #f89e00 0.99%, #da2f68 100%)',
+                    }}
+                    className="inline-flex w-full items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white cursor-pointer"
+                  >
                     <LeftPaginationArrow height={18} width={18} />
                     Prev Chapter
                   </span>
                 </Link>
               ) : (
-                <span className="inline-flex w-1/2 sm:w-fit items-center gap-x-1.5 py-1.5 px-3 rounded-full h-full text-xs font-medium bg-gray-800 text-white cursor-pointer">
+                <span className="inline-flex w-1/2 sm:w-fit items-center gap-x-1.5 py-1.5 px-3 rounded-full h-full text-xs font-medium !bg-gray-800 text-white cursor-pointer">
                   <Exclamation height={18} width={18} />
                   Prev Chapter
                 </span>
@@ -127,6 +146,10 @@ const SingleChapter = ({ chapter }) => {
               currentPathArr[currentPathArr.length - 1] ? (
                 <Link href={nextPage} className="w-1/2 sm:w-fit">
                   <span
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(98.37deg, #f89e00 0.99%, #da2f68 100%)',
+                    }}
                     className={`inline-flex items-center w-full gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white cursor-pointer`}
                   >
                     Next Chapter
