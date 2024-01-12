@@ -2,7 +2,6 @@
 import axios from 'axios';
 import React from 'react';
 import getImageBuffer from '../_actions/getImageBuffer';
-import Select from '@/components/select/Select';
 import './style.scss';
 
 const Page = () => {
@@ -103,10 +102,6 @@ const Page = () => {
             Upload
           </button>
         </div>
-      </div>
-      {/*select*/}
-      <div className="select-wrapper">
-        <Select />
       </div>
     </div>
   );
