@@ -39,12 +39,6 @@ const Trending = ({ data }) => {
       <ContentWrapper>
         <span className="carouselTitle">Trending</span>
         <div className="flex gap-2 cursor-pointer items-center">
-          <div onClick={() => navigation('left')}>
-            <LeftArrow fill="#F38D25" />
-          </div>
-          <div onClick={() => navigation('right')}>
-            <RightArrow fill="#F38D25" />
-          </div>
           <SwitchTabs
             // data={['Day', 'Week']}
             onTabChange={onTabChange}
