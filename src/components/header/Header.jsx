@@ -128,16 +128,17 @@ const Header = () => {
                   {menu.name}
                 </li>
               ) : (
-                <li
-                  key={idx}
-                  className="menuItem"
-                  onClick={() => {
-                    menu.type === 'search' && setShowSearch(!showSearch);
-                    setMobileMenu(false);
-                  }}
-                >
-                  <Link href={'/explore'}>{menu.name}</Link>
-                </li>
+                <Link href={'/explore'} key={idx}>
+                  <li
+                    className="menuItem"
+                    onClick={() => {
+                      menu.type === 'search' && setShowSearch(!showSearch);
+                      setMobileMenu(false);
+                    }}
+                  >
+                    {menu.name}
+                  </li>
+                </Link>
               )}
             </>
           ))}
