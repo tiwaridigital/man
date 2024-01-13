@@ -66,3 +66,23 @@
 .read-the-docs {
   color: #888;
 }
+
+.cardsNavBtn {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 15px;
+  background-image: var(--gradient);
+  transition: 0.5s;
+  background-size: 140% auto;
+}
+
+.cardsNavBtn:hover {
+  background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  background-position: right center; /* change the direction of the change here */
+}

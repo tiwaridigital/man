@@ -9,7 +9,7 @@ import LeftArrow from '../../../public/assets/icons/LeftArrow';
 import RightArrow from '../../../public/assets/icons/RightArrow';
 import LeftNavigation from '../../../public/assets/icons/LeftNavigation';
 
-const Trending = ({ data }) => {
+const Trending = ({ data, title }) => {
   const carouselContainer = useRef(null);
   console.log('carouselContainer', carouselContainer);
 
@@ -37,7 +37,7 @@ const Trending = ({ data }) => {
   return (
     <div className="carouselSection">
       <ContentWrapper>
-        <span className="carouselTitle">Trending</span>
+        <span className="carouselTitle">{title}</span>
         <div className="flex gap-2 cursor-pointer items-center">
           <SwitchTabs
             // data={['Day', 'Week']}

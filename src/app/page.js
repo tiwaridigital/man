@@ -10,9 +10,8 @@ export default async function Home() {
   return (
     <div>
       <HeroBanner />
-      {/*Popular Mangas*/}
+      <Trending data={data} title={'Trending'} />
       <MangaCardsContainer items={data.slice(0, 6)} />
-      <Trending data={data} />
     </div>
   );
 }

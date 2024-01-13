@@ -274,7 +274,7 @@ const Explore = ({ manga }) => {
             show={showFilters.added}
           />
           <div className="pageHeader">
-            <div className="pageTitle">Explore Manga</div>
+            <div className="pageTitle mt-2">Explore Manga</div>
             <div className="filters">
               {/* <Select
                 isMulti
