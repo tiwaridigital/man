@@ -123,19 +123,13 @@ const SingleChapter = ({ chapter }) => {
               {/* Prev Page */}
               {currentPathArr[currentPathArr.length - 1] != 1 ? (
                 <Link href={prevPage} className="w-1/2 sm:w-fit">
-                  <span
-                    style={{
-                      backgroundImage:
-                        'linear-gradient(98.37deg, #f89e00 0.99%, #da2f68 100%)',
-                    }}
-                    className="inline-flex w-full items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white cursor-pointer"
-                  >
+                  <span className="chapter-navBtn nlast w-full">
                     <LeftPaginationArrow height={18} width={18} />
                     Prev Chapter
                   </span>
                 </Link>
               ) : (
-                <span className="inline-flex w-1/2 sm:w-fit items-center gap-x-1.5 py-1.5 px-3 rounded-full h-full text-xs font-medium !bg-gray-800 text-white cursor-pointer">
+                <span className="w-1/2 sm:w-fit chapter-navBtn">
                   <Exclamation height={18} width={18} />
                   Prev Chapter
                 </span>
@@ -145,21 +139,13 @@ const SingleChapter = ({ chapter }) => {
               {chapter.totalEpisodes !=
               currentPathArr[currentPathArr.length - 1] ? (
                 <Link href={nextPage} className="w-1/2 sm:w-fit">
-                  <span
-                    style={{
-                      backgroundImage:
-                        'linear-gradient(98.37deg, #f89e00 0.99%, #da2f68 100%)',
-                    }}
-                    className={`inline-flex items-center w-full gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-500 text-white cursor-pointer`}
-                  >
+                  <span className="chapter-navBtn nlast w-full">
                     Next Chapter
                     <RightPaginationArrow height={18} width={18} />
                   </span>
                 </Link>
               ) : (
-                <span
-                  className={`inline-flex items-center w-1/2 sm:w-fit gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-800 text-white cursor-pointer`}
-                >
+                <span className="w-1/2 sm:w-fit chapter-navBtn">
                   Next Chapter
                   <Exclamation height={18} width={18} />
                 </span>

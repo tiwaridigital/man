@@ -19,7 +19,7 @@ const MangaCardsContainer = ({ items }) => {
             Latest Update
           </div>
           <Link href={'/explore'} className="cardsNavBtn">
-            View All
+            <span>View All</span>
           </Link>
         </div>
         <div className="relative">

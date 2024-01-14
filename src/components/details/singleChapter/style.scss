@@ -131,4 +131,30 @@
       }
     }
   }
+
+  .chapter-navBtn {
+    display: inline-flex;
+    //width: 100%;
+    align-items: center;
+    column-gap: 0.375rem;
+    padding: 0.375rem 0.75rem 0.375rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    background-color: rgb(31 41 55 / 1);
+    transition: 0.5s;
+    background-size: 140% auto;
+  }
+
+  .chapter-navBtn.nlast {
+    background-image: var(--gradient);
+
+    &:hover {
+      background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%);
+      background-position: right center; /* change the direction of the change here */
+    }
+  }
 }

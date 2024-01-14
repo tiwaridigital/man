@@ -1,29 +1,27 @@
-import axios from 'axios'
-import sharp from 'sharp'
-import getImageBuffer from '@/app/_actions/getImageBuffer'
-export const convertImage = async (format, url) => {
-  console.log('convertImage called')
+import axios from 'axios';
+import sharp from 'sharp';
+import getImageBuffer from '@/app/_actions/getImageBuffer';
+
+export const convertImage = async (buffer, format) => {
+  console.log('convertImage called');
   try {
-    // Fetch the image buffer from the URL
-    const { data } = await axios.get(url, { responseType: 'arraybuffer' })
-    console.log('axios buffer', data)
-    // convert Image to png Buffer
-    const convertedImageBuffer = await sharp(data).toFormat(format).toBuffer()
-    // console.log('convertedImageBuffer', convertedImageBuffer)
-    const image = imageUpload(convertedImageBuffer.toString('base64'))
-    console.log('image inside convertImage', image)
-    // return convertedImageBuffer.toString('base64')
+    // convert Image to Specified Image Type Buffer
+    return await sharp(buffer)
+      [format]({
+        quality: 90,
+      })
+      .toBuffer();
   } catch (err) {
-    console.log('Error converting image', err)
+    console.log('Error converting image', err);
   }
-}
+};
 
 export const imageUpload = async (imageBuffer = '', type, url) => {
-  console.log('uploadImage called', type)
-  const FormData = require('form-data')
-  let data = new FormData()
-  data.append('image', type === 'base64' ? imageBuffer : url)
-  data.append('type', type)
+  console.log('uploadImage called', type);
+  const FormData = require('form-data');
+  let data = new FormData();
+  data.append('image', type === 'base64' ? imageBuffer : url);
+  data.append('type', type);
   // data.append('name', 'macbook.png')
   // data.append('title', 'Macbook Air M1')
   // data.append('description', 'This is an macbook air m1 image.')
@@ -37,63 +35,56 @@ export const imageUpload = async (imageBuffer = '', type, url) => {
       // ...data.getHeaders(),
     },
     data: data,
-  }
+  };
   // let data =
   return axios
     .request(config)
     .then((response) => {
       // console.log('response')
       // console.log(JSON.stringify(response.data))
-      return JSON.stringify(response.data)
+      return JSON.stringify(response.data);
     })
     .catch((error) => {
-      console.log('error')
-      console.log(error)
-    })
-}
+      console.log('error');
+      console.log(error);
+    });
+};
 
 export const imgBBUpload = async (imageUrl) => {
-    const url = `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_SECRET}&image=${imageUrl}`
-    const response = await fetch(url, {
-      method: 'POST',
-    })
-    const result = await response.json()
-    return result
-}
+  const url = `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_SECRET}&image=${imageUrl}`;
+  const response = await fetch(url, {
+    method: 'POST',
+  });
+  const result = await response.json();
+  return result;
+};
 
 export const cloudFlareR2 = async (fileName, imageUrl) => {
-  const bufferResult = await getImageBuffer(imageUrl)
-  const buffer = new Uint8Array(
-    atob(bufferResult)
-      .split('')
-      .map((char) => char.charCodeAt(0))
-  )
-
-  // console.log('buffer', buffer);
-  console.log('fileName', imageUrl)
+  const bufferResult = await getImageBuffer(imageUrl);
+  const convertedImageBuffer = await convertImage(bufferResult, 'webp');
 
   const response = await fetch('http://localhost:3000/api/cloudFlareUpload', {
     method: 'POST',
     body: JSON.stringify({
       fileName,
     }),
-  })
+  });
 
-  const { url } = await response.json()
-  console.log('response url', url)
+  const { url } = await response.json();
+  console.log('response url', url);
 
   const uploaded = await fetch(url, {
     method: 'PUT',
-    body: buffer,
-  })
+    body: convertedImageBuffer,
+  });
 
   // console.log('uploaded', uploaded)
-}
+};
 
 export const bunnyCDNUpload = async (fileName, imageUrl) => {
   // Fetch the image buffer from the URL
-  const { data } = await axios.get(imageUrl, { responseType: 'arraybuffer' })
-  console.log('axios buffer', data)
+  const { data } = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+  console.log('axios buffer', data);
   // pass imageBuffer in data
   let config = {
     method: 'PUT',
@@ -104,14 +95,14 @@ export const bunnyCDNUpload = async (fileName, imageUrl) => {
       'Content-Type': 'application/octet-stream',
     },
     data: data,
-  }
+  };
 
   return axios
     .request(config)
     .then((response) => {
-      console.log('uploaded', response.data)
+      console.log('uploaded', response.data);
     })
     .catch((err) => {
-      console.log('error uploading', err)
-    })
-}
+      console.log('error uploading', err);
+    });
+};
