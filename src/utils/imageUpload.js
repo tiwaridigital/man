@@ -3,7 +3,6 @@ import sharp from 'sharp';
 import getImageBuffer from '@/app/_actions/getImageBuffer';
 
 export const convertImage = async (buffer, format) => {
-  console.log('convertImage called');
   try {
     // convert Image to Specified Image Type Buffer
     return await sharp(buffer)
@@ -59,9 +58,15 @@ export const imgBBUpload = async (imageUrl) => {
   return result;
 };
 
-export const cloudFlareR2 = async (fileName, imageUrl) => {
+export const cloudFlareR2 = async (fileName, imageUrl, convert) => {
   const bufferResult = await getImageBuffer(imageUrl);
-  const convertedImageBuffer = await convertImage(bufferResult, 'webp');
+  let convertedImageBuffer;
+  if (convert) {
+    const convertFileType = 'webp';
+    convertedImageBuffer = await convertImage(bufferResult, convertFileType);
+    const fileExtension = fileName.split('.').pop();
+    fileName = fileName.replace(fileExtension, convertFileType);
+  }
 
   const response = await fetch('http://localhost:3000/api/cloudFlareUpload', {
     method: 'POST',
@@ -75,7 +80,7 @@ export const cloudFlareR2 = async (fileName, imageUrl) => {
 
   const uploaded = await fetch(url, {
     method: 'PUT',
-    body: convertedImageBuffer,
+    body: convert ? convertedImageBuffer : bufferResult,
   });
 
   // console.log('uploaded', uploaded)
