@@ -2,11 +2,15 @@
 import axios from 'axios';
 
 export default async function getImageBuffer(url) {
-  const res = await axios({
-    method: 'get',
-    url: url,
-    responseType: 'arraybuffer',
-  });
+  try {
+    const res = await axios({
+      method: 'get',
+      url: url,
+      responseType: 'arraybuffer',
+    });
 
-  return Buffer.from(res.data);
+    return Buffer.from(res.data);
+  } catch (error) {
+    console.log('error getting bufferImage', error);
+  }
 }
