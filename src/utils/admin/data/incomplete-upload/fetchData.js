@@ -1,61 +1,31 @@
-import {
-  bunnyCDNUpload,
-  cloudFlareR2,
-  convertImage,
-  freeImageHost,
-  imageUpload,
-  imgBBUpload,
-} from '@/utils/imageUpload';
-import axios from 'axios';
-import handleInterruptedUpload from '@/utils/admin/data/handleInterruptedUpload';
+import { cloudFlareR2, freeImageHost, imgBBUpload } from '@/utils/imageUpload';
 
 const { Manga, MangaType } = require('manga-lib');
-const FormData = require('form-data');
-
-export const fetchData = async (src, url, isIncomplete = false) => {
-  if (src === 'mangadex') {
-    try {
-      // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
-      const manga = new Manga().build(MangaType.MANGADEX);
-
-      // Retrieve the manga details
-      const detail_manga = await manga.getDetailManga(
-        // '05bd710c-d94a-45eb-be99-2109d58f1006'
-        url,
-      );
-
-      // get all chapters data
-      const chapterData = await Promise.all(
-        detail_manga.chapters.map(async (chapter) => {
-          // Introduce a delay of 1 second between each iteration
-          await new Promise((resolve) => setTimeout(resolve, 3000));
-          const data = await manga.getDataChapter(chapter.path);
-          return data;
-        }),
-      );
-
-      return { detail_manga, chapterData };
-    } catch (err) {
-      throw new Error(`An error occurred while fetching from Mangadex ${err}`);
-    }
-  } else if (src === 'asuratoon') {
+import handleInterruptedUpload from '@/utils/admin/data/handleInterruptedUpload';
+export const inCompleteUploadFetchData = async (
+  src = 'asuratoon',
+  url = 'https://asuratoon.com/manga/9260952888-insanely-talented-player/',
+  completedChapters = 12,
+) => {
+  if (src === 'asuratoon') {
     /*
      * used when upload is interrupted then
      * we can track at which idx it stopped to resume from there
      */
-    let chapterIdx = 0;
+    let chapterIdx;
 
     const imagesArr = [];
-    let detail_manga;
+    let detail_manga, title;
     const manga = new Manga().build(MangaType.ASURASCANS);
 
     try {
       // Retrieve the manga details
       detail_manga = await manga.getDetailManga(url);
       console.log('detail_manga', detail_manga);
+      title = detail_manga.title;
       // get all chapters data
       const chapterData = await Promise.all(
-        detail_manga.chapters.map(async (chapter) => {
+        detail_manga.chapters.slice(completedChapters).map(async (chapter) => {
           const data = await manga.getDataChapter(chapter.url);
           return data.chapter_data.filter(
             (x) =>
@@ -70,8 +40,7 @@ export const fetchData = async (src, url, isIncomplete = false) => {
       /*
        * Upload Images to imgBB or Any Other Host
        */
-      // chapterIdx = isIncomplete ? startIdx : 0; // if upload is incomplete => start from the completed chapters Index
-      // let chapterIdx = 0;
+      chapterIdx = completedChapters; // if upload is incomplete => start from the completed chapters Index
       for (const chapters of chapterData) {
         let arr = [];
         console.log('inside 1st for of', new Date());
@@ -103,7 +72,6 @@ export const fetchData = async (src, url, isIncomplete = false) => {
                   : imageHost === 'freeImageHost'
                     ? image.image.url
                     : 'null',
-            // src_origin: `https://mangu.b-cdn.net/${detail_manga.title}/chapter-${chapterIdx}/${innerChapterIdx}.${fileExtension}`,
           };
 
           // if upload is interrupted then we will use this object to delete the images
@@ -117,10 +85,6 @@ export const fetchData = async (src, url, isIncomplete = false) => {
         console.log('arr', arr);
         imagesArr.push(arr);
         chapterIdx += 1;
-
-        if (chapterIdx === 1) {
-          throw new Error('testing this error');
-        }
       }
 
       console.log('imagesArr', imagesArr);
@@ -128,36 +92,14 @@ export const fetchData = async (src, url, isIncomplete = false) => {
       return { detail_manga, chapterData, chapterImages: imagesArr };
     } catch (err) {
       console.log('An error occurred while fetching from Asuratoon', err);
-      console.log('throw block stoppedChapterIdx', chapterIdx);
-      handleInterruptedUpload(imagesArr, detail_manga, chapterIdx);
+      console.log('catch block', chapterIdx);
+      handleInterruptedUpload(
+        imagesArr,
+        detail_manga,
+        chapterIdx,
+        'incomplete-upload',
+      );
     }
-  } else if (src === 'nettruyenus') {
-    // try {
-    // Create a new instance of the manga site, MangaType.NETTRUYEN is currently support for https://www.nettruyenplus.com/
-    const manga = new Manga().build(MangaType.NETTRUYEN);
-
-    // Get list latest manga
-    // const latest = await manga.getListLatestUpdate();
-    // Retrieve the manga details
-    const detail_manga = await manga.getDetailManga(
-      // '71a621f8-c2bc-496e-aa34-f4b91e9874ac'
-      'https://www.nettruyenus.com/truyen-tranh/the-reincarnation-magician-of-the-inferior-eyes-215350',
-    );
-
-    console.log('detail_manga', detail_manga);
-
-    // get all chapters data
-    const chapterData = await Promise.all(
-      detail_manga.chapters.slice(0, 1).map(async (chapter) => {
-        const data = await manga.getDataChapter(chapter.url);
-        return data;
-      }),
-    );
-
-    return { detail_manga, chapterData };
-    // } catch (err) {
-    //   throw new Error(`An error occurred while fetching from Mangadex ${err}`)
-    // }
   }
 };
 

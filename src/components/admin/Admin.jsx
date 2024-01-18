@@ -1,27 +1,27 @@
-'use client'
-import React, { useState } from 'react'
-import ContentWrapper from '../contentWrapper/ContentWrapper'
-import Select from 'react-select'
-import Modal from '../modal/Modal'
-import { fetchDataServerAction } from '@/app/_actions/fetchDataFromServer'
-import SINGLE_MANGA_MUTATE from '../../graphql/admin/SingleMangaMutation.gql'
-import SINGLE_CHAPTER_MUTATE from '@/graphql/admin/chapters/SingleChapterMutation.gql'
-import COMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/completeChapterMutation.gql'
-import INCOMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/inCompleteChapterMutation.gql'
-import client from '../../../client'
-import { slugify } from '../../utils/helpers'
+'use client';
+import React, { useState } from 'react';
+import ContentWrapper from '../contentWrapper/ContentWrapper';
+import Select from 'react-select';
+import Modal from '../modal/Modal';
+import { fetchDataServerAction } from '@/app/_actions/fetchDataFromServer';
+import SINGLE_MANGA_MUTATE from '../../graphql/admin/SingleMangaMutation.gql';
+import SINGLE_CHAPTER_MUTATE from '@/graphql/admin/chapters/SingleChapterMutation.gql';
+import COMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/completeChapterMutation.gql';
+import INCOMPLETE_CHAPTER_MUTATION from '@/graphql/client/chapter_tracker/inCompleteChapterMutation.gql';
+import client from '../../../client';
+import { slugify } from '@/utils/helpers';
 
 const Admin = () => {
-  const [manga, setManga] = useState(null)
-  console.log('manga', manga)
+  const [manga, setManga] = useState(null);
+  console.log('manga', manga);
 
-  const [open, setOpen] = useState(false)
-  const [selectedSrc, setSelectedSrc] = useState(null)
-  const [srcUrl, setSrcUrl] = useState(null)
+  const [open, setOpen] = useState(false);
+  const [selectedSrc, setSelectedSrc] = useState(null);
+  const [srcUrl, setSrcUrl] = useState(null);
   const options = [
     { value: 'manga', label: 'Create Single Manga' },
     { value: 'chapter', label: 'Create Chapter' },
-  ]
+  ];
 
   const mangaSources = [
     { value: 'mangadex', label: 'Mangadex' },
@@ -29,18 +29,18 @@ const Admin = () => {
     { value: 'toonily', label: 'Toonily' },
     { value: 'nettruyen', label: 'Nettruyen' },
     { value: 'blogtruyen', label: 'Blogtruyen' },
-  ]
+  ];
 
   const handleActions = (e) => {
     if (e.value === 'manga' || e.value === 'chapter') {
-      setOpen(true)
+      setOpen(true);
     }
-  }
+  };
 
-  console.log('srcUrl', srcUrl)
+  console.log('srcUrl', srcUrl);
 
   const handleDataFetching_Insertion = async (e) => {
-    console.log('handleSources')
+    console.log('handleSources');
     /*
      * First Fetch The Manga Using fetchDataServerAction Function, which is a => Server Action
      * i.e. function based on 'use server' method -> where you can call other server functions
@@ -49,9 +49,9 @@ const Admin = () => {
     const data = await fetchDataServerAction(
       selectedSrc,
       // 'https://asuratoon.com/manga/6849480105-regressing-with-the-kings-power/'
-      srcUrl
-    )
-    setManga(data)
+      srcUrl,
+    );
+    setManga(data);
 
     /*
      * Now Mutate this single manga data to hasura
@@ -68,28 +68,28 @@ const Admin = () => {
         rate: rating,
         uploadedDate,
         updatedDate,
-      } = data.detail_manga
+      } = data.detail_manga;
 
-      const slug = slugify(title)
-      const genres = data.detail_manga.genres.map((x) => x.name)
+      const slug = slugify(title);
+      const genres = data.detail_manga.genres.map((x) => x.name);
       const dates = {
         uploadedDate: uploadedDate,
         updatedDate,
-      }
+      };
       /*
-       * Create Chapter in Single Manga => To get chapter details for later user => for fetching the chapters
+       * Create Chapter in Single Manga => To get chapter details for later use => for fetching the chapters
        */
       let chapters = data.detail_manga.chapters.map((x, idx) => {
         return {
           title: x.title,
           slug: slugify(
-            `${slug} chapter ${data.detail_manga.chapters.length - idx}`
+            `${slug} chapter ${data.detail_manga.chapters.length - idx}`,
           ),
           last_update: x.last_update,
-        }
-      })
+        };
+      });
 
-      console.log('chapters', chapters)
+      console.log('chapters', chapters);
 
       const mangaResult = await client.mutate({
         mutation: SINGLE_MANGA_MUTATE,
@@ -108,14 +108,14 @@ const Admin = () => {
           rating,
           dates,
         },
-      })
-      console.log('mangaResult', mangaResult)
+      });
+      console.log('mangaResult', mangaResult);
 
-      await createChapters(data, mangaResult)
+      await createChapters(data, mangaResult);
     } catch (err) {
-      throw new Error(`Error Creating Single Manga to DB: ${err}`)
+      throw new Error(`Error Creating Single Manga to DB: ${err}`);
     }
-  }
+  };
 
   const createChapters = async (data, mangaResult) => {
     /*
@@ -130,18 +130,18 @@ const Admin = () => {
         slug: slugify(
           `${mangaResult.data.insert_singleMang_one.slug} chapter ${
             data.detail_manga.chapters.length - idx
-          }`
+          }`,
         ),
         last_update: x.last_update,
-      }
-    })
+      };
+    });
 
-    console.log('chapters', chaptersArr)
+    console.log('chapters', chaptersArr);
 
-    let count = 0
+    let count = 0;
     for (const x of chaptersArr) {
-      const idx = chaptersArr.indexOf(x) // gets current idx
-      console.log('idx', idx)
+      const idx = chaptersArr.indexOf(x); // gets current idx
+      console.log('idx', idx);
       const chapterResult = await client.mutate({
         mutation: SINGLE_CHAPTER_MUTATE,
         variables: {
@@ -149,12 +149,15 @@ const Admin = () => {
           url: x.url,
           data: x.chapter_data,
           slug: x.slug,
-          hasNextEp: idx === 0 ? false : true, /* Inserted false for 0th idx => because chaptersArr is reversed in descending order */
-          totalEpisodes: chaptersArr.length
+          hasNextEp:
+            idx === 0
+              ? false
+              : true /* Inserted false for 0th idx => because chaptersArr is reversed in descending order */,
+          totalEpisodes: chaptersArr.length,
         },
-      })
-      console.log('chapterResult', chapterResult)
-      count++
+      });
+      console.log('chapterResult', chapterResult);
+      count++;
     }
 
     /*
@@ -168,26 +171,26 @@ const Admin = () => {
         variables: {
           chapterId: mangaResult.data.insert_singleMang_one.id,
         },
-      })
-      console.log('chapterTracker Complete', chapterTrackerResult)
+      });
+      console.log('chapterTracker Complete', chapterTrackerResult);
     } else {
       const chapterTrackerResult = await client.mutate({
         mutation: INCOMPLETE_CHAPTER_MUTATION,
         variables: {
           chapterId: mangaResult.data.insert_singleMang_one.id,
         },
-      })
-      console.log('chapterTracker Incomplete', chapterTrackerResult)
+      });
+      console.log('chapterTracker Incomplete', chapterTrackerResult);
     }
-  }
+  };
 
   return (
-    <div className='pt-[100px] pb-[100px]'>
+    <div className="pt-[100px] pb-[100px]">
       <ContentWrapper>
-        <div className='max-w-[300px]'>
+        <div className="max-w-[300px]">
           <Select
             options={options}
-            placeholder='Select Action...'
+            placeholder="Select Action..."
             onChange={handleActions}
           />
         </div>
@@ -202,7 +205,7 @@ const Admin = () => {
         />
       </ContentWrapper>
     </div>
-  )
-}
+  );
+};
 
-export default Admin
+export default Admin;

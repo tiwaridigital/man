@@ -1,18 +1,26 @@
 'use client';
-import React from 'react';
-import deleteImgBB from '@/utils/admin/data/deleteImgBB';
+import React, { useState } from 'react';
+import handleInterruptedUpload from '@/utils/admin/data/handleInterruptedUpload';
+import { fetchDataServerAction } from '@/app/_actions/fetchDataFromServer';
 
 const Page = () => {
-  const hello = () => {
-    // deleteImgBB();
+  const hello = async () => {
+    console.log('hello callled');
+    const data = await fetchDataServerAction(
+      'asuratoon',
+      'https://asuratoon.com/manga/9260952888-insanely-talented-player/',
+    );
+
+    console.log('data', data);
+
+    await handleInterruptedUpload([], data.detail_manga);
   };
 
-  hello();
   return (
     <>
       <div style={{ paddingTop: '150px', marginBottom: '150px' }}>
         <h1 className="text-[40px] text-white text-center">Paginate</h1>
-        <button onClick={deleteImgBB} className="bg-white h-[40px] w-[200px]">
+        <button onClick={hello} className="bg-white h-[40px] w-[200px]">
           Click
         </button>
       </div>

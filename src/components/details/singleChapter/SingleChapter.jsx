@@ -21,6 +21,7 @@ const SingleChapter = ({ chapter }) => {
   const parentPath = paramsArr.slice(0, paramsArr.length - 2).join('-');
 
   console.log('parentPath', parentPath);
+  console.log('chapterData', chapter);
 
   const currentPathArr = currentPath.split('-'); // split on basis of '-' so that, it can be replaced with selected chapter.
   // Prev & Next Page URL
@@ -63,8 +64,6 @@ const SingleChapter = ({ chapter }) => {
     // console.log('imgHeight', imgHeight)
     // console.log('imgWidth', imgWidth)
   }, [imgHeight, imgWidth]);
-
-  console.log('chapterData', chapter);
 
   const handleSelectedChapter = (e) => {
     const selectedOption = e.target.options.selectedIndex; // gets selected chapter

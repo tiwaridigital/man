@@ -58,6 +58,15 @@ export const imgBBUpload = async (imageUrl) => {
   return result;
 };
 
+export const freeImageHost = async (imageUrl) => {
+  const url = `https://freeimage.host/api/1/upload?key=6d207e02198a847aa98d0a2a901485a5&source=${imageUrl}`;
+  const response = await fetch(url, {
+    method: 'POST',
+  });
+  const result = await response.json();
+  return result;
+};
+
 export const cloudFlareR2 = async (fileName, imageUrl, convert) => {
   const bufferResult = await getImageBuffer(imageUrl);
   let convertedImageBuffer;
