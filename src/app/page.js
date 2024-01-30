@@ -4,6 +4,10 @@ import fetchAllMangas from '../utils/data/fetchAllMangas';
 import { unstable_noStore as noStore } from 'next/cache';
 import MangaCardsContainer from '@/components/mangaCardsContainer/MangaCardsContainer';
 // import MovieCard from '@/components/movieCard/MovieCard';
+
+export const metadata = {
+  title: 'Manga - Best Comics, High Quality Comics & Manga',
+};
 export default async function Home() {
   noStore();
   const data = await fetchAllMangas();

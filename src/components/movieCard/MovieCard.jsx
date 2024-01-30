@@ -25,7 +25,7 @@ const MovieCard = ({ data, fromSearch, mediaType, style }) => {
       </Link>
 
       <div className="textBlock">
-        <span className="title">{data.title || data.name}</span>
+        <h2 className="title">{data.title || data.name}</h2>
         <span className="date">
           {dayjs(data.release_date).format('MMM D, YYYY')}
         </span>

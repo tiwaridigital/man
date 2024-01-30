@@ -75,7 +75,7 @@ const Carousel = ({
                       <Genres data={item.genres.slice(0, 2)} />
                     </div>
                     <div className="textBlock">
-                      <span className="title">{item.title || item.name}</span>
+                      <h2 className="title">{item.title || item.name}</h2>
                       <span className="date">
                         {dayjs(item.uploadedDate).format('MMM D, YYYY')}
                       </span>
