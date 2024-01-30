@@ -117,10 +117,6 @@ export const fetchData = async (src, url, isIncomplete = false) => {
         console.log('arr', arr);
         imagesArr.push(arr);
         chapterIdx += 1;
-
-        if (chapterIdx === 1) {
-          throw new Error('testing this error');
-        }
       }
 
       console.log('imagesArr', imagesArr);
@@ -129,7 +125,7 @@ export const fetchData = async (src, url, isIncomplete = false) => {
     } catch (err) {
       console.log('An error occurred while fetching from Asuratoon', err);
       console.log('throw block stoppedChapterIdx', chapterIdx);
-      handleInterruptedUpload(imagesArr, detail_manga, chapterIdx);
+      handleInterruptedUpload(imagesArr, detail_manga, chapterIdx, '', url);
     }
   } else if (src === 'nettruyenus') {
     // try {

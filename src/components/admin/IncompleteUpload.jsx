@@ -13,7 +13,7 @@ import { inCompleteUploadFetchDataFromServer } from '@/app/_actions/inCompleteUp
 const IncompleteUpload = () => {
   const selectedSrc = 'asuratoon';
   const srcUrl =
-    'https://asuratoon.com/manga/9260952888-insanely-talented-player/';
+    'https://asuratoon.com/manga/9260952888-the-genius-assassin-who-takes-it-all/';
   /*
    * First Fetch the URL from sanity
    * to know which chapter to start from
@@ -22,7 +22,7 @@ const IncompleteUpload = () => {
     const id = 'hcPd9DU4IcfM8v35xRW8go';
     const query = `*[_type == "incompleteManga" && _id == "${id}"]`;
     const mangaResult = await sanityClient.fetch(query);
-    console.log('manga result', result);
+    console.log('manga result', mangaResult);
   };
 
   const handleDataFetching_Insertion = async (mangaResult) => {
@@ -35,8 +35,8 @@ const IncompleteUpload = () => {
     const data = await inCompleteUploadFetchDataFromServer(
       selectedSrc,
       // 'https://asuratoon.com/manga/6849480105-regressing-with-the-kings-power/'
-      srcUrl,
-      15,
+      mangaResult.srcUrl,
+      mangaResult,
     );
 
     // try {
@@ -47,21 +47,22 @@ const IncompleteUpload = () => {
   };
 
   const createChapters = async (detail_manga, mangaResult, chapterImages) => {
+    console.log('mangaResult', mangaResult);
+    console.log('detail_manga', detail_manga);
     /*
      * Create Chapter Now => After Manga is Created
      */
     let chaptersArr = detail_manga.chapters
       .slice(mangaResult.completedChapters)
       .map((x, idx) => {
+        console.log('chaptersArr idx', idx);
         return {
           title: x.title,
-          url: mangaResult.id,
+          url: mangaResult._id,
           chapter_data: chapterImages[idx],
           slug: slugify(
             `${mangaResult.slug} chapter ${
-              detail_manga.chapters.length -
-              detail_manga.completedChapters -
-              idx
+              mangaResult.totalChapters - mangaResult.completedChapters - idx
             }`,
           ),
           last_update: x.last_update,
@@ -76,18 +77,24 @@ const IncompleteUpload = () => {
       console.log('idx', idx);
       const chapterObj = {
         _type: 'chapters',
-        slug: `${x.title} chapter ${mangaResult.completedChapters + idx}`,
-        data: x.map((xx, idx) => ({
+        slug: `${mangaResult.title} Chapter ${
+          mangaResult.totalChapters - mangaResult.completedChapters - idx
+        }`,
+        data: x.chapter_data.map((xx, idx) => ({
           _key: idx.toString(),
           id: idx.toString(),
           src_origin: xx.src_origin,
           delete_url: xx.delete_url,
         })),
-        title: `${x.title}-${idx + mangaResult.completedChapters}`,
+        title: `${mangaResult.title}-${
+          mangaResult.totalChapters - mangaResult.completedChapters - idx
+        }`,
         url: {
           _type: 'reference',
-          _url: mangaResult._id,
+          _ref: mangaResult._id,
+          _weak: true,
         },
+        hasNextEp: true,
       };
 
       const chapterResult = await sanityClient.create(chapterObj);

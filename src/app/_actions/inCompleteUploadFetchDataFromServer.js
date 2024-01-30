@@ -4,8 +4,8 @@ import { inCompleteUploadFetchData } from '@/utils/admin/data/incomplete-upload/
 export async function inCompleteUploadFetchDataFromServer(
   src,
   url,
-  completedChapters,
+  mangaResult,
 ) {
-  const data = await inCompleteUploadFetchData(src, url, completedChapters);
+  const data = await inCompleteUploadFetchData(src, url, mangaResult);
   return data;
 }

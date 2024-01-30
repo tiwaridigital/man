@@ -2,11 +2,8 @@ import { cloudFlareR2, freeImageHost, imgBBUpload } from '@/utils/imageUpload';
 
 const { Manga, MangaType } = require('manga-lib');
 import handleInterruptedUpload from '@/utils/admin/data/handleInterruptedUpload';
-export const inCompleteUploadFetchData = async (
-  src = 'asuratoon',
-  url = 'https://asuratoon.com/manga/9260952888-insanely-talented-player/',
-  completedChapters = 12,
-) => {
+export const inCompleteUploadFetchData = async (src, url, mangaResult) => {
+  // mangaResult = current incompleted manga which we are uploading
   if (src === 'asuratoon') {
     /*
      * used when upload is interrupted then
@@ -25,14 +22,16 @@ export const inCompleteUploadFetchData = async (
       title = detail_manga.title;
       // get all chapters data
       const chapterData = await Promise.all(
-        detail_manga.chapters.slice(completedChapters).map(async (chapter) => {
-          const data = await manga.getDataChapter(chapter.url);
-          return data.chapter_data.filter(
-            (x) =>
-              x.src_origin !==
-              'https://www.asurascans.com/wp-content/uploads/2021/04/page100-10.jpg',
-          );
-        }),
+        detail_manga.chapters
+          .slice(mangaResult.completedChapters)
+          .map(async (chapter) => {
+            const data = await manga.getDataChapter(chapter.url);
+            return data.chapter_data.filter(
+              (x) =>
+                x.src_origin !==
+                'https://www.asurascans.com/wp-content/uploads/2021/04/page100-10.jpg',
+            );
+          }),
       );
 
       console.log('chapterDate retuned now uploading');
@@ -40,7 +39,7 @@ export const inCompleteUploadFetchData = async (
       /*
        * Upload Images to imgBB or Any Other Host
        */
-      chapterIdx = completedChapters; // if upload is incomplete => start from the completed chapters Index
+      chapterIdx = mangaResult.completedChapters; // if upload is incomplete => start from the completed chapters Index
       for (const chapters of chapterData) {
         let arr = [];
         console.log('inside 1st for of', new Date());
@@ -85,6 +84,10 @@ export const inCompleteUploadFetchData = async (
         console.log('arr', arr);
         imagesArr.push(arr);
         chapterIdx += 1;
+
+        if (chapterIdx === 16) {
+          throw new Error('testing incomplete upload error');
+        }
       }
 
       console.log('imagesArr', imagesArr);
@@ -98,6 +101,7 @@ export const inCompleteUploadFetchData = async (
         detail_manga,
         chapterIdx,
         'incomplete-upload',
+        mangaResult,
       );
     }
   }

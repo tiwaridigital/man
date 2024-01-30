@@ -4,12 +4,14 @@ import SINGLE_CHAPTER_MUTATE from '@/graphql/admin/chapters/SingleChapterMutatio
 import { sanityClient } from '../../../sanityClient';
 
 const Page = () => {
+  const totalEpisodes = 12;
   const getAllChapters = async () => {
-    const query = '*[_type == "chapters"] | order(_createdAt asc)';
+    const query =
+      '*[_type == "chapters" && url._ref == "hcPd9DU4IcfM8v35xUiiAM" && !(_id in path(\'drafts.**\'))] | order(_createdAt asc)';
     const chapters = await sanityClient.fetch(query);
     console.log('all chapters', chapters);
 
-    const nArr = chapters.slice(23).map((chapter, idx) => {
+    const nArr = chapters.map((chapter, idx) => {
       const objArr = chapter.data.map((x) => {
         return {
           id: x.id,
@@ -18,15 +20,15 @@ const Page = () => {
       });
 
       return {
-        title: `Chapter ${3 - idx}`,
-        url: '09ca1a8e-0154-4184-a78d-59aa8ecab135',
+        title: `Chapter ${12 - idx}`,
+        url: 'ac3deaac-3587-4153-ba73-c73c36972328',
         data: objArr,
-        slug: `insanely-talented-player-chapter-${3 - idx}`,
+        slug: `bloodhounds-regression-instinct-chapter-${12 - idx}`,
         hasNextEp:
           idx === 0
             ? false
             : true /* Inserted false for 0th idx => because chaptersArr is reversed in descending order */,
-        totalEpisodes: 25,
+        totalEpisodes,
       };
     });
 
@@ -49,7 +51,7 @@ const Page = () => {
             idx === 0
               ? false
               : true /* Inserted false for 0th idx => because chaptersArr is reversed in descending order */,
-          totalEpisodes: 25,
+          totalEpisodes,
         },
       });
       console.log('chapterResult', chapterResult);

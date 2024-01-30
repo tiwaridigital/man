@@ -18,13 +18,21 @@ export default async function handleInterruptedUpload(
   detail_manga,
   stoppedChapterIdx,
   caller,
+  mangaResult,
 ) {
   console.log('handleInterruptedUpload called');
   console.log('stoppedChapterIdx', stoppedChapterIdx);
-  if (caller != 'incomplete-upload') {
-    await createManga(detail_manga, chapterImages, stoppedChapterIdx);
+  if (caller !== 'incomplete-upload') {
+    console.log('caller not incomplete-upload');
+    await createManga(
+      detail_manga,
+      chapterImages,
+      stoppedChapterIdx,
+      mangaResult.srcUrl,
+    );
   } else {
     console.log('handleInterruptedUpload else block - only create chapters');
+    console.log('caller incomplete-upload');
     console.log('chapterImages', chapterImages);
     for (const outerArr of chapterImages) {
       const idx = chapterImages.indexOf(outerArr);
@@ -32,7 +40,9 @@ export default async function handleInterruptedUpload(
       const chapterObj = {
         _type: 'chapters',
         slug: slugify(
-          `${detail_manga.title} chapter ${stoppedChapterIdx + idx}`,
+          `${mangaResult.slug} chapter ${
+            mangaResult.totalChapters - mangaResult.completedChapters - idx
+          }`,
         ),
         data: outerArr.map((x, idx) => ({
           _key: idx.toString(),
@@ -40,20 +50,41 @@ export default async function handleInterruptedUpload(
           src_origin: x.src_origin,
           delete_url: x.delete_url,
         })),
-        title: `${detail_manga.title}-${idx + stoppedChapterIdx}`,
+        title: `${detail_manga.title} Chapter ${
+          mangaResult.totalChapters - mangaResult.completedChapters - idx
+        }`,
         url: {
           _type: 'reference',
-          _url: '',
+          _ref: mangaResult._id,
+          _weak: true,
         },
+        totalEpisodes: mangaResult.totalChapters,
       };
 
       const result = await sanityClient.create(chapterObj);
       console.log('result', result);
     }
+    /*
+     * Now Update Completed Chapters Count
+     * in Manga
+     */
+    const mangaUpdated = await sanityClient
+      .patch(mangaResult._id)
+      .set({
+        completedChapters: mangaResult.completedChapters + chapterImages.length,
+      })
+      .commit();
+
+    console.log('mangaUpdated', mangaUpdated);
   }
 }
 
-const createManga = async (detail_manga, chapterImages, stoppedChapterIdx) => {
+const createManga = async (
+  detail_manga,
+  chapterImages,
+  stoppedChapterIdx,
+  srcUrl,
+) => {
   console.log('detail_manga', detail_manga);
   const {
     title,
@@ -105,6 +136,7 @@ const createManga = async (detail_manga, chapterImages, stoppedChapterIdx) => {
     rating,
     dates,
     totalChapters: detail_manga.chapters.length,
+    srcUrl,
   };
 
   const mangaResult = await sanityClient.create(sanityObj);
@@ -115,7 +147,6 @@ const createManga = async (detail_manga, chapterImages, stoppedChapterIdx) => {
     chapterImages,
     stoppedChapterIdx,
   );
-  console.log('chaptersCreated', chaptersCreated);
 };
 
 const createChapters = async (
@@ -124,6 +155,7 @@ const createChapters = async (
   chapterImages,
   stoppedChapterIdx,
 ) => {
+  console.log('mangaResult', mangaResult);
   /*
    * Create Chapter Now => After Manga is Created
    */
@@ -132,7 +164,7 @@ const createChapters = async (
     .map((x, idx) => {
       return {
         title: `${detail_manga.title} ${x.title}`,
-        url: mangaResult.id,
+        url: mangaResult._id,
         chapter_data: chapterImages[idx],
         slug: slugify(
           `${mangaResult.slug} chapter ${mangaResult.totalChapters - idx}`,
@@ -161,6 +193,7 @@ const createChapters = async (
       url: {
         _type: 'reference',
         _ref: mangaResult._id,
+        _weak: true,
       },
     };
 

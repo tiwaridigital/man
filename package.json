@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap",
+    "generate-sitemap": "next-sitemap"
   },
   "browser": {
     "fs": false,
@@ -31,6 +33,7 @@
     "jsonwebtoken": "^9.0.2",
     "manga-lib": "^1.1.2",
     "next": "14.0.1",
+    "next-sitemap": "^4.2.3",
     "puppeteer": "^21.4.1",
     "react": "^18",
     "react-circular-progressbar": "^2.1.0",
