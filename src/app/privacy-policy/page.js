@@ -6,7 +6,7 @@ const Page = () => {
   const h3Styles = 'text-[16px] font-semibold my-4';
   return (
     <ContentWrapper>
-      <div className="text-white text-[14px] font-normal leading-6 pt-[100px]">
+      <div className="text-white text-[14px] font-normal leading-6 pt-[100px] pb-[30px]">
         <h1 className="text-[32px] font-medium mb-6">Privacy Policy</h1>
         <p>
           The following web pages outline shadowscans.com’s collection and use

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 // import {
 //   FaFacebookF,
 //   FaInstagram,
@@ -6,22 +6,36 @@ import React from 'react'
 //   FaLinkedin,
 // } from "react-icons/fa";
 
-import ContentWrapper from '../contentWrapper/ContentWrapper'
+import ContentWrapper from '../contentWrapper/ContentWrapper';
 
-import './style.scss'
-
+import './style.scss';
+import Link from 'next/link';
 const Footer = () => {
+  const menu = [
+    {
+      name: 'Terms Of Use',
+      link: '/terms',
+    },
+    {
+      name: 'Privacy Policy',
+      link: '/privacy-policy',
+    },
+    {
+      name: 'DMCA',
+      link: '/dmca',
+    },
+  ];
   return (
-    <footer className='footer'>
+    <footer className="footer">
       <ContentWrapper>
-        <ul className='menuItems'>
-          <li className='menuItem'>Terms Of Use</li>
-          <li className='menuItem'>Privacy-Policy</li>
-          <li className='menuItem'>About</li>
-          <li className='menuItem'>Blog</li>
-          <li className='menuItem'>FAQ</li>
+        <ul className="menuItems">
+          {menu.map((x, idx) => (
+            <li key={idx} className="menuItem">
+              <Link href={x.link}>{x.name}</Link>
+            </li>
+          ))}
         </ul>
-        <div className='infoText'>
+        <div className="infoText">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -45,7 +59,7 @@ const Footer = () => {
         </div> */}
       </ContentWrapper>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
