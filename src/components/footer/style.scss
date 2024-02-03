@@ -9,15 +9,16 @@
     align-items: center;
     flex-direction: column;
   }
+
   .menuItems {
     list-style-type: none;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
     @include md {
-      margin-bottom: 30px;
+      // margin-bottom: 30px;
       gap: 30px;
     }
     .menuItem {
