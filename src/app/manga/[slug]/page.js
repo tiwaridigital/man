@@ -12,7 +12,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
   // const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: `Manga Story - ${manga.title}`,
+    title: `${manga.title} - Manga Story`,
     openGraph: {
       images: ['/some-specific-page-image.jpg', manga.coverImage],
     },
@@ -22,7 +22,6 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
 const Page = async ({ params }) => {
   const manga = await fetchSingleManga(params.slug);
-  console.log('product', manga);
   return (
     <div>
       {/*<DetailsBannerDex />*/}

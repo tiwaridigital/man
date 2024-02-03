@@ -17,7 +17,7 @@ const BreadCrumb = ({ title, type, chapterTitle, chapterParentPath }) => {
         >
           <a itemProp="item" href="/" className="flex items-center gap-2">
             <Home color={'white'} height={20} width={20} />
-            <span itemProp="name">Asura Scans ›</span>
+            <span itemProp="name">Manga Story ›</span>
           </a>
           <meta itemProp="position" content="1" />
         </li>

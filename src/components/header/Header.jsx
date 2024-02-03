@@ -2,7 +2,7 @@
 import React from 'react';
 import './style.scss';
 import ContentWrapper from '../contentWrapper/ContentWrapper';
-import logo from '../../assets/movix-logo.svg';
+import logo from '/public/logo.svg';
 import { useEffect, useState } from 'react';
 import Search from '../../../public/assets/icons/Search';
 import Close from '../../../public/assets/icons/Close';
@@ -91,7 +91,7 @@ const Header = () => {
       <ContentWrapper>
         <div className="logo">
           <a href="/">
-            <Image priority height={40} width={131} src={logo.src} alt="" />
+            <Image priority height={45} width={230} src={logo.src} alt="" />
           </a>
         </div>
         {/*<ul className="menuItems">*/}
