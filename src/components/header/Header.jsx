@@ -87,31 +87,23 @@ const Header = () => {
   };
 
   return (
-    <header className={`header ${mobileMenu ? 'mobileView' : ''} ${show}`}>
+    <header
+      itemScope
+      itemType="http://schema.org/WPHeader"
+      className={`header ${mobileMenu ? 'mobileView' : ''}${show}`}
+    >
       <ContentWrapper>
         <div className="logo">
-          <a href="/">
-            <Image priority height={45} width={230} src={logo.src} alt="" />
-          </a>
+          <Link href="/" itemProp="url">
+            <Image
+              priority
+              height={45}
+              width={230}
+              src={logo.src}
+              alt="Manga Story logo"
+            />
+          </Link>
         </div>
-        {/*<ul className="menuItems">*/}
-        {/*  {menuItems.map((menu, idx) => (*/}
-        {/*    <li*/}
-        {/*      key={idx}*/}
-        {/*      className="menuItem"*/}
-        {/*      onClick={() => {*/}
-        {/*        menu.type === 'search' && setShowSearch(!showSearch);*/}
-        {/*        setMobileMenu(false);*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      {menu.type === 'search' ? (*/}
-        {/*        menu.name*/}
-        {/*      ) : (*/}
-        {/*        <Link href={'/explore'}>{menu.name}</Link>*/}
-        {/*      )}*/}
-        {/*    </li>*/}
-        {/*  ))}*/}
-        {/*</ul>*/}
 
         <ul className="menuItems">
           {menuItems.map((menu, idx) => (

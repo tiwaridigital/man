@@ -70,7 +70,7 @@ const Carousel = ({
                 <div key={item.id} className="carouselItem">
                   <Link href={`/manga/${item.slug}`} target="_blank">
                     <div className="posterBlock">
-                      <Img src={posterUrl} />
+                      <Img src={posterUrl} alt={item.title} />
                       <CircleRating rating={Number(item.rating).toFixed(1)} />
                       <Genres data={item.genres.slice(0, 2)} />
                     </div>
