@@ -21,6 +21,7 @@ import Image from 'next/image';
 // const ContentWrapper = dynamic(() =>
 //   import('@/components/contentWrapper/ContentWrapper')
 // )
+import mangaBg from '/public/manga-bg.avif';
 
 const DetailsBanner = ({ manga }) => {
   // const [data, setData] = useState(null)
@@ -117,9 +118,7 @@ const DetailsBanner = ({ manga }) => {
         <div className="detailsBanner">
           <div className="backdrop-img">
             <Image
-              src={
-                'https://image.tmdb.org/t/p/original/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg'
-              }
+              src={mangaBg.src}
               // className='lazy-load-image-background'
               sizes="100vw"
               fill

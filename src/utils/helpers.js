@@ -1,9 +1,9 @@
 export const formatDate = (originalDate) => {
-  const date = new Date(originalDate)
-  const options = { day: '2-digit', month: 'short', year: 'numeric' }
-  const formattedDate = date.toLocaleDateString('en-US', options)
-  return formattedDate
-}
+  const date = new Date(originalDate);
+  const options = { day: '2-digit', month: 'short', year: 'numeric' };
+  const formattedDate = date.toLocaleDateString('en-US', options);
+  return formattedDate;
+};
 
 export const slugify = (text) => {
   return text
@@ -15,24 +15,24 @@ export const slugify = (text) => {
     .replace(/[^\w\-]+/g, '') // Remove all non-word characters
     .replace(/\-\-+/g, '-') // Replace multiple - with single -
     .replace(/^-+/, '') // Trim - from start of text
-    .replace(/-+$/, '') // Trim - from end of text
-}
+    .replace(/-+$/, ''); // Trim - from end of text
+};
 
 export const tagsMaker = (title) => {
   return (
     <div
-      className='text-gray-50 text-[14px] mt-8 mb-4'
+      className="text-gray-50 text-[14px] mt-8 mb-8"
       style={{ lineHeight: 1.5, opacity: 0.7 }}
     >
       <strong>Keywords: </strong> read {title}, {title} english, {title} eng,
       download
       {title} eng, read {title} online
     </div>
-  )
-}
+  );
+};
 
 export const getFileExtension = (file) => {
-  const fileSplit = file.split('.')
-  const fileExtension = fileSplit[fileSplit.length - 1]
-  return fileExtension
-}
+  const fileSplit = file.split('.');
+  const fileExtension = fileSplit[fileSplit.length - 1];
+  return fileExtension;
+};

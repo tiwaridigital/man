@@ -5,17 +5,17 @@ import { useEffect } from 'react';
 import Img from '../lazyLoadImage/Img';
 import ContentWrapper from '../contentWrapper/ContentWrapper';
 import { useRouter } from 'next/navigation';
-
+import mangaBg from '/public/manga-bg.avif';
 const HeroBanner = () => {
   const router = useRouter();
   const [background, setBackground] = useState('');
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    const bg =
-      'https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/11/10-Most-Successful-Manga-Ever-(-How-Many-Copies-Were-Sold).jpg';
-    console.log(bg);
-    setBackground(bg);
+    // const bg =
+    //   'https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/11/10-Most-Successful-Manga-Ever-(-How-Many-Copies-Were-Sold).jpg';
+    // console.log(bg);
+    setBackground(mangaBg.src);
   }, []);
 
   const handleSearchQuery = (e, type = null) => {
@@ -30,7 +30,7 @@ const HeroBanner = () => {
     <div className="heroBanner">
       {/* {!loading && ( */}
       <div className="backdrop-img">
-        <Img src={background} alt="backdrop" />
+        <Img src={background} />
       </div>
       {/* )} */}
       <div className="opacity-layer"></div>
@@ -38,13 +38,11 @@ const HeroBanner = () => {
       <ContentWrapper>
         <div className="heroBannerContent">
           <span className="title">Welcome.</span>
-          <span className="subTitle">
-            Millions of TV Shows and People to discover. Explore now.
-          </span>
+          <span className="subTitle"></span>
           <div className="searchInput">
             <input
               type="text"
-              placeholder="Search for a movie or tv show...."
+              placeholder="Search for a Manga..."
               onKeyUp={handleSearchQuery}
               onChange={(e) => setQuery(e.target.value)}
             />
