@@ -3,7 +3,7 @@
 const dev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  siteUrl: dev ? 'http://localhost:3000' : 'https://man-iota.vercel.app',
+  siteUrl: dev ? 'http://localhost:3000' : 'https://mangastory',
   generateRobotsTxt: true, // (optional)
   exclude: [
     '/search',
