@@ -184,6 +184,7 @@ const SingleChapter = ({ chapter }) => {
                     style={{ width: '100%', height: 'auto' }}
                     priority={idx === 0 ? true : false}
                     onLoad={(e) => handleimgAspectRatio(e, idx)}
+                    unoptimized
                     // style={{
                     //   maxWidth: '100%',
                     //   width: '100%',
