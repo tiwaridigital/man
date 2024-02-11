@@ -133,7 +133,7 @@ const DetailsBanner = ({ manga }) => {
           </div>
           <div className="opacity-layer" />
           <ContentWrapper>
-            <BreadCrumb title={manga?.title} />
+            <BreadCrumb title={manga?.title} chapterParentPath={manga?.slug} />
             <div className="content">
               <div
                 className="left"
@@ -304,6 +304,7 @@ const DetailsBanner = ({ manga }) => {
                             cursor: 'pointer',
                           }),
                         }}
+                        aria-label={'sortable'}
                       />
                     </div>
                   </div>

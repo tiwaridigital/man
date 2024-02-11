@@ -12,9 +12,6 @@ const HeroBanner = () => {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    // const bg =
-    //   'https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/11/10-Most-Successful-Manga-Ever-(-How-Many-Copies-Were-Sold).jpg';
-    // console.log(bg);
     setBackground(mangaBg.src);
   }, []);
 
@@ -30,7 +27,7 @@ const HeroBanner = () => {
     <div className="heroBanner">
       {/* {!loading && ( */}
       <div className="backdrop-img">
-        <Img src={background} />
+        <Img src={background} alt="backdrop" />
       </div>
       {/* )} */}
       <div className="opacity-layer"></div>

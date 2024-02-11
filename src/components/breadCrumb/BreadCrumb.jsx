@@ -7,13 +7,13 @@ const BreadCrumb = ({ title, type, chapterTitle, chapterParentPath }) => {
     <div className="pl-[20px] p-2.5 mb-[20px] bg-[#0D2851] relative rounded-md text-gray-50">
       <ol
         itemScope=""
-        itemType="http://schema.org/BreadcrumbList"
+        itemType="https://schema.org/BreadcrumbList"
         className="flex items-center gap-2 cursor-pointer text-[14px] flex-wrap "
       >
         <li
           itemProp="itemListElement"
           itemScope=""
-          itemType="http://schema.org/ListItem"
+          itemType="https://schema.org/ListItem"
         >
           <a itemProp="item" href="/" className="flex items-center gap-2">
             <Home color={'white'} height={20} width={20} />
@@ -24,7 +24,7 @@ const BreadCrumb = ({ title, type, chapterTitle, chapterParentPath }) => {
         <li
           itemProp="itemListElement"
           itemScope=""
-          itemType="http://schema.org/ListItem"
+          itemType="https://schema.org/ListItem"
         >
           <a
             itemProp="item"
@@ -43,7 +43,7 @@ const BreadCrumb = ({ title, type, chapterTitle, chapterParentPath }) => {
             <li
               itemProp="itemListElement"
               itemScope=""
-              itemType="http://schema.org/ListItem"
+              itemType="https://schema.org/ListItem"
             >
               <a itemProp="item" href={'/'} className="flex items-center gap-2">
                 <Book color="white" height={20} width={20} />

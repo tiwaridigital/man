@@ -14,7 +14,7 @@ const MovieCard = ({ data, fromSearch, mediaType, style }) => {
     <div className={`movieCard ${style}`}>
       <Link href={`/manga/${data.slug}`}>
         <div className="posterBlock">
-          <Img className="posterImg" src={data.coverImage} />
+          <Img className="posterImg" src={data.coverImage} alt={data.title} />
           {!fromSearch && (
             <>
               <CircleRating rating={data?.rating} />

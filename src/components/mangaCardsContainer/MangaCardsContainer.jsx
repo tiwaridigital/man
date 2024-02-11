@@ -7,8 +7,8 @@ const MangaCardsContainer = ({ items }) => {
   console.log('items', items);
   return (
     <div
-      className="explorePage"
-      style={{ paddingTop: '5px !important', minHeight: 'auto' }}
+      className="explorePage !pt-[5px]"
+      style={{ paddingTop: '5px!important', minHeight: 'auto' }}
     >
       <ContentWrapper>
         <div className="pageHeader !mb-0 sm:!mb-[24px] !flex-row">
