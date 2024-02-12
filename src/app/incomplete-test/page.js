@@ -35,6 +35,7 @@ const Page = () => {
     console.log('nArr', nArr);
     const chapterCreate = await insertChapters(nArr);
   };
+  
   const insertChapters = async (chaptersArr) => {
     let count = 0;
     for (const x of chaptersArr) {

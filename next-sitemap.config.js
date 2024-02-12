@@ -3,7 +3,7 @@
 const dev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  siteUrl: dev ? 'http://localhost:3000' : 'https://mangastory',
+  siteUrl: dev ? 'http://localhost:3000' : 'https://mangastory.org',
   generateRobotsTxt: true, // (optional)
   exclude: [
     '/search',
@@ -14,5 +14,7 @@ module.exports = {
     '/admin/create',
     '/admin/incomplete-upload',
     '/paginate',
+    '/login',
+    '/register',
   ],
 };
