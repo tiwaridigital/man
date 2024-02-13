@@ -141,12 +141,11 @@ const DetailsBanner = ({ manga }) => {
                 itemScope
                 itemType="https://schema.org/ImageObject"
               >
-                {manga.poster_path ? (
-                  <Img className="posterImg" src={manga.coverImage} />
-                ) : (
+                {
                   <Image
                     className="posterImg"
                     src={manga.coverImage}
+                    unoptimized
                     width={150}
                     height={300}
                     alt=""
@@ -154,7 +153,7 @@ const DetailsBanner = ({ manga }) => {
                     priority={true}
                     itemProp="image"
                   />
-                )}
+                }
               </div>
               <div className="right">
                 <div className="title">
