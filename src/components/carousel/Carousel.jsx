@@ -18,7 +18,6 @@ const Carousel = ({
   title = 'Ujjwal Tiwari',
   carouselContainer,
 }) => {
-  console.log('data', data);
   // const carouselContainer = useRef(null)
   // const { url } = useSelector((state) => state.home)
   // const navigate = useNavigate()

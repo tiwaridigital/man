@@ -1,7 +1,6 @@
 'use client';
 import React, { useRef, useState } from 'react';
 import './style.scss';
-// import useFetch from '../../../hooks/useFetch'
 import SwitchTabs from '../switchTabs/SwitchTabs';
 import Carousel from '../carousel/Carousel';
 import ContentWrapper from '../contentWrapper/ContentWrapper';
@@ -11,7 +10,6 @@ import LeftNavigation from '../../../public/assets/icons/LeftNavigation';
 
 const Trending = ({ data, title }) => {
   const carouselContainer = useRef(null);
-  console.log('carouselContainer', carouselContainer);
 
   const [endPoint, setEndPoint] = useState('day');
   // const { data, loading } = useFetch(`/trending/all/${endPoint}`)

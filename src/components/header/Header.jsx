@@ -90,50 +90,50 @@ const Header = () => {
     <header
       itemScope
       itemType="http://schema.org/WPHeader"
-      className={`header ${mobileMenu ? 'mobileView' : ''}${show}`}
+      className={`header ${mobileMenu ? 'mobileView' : ''} ${show}`}
     >
       <ContentWrapper>
         <div className="logo">
           <Link href="/" itemProp="url">
-            <Image
-              priority
-              height={45}
-              width={230}
-              src={logo.src}
-              alt="Manga Story logo"
-            />
+            <Image priority height={45} width={230} src={logo.src} alt="" />
           </Link>
         </div>
 
         <ul className="menuItems">
-          {menuItems.map((menu, idx) => (
-            <>
-              {menu.type === 'search' ? (
-                <li
-                  key={idx}
-                  className="menuItem"
-                  onClick={() => {
-                    menu.type === 'search' && setShowSearch(!showSearch);
-                    setMobileMenu(false);
-                  }}
-                >
-                  {menu.name}
-                </li>
-              ) : (
-                <li
-                  // className="menuItem"
-                  onClick={() => {
-                    menu.type === 'search' && setShowSearch(!showSearch);
-                    setMobileMenu(false);
-                  }}
-                >
-                  <Link href={'/explore'} key={idx} className="menuItem block">
-                    {menu.name}
-                  </Link>
-                </li>
-              )}
-            </>
-          ))}
+          {/*{menuItems.map((menu, idx) => (*/}
+          {/*  <>*/}
+          {/*    {menu.type === 'search' ? (*/}
+          {/*      <li*/}
+          {/*        key={idx}*/}
+          {/*        className="menuItem"*/}
+          {/*        onClick={() => {*/}
+          {/*          menu.type === 'search' && setShowSearch(!showSearch);*/}
+          {/*          setMobileMenu(false);*/}
+          {/*        }}*/}
+          {/*      >*/}
+          {/*        {menu.name}*/}
+          {/*      </li>*/}
+          {/*    ) : (*/}
+          {/*      <li className="menuItem" key={idx}>*/}
+          {/*        <Link href={'/explore'} className="block" key={idx}>*/}
+          {/*          {menu.name}*/}
+          {/*        </Link>*/}
+          {/*      </li>*/}
+          {/*    )}*/}
+          {/*  </>*/}
+          {/*))}*/}
+          <li className="menuItem">
+            <Link href={'/explore'}>Explore</Link>
+          </li>
+          <li
+            className="menuItem"
+            onClick={() => {
+              setShowSearch(!showSearch);
+              setMobileMenu(false);
+            }}
+          >
+            <Search width={20} height={20} />
+          </li>
         </ul>
 
         <div className="mobileMenuItems">

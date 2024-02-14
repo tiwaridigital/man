@@ -4,7 +4,6 @@ import ContentWrapper from '@/components/contentWrapper/ContentWrapper';
 import '../explore/style.scss';
 import Link from 'next/link';
 const MangaCardsContainer = ({ items }) => {
-  console.log('items', items);
   return (
     <div
       className="explorePage !pt-[5px]"
