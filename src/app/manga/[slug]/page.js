@@ -21,8 +21,6 @@ export async function generateMetadata({ params, searchParams }, parent) {
 }
 
 const Page = async ({ params }) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
   const manga = await fetchSingleManga(params.slug);
   return (
     <div>

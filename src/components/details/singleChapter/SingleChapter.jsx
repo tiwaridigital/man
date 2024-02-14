@@ -99,9 +99,9 @@ const SingleChapter = ({ chapter }) => {
             <strong>
               {mangaTitle} - {chapter?.title}
             </strong>{' '}
-            at Asura Scans . Manga <strong>{mangaTitle}</strong> always updated
-            at Asura Scans . Dont forget to read the other manga updates. A list
-            of manga collections Asura Scans is in the Manga List menu.
+            at Manga Story . Manga <strong>{mangaTitle}</strong> always updated
+            at Manga Story . Dont forget to read the other manga updates. A list
+            of manga collections Manga Story is in the Manga List menu.
           </div>
           {/*Navigation*/}
           <div className="flex flex-col gap-4 sm:flex-row justify-between mb-8 relative">

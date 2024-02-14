@@ -211,7 +211,7 @@ const DetailsBanner = ({ manga }) => {
 
                   <div className="infoItem">
                     <span className="text bold">Released By: </span>
-                    <span className="text">asuratoons.com</span>
+                    <span className="text">MangaStory.org</span>
                   </div>
                 </div>
                 <div className="info">

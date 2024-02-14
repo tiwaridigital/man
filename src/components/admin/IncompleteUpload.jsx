@@ -77,16 +77,18 @@ const IncompleteUpload = () => {
       console.log('idx', idx);
       const chapterObj = {
         _type: 'chapters',
-        slug: `${mangaResult.title} Chapter ${
-          mangaResult.totalChapters - mangaResult.completedChapters - idx
-        }`,
+        slug: slugify(
+          `${mangaResult.title} Chapter ${
+            mangaResult.totalChapters - mangaResult.completedChapters - idx
+          }`,
+        ),
         data: x.chapter_data.map((xx, idx) => ({
           _key: idx.toString(),
           id: idx.toString(),
           src_origin: xx.src_origin,
           delete_url: xx.delete_url,
         })),
-        title: `${mangaResult.title}-${
+        title: `${mangaResult.title} Chapter ${
           mangaResult.totalChapters - mangaResult.completedChapters - idx
         }`,
         url: {
@@ -101,6 +103,17 @@ const IncompleteUpload = () => {
       console.log('chapterResult', chapterResult);
       count++;
     }
+
+    /*
+     * Now Update Completed Chapters Count
+     * in Manga
+     */
+    const mangaUpdated = await sanityClient
+      .patch(mangaResult._id)
+      .set({
+        completedChapters: mangaResult.completedChapters + chaptersArr.length,
+      })
+      .commit();
   };
 
   return (
