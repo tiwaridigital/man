@@ -13,7 +13,6 @@ const SignOut = () => {
     })
 
     const result = await response.json()
-    console.log('result', result)
     localStorage.removeItem('token')
   }
   return (

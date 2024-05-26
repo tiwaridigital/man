@@ -11,6 +11,6 @@ export default async function getImageBuffer(url) {
 
     return Buffer.from(res.data);
   } catch (error) {
-    console.log('error getting bufferImage', error);
+    console.error('error getting bufferImage', error);
   }
 }

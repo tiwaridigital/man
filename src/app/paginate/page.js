@@ -5,13 +5,10 @@ import { fetchDataServerAction } from '@/app/_actions/fetchDataFromServer';
 
 const Page = () => {
   const hello = async () => {
-    console.log('hello callled');
     const data = await fetchDataServerAction(
       'asuratoon',
       'https://asuratoon.com/manga/9260952888-insanely-talented-player/',
     );
-
-    console.log('data', data);
 
     await handleInterruptedUpload([], data.detail_manga);
   };

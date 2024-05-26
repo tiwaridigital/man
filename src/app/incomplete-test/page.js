@@ -9,7 +9,6 @@ const Page = () => {
     const query =
       '*[_type == "chapters" && url._ref == "hcPd9DU4IcfM8v35xUiiAM" && !(_id in path(\'drafts.**\'))] | order(_createdAt asc)';
     const chapters = await sanityClient.fetch(query);
-    console.log('all chapters', chapters);
 
     const nArr = chapters.map((chapter, idx) => {
       const objArr = chapter.data.map((x) => {
@@ -32,15 +31,13 @@ const Page = () => {
       };
     });
 
-    console.log('nArr', nArr);
     const chapterCreate = await insertChapters(nArr);
   };
-  
+
   const insertChapters = async (chaptersArr) => {
     let count = 0;
     for (const x of chaptersArr) {
       const idx = chaptersArr.indexOf(x); // gets current idx
-      console.log('idx', idx);
       const chapterResult = await client.mutate({
         mutation: SINGLE_CHAPTER_MUTATE,
         variables: {
@@ -55,7 +52,6 @@ const Page = () => {
           totalEpisodes,
         },
       });
-      console.log('chapterResult', chapterResult);
       count++;
     }
   };

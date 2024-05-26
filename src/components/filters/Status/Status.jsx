@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { statuses } from '@/lib/filterData'
 const Status = ({ selectedStatus, setSelectedStatus, onChange, show }) => {
   const handleChange = async (e) => {
-    console.log('selectedStatus handleChange called')
     if (e.target.checked) {
       /*
        * if checked => set value into state

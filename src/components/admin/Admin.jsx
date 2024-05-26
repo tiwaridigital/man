@@ -13,7 +13,6 @@ import { slugify } from '@/utils/helpers';
 
 const Admin = () => {
   const [manga, setManga] = useState(null);
-  console.log('manga', manga);
 
   const [open, setOpen] = useState(false);
   const [selectedSrc, setSelectedSrc] = useState(null);
@@ -37,10 +36,7 @@ const Admin = () => {
     }
   };
 
-  console.log('srcUrl', srcUrl);
-
   const handleDataFetching_Insertion = async (e) => {
-    console.log('handleSources');
     /*
      * First Fetch The Manga Using fetchDataServerAction Function, which is a => Server Action
      * i.e. function based on 'use server' method -> where you can call other server functions
@@ -89,8 +85,6 @@ const Admin = () => {
         };
       });
 
-      console.log('chapters', chapters);
-
       const mangaResult = await client.mutate({
         mutation: SINGLE_MANGA_MUTATE,
         variables: {
@@ -109,7 +103,6 @@ const Admin = () => {
           dates,
         },
       });
-      console.log('mangaResult', mangaResult);
 
       await createChapters(data, mangaResult);
     } catch (err) {
@@ -136,12 +129,9 @@ const Admin = () => {
       };
     });
 
-    console.log('chapters', chaptersArr);
-
     let count = 0;
     for (const x of chaptersArr) {
       const idx = chaptersArr.indexOf(x); // gets current idx
-      console.log('idx', idx);
       const chapterResult = await client.mutate({
         mutation: SINGLE_CHAPTER_MUTATE,
         variables: {
@@ -156,7 +146,6 @@ const Admin = () => {
           totalEpisodes: chaptersArr.length,
         },
       });
-      console.log('chapterResult', chapterResult);
       count++;
     }
 
@@ -172,7 +161,6 @@ const Admin = () => {
           chapterId: mangaResult.data.insert_singleMang_one.id,
         },
       });
-      console.log('chapterTracker Complete', chapterTrackerResult);
     } else {
       const chapterTrackerResult = await client.mutate({
         mutation: INCOMPLETE_CHAPTER_MUTATION,
@@ -180,7 +168,6 @@ const Admin = () => {
           chapterId: mangaResult.data.insert_singleMang_one.id,
         },
       });
-      console.log('chapterTracker Incomplete', chapterTrackerResult);
     }
   };
 

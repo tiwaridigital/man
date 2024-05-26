@@ -9,10 +9,9 @@ const fetchSingleChapter = async (slug) => {
         slug: slug,
       },
     });
-    console.log('chapter', result);
     return result.data.chapters[0];
   } catch (err) {
-    console.log('Error Fetching Single Chapter', err);
+    console.error('Error Fetching Single Chapter', err);
   }
 };
 

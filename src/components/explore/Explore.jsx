@@ -114,11 +114,7 @@ const Explore = ({ manga }) => {
     if (action.name === 'genres') {
       setGenre(selectedItems);
       const genresLabel = genre.map((x) => x.label);
-      console.log('genres label', genresLabel);
       const temp = data.filter((item) => item.genres.includes(genresLabel));
-      console.log('genres temp', temp);
-
-      console.log('genres temp', temp);
       if (action.action !== 'clear') {
         // let genreId = selectedItems.map((g) => g.id)
         // genreId = JSON.stringify(genreId).slice(1, -1)
@@ -133,34 +129,21 @@ const Explore = ({ manga }) => {
   };
 
   const handleShowFilters = (btnName) => {
-    console.log('handleShowFilters', btnName);
     if (btnName === 'genres') {
-      console.log('genres show');
       setSelectedStatus(null);
       setShowFilters((prev) => ({ genres: !prev.genres }));
     } else if (btnName === 'status') {
-      console.log('status show');
       setSelectedGenres([]);
       setShowFilters((prev) => ({ status: !prev.status }));
     } else if (btnName === 'added') {
-      console.log('handleShowFilter added show');
       setShowFilters((prev) => ({ added: !prev.added }));
     }
   };
 
-  // console.log('handleShowFilters', showFilters)
-
   const sortGenres = (e) => {
-    // const selectedGenres = e.map((x) => x.label)
-    // setData([...manga])
-    console.log('selectedGenres sortgenres called', selectedGenres);
-    console.log('selectedGenres manga', manga);
-
     const filteredData = manga.filter((item) =>
       item.genres.some((genre) => selectedGenres.includes(genre)),
     );
-
-    console.log('filteredData genres', filteredData);
     setData(filteredData);
 
     if (selectedGenres.length == 0) {
@@ -169,11 +152,7 @@ const Explore = ({ manga }) => {
   };
 
   const filterStatus = (e) => {
-    // setData([...manga])
-    console.log('filterStatus status', selectedStatus);
-    console.log('filterStatus manga', manga);
     const filteredData = manga.filter((item) => item.status === selectedStatus);
-    console.log('filteredData status', filteredData);
     setData(filteredData);
 
     if (!selectedStatus) {
@@ -182,8 +161,6 @@ const Explore = ({ manga }) => {
   };
 
   const filterAdded = (e) => {
-    console.log('filterAdded added', selectedAdded);
-    console.log('filterAdded manga', manga);
     let filteredData = [];
     if (selectedAdded === 'az') {
       //a-z sorting
@@ -220,7 +197,6 @@ const Explore = ({ manga }) => {
         return 0;
       });
     }
-    console.log('filteredData added', filteredData);
     setData(filteredData);
 
     if (!selectedAdded) {
@@ -275,33 +251,6 @@ const Explore = ({ manga }) => {
           />
           <div className="pageHeader">
             <div className="pageTitle mt-2">Explore Manga</div>
-            <div className="filters">
-              {/* <Select
-                isMulti
-                name='genres'
-                // value={genre}
-                closeMenuOnSelect={false}
-                options={genres}
-                // getOptionLabel={(option) => option.name}
-                // getOptionValue={(option) => option.id}
-                onChange={sortGenres}
-                placeholder='Select genres'
-                className='react-select-container genresDD'
-                classNamePrefix='react-select'
-                instanceId={'react-select-1'}
-              />
-              <Select
-                name='sortby'
-                value={sortby}
-                options={sortbyData}
-                onChange={onChange}
-                isClearable={true}
-                placeholder='Sort by'
-                className='react-select-container sortbyDD'
-                classNamePrefix='react-select'
-                instanceId={'react-select-12'}
-              /> */}
-            </div>
           </div>
           {data.length === 0 && <Spinner initial={true} />}
           {!loading && (

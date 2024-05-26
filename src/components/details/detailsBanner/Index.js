@@ -1,53 +1,21 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import dayjs from 'dayjs';
 
 import './style.scss';
 import Genres from '../../genres/Genres';
 import CircleRating from '../../circleRating/CircleRating';
-import Img from '../../lazyLoadImage/Img.jsx';
-import PlayIcon from '../PlayIcon';
-import { getReleaseDate } from '../../../utils/getReleaseDate';
-import { formatDate, tagsMaker } from '../../../utils/helpers';
+import { tagsMaker } from '../../../utils/helpers';
 import Select from 'react-select';
-import dynamic from 'next/dynamic';
-import BannerSkelton from '@/components/details/detailsBannerDex/BannerSkelton';
-import Link from 'next/link';
 import ContentWrapper from '../../contentWrapper/ContentWrapper';
 import BreadCrumb from '@/components/breadCrumb/BreadCrumb';
 import Bookmark from '../../../../public/assets/icons/Bookmark';
 import ChaptersList from '../ChaptersList';
 import Image from 'next/image';
-// const ContentWrapper = dynamic(() =>
-//   import('@/components/contentWrapper/ContentWrapper')
-// )
 import mangaBg from '/public/manga-bg.avif';
-
+import BannerSkelton from '@/components/BannerSkeleton/BannerSkelton';
 const DetailsBanner = ({ manga }) => {
-  // const [data, setData] = useState(null)
-  // const [manga, setManga] = useState(null)
   const [chapters, setChapters] = useState(null);
-
-  // console.log('data', data)
-
-  // const fetchManga = async () => {
-  //     const data = await fetchDataServerAction(
-  //         'asuratoon',
-  //         'https://asuratoon.com/manga/6849480105-surviving-the-game-as-a-barbarian/'
-  //     )
-  //     // setManga(data)
-  // }
-
-  // useEffect(() => {
-  //     if (manga) {
-  //         setChapters(manga?.chapters)
-  //     }
-  //     if (manga) {
-  //         getReleaseDate(manga?.uploadedDate)
-  //     }
-  // }, [manga])
-
-  console.log('manga', manga);
 
   const selectOptions = [
     { value: 'asc', label: 'Ascending' },
@@ -55,8 +23,6 @@ const DetailsBanner = ({ manga }) => {
   ];
 
   const sortOrder = (e) => {
-    console.log('sortOrder called', e);
-
     const extractNumber = (title) => parseInt(title.match(/\d+/)?.[0] || 0, 10);
 
     const compare = (a, b) =>
@@ -69,7 +35,6 @@ const DetailsBanner = ({ manga }) => {
   };
 
   const downloadImage = () => {
-    console.log('download image');
     // Replace 'image_url' with the actual URL of the image you want to download.
     const image_url =
       'https://cdn.toonily.com/chapters/manga_601d7ee072504/0bc51bcbe6d2b758ae9f5ab5ba298da5/Who%20Made%20Me%20a%20Princess_00.jpg';
@@ -85,32 +50,6 @@ const DetailsBanner = ({ manga }) => {
     // Cleanup: remove the anchor element.
     document.body.removeChild(anchor);
   };
-
-  //   const { mediaType, id } = useParams()
-  //   const { data, loading } = useFetch(`/${mediaType}/${id}`)
-  //   const { url } = useSelector((state) => state.home)
-  //   const [show, setShow] = useState(false)
-  //   const [videoId, setVideoId] = useState(null)
-
-  //   console.log('show', show, videoId)
-  const crew = [];
-
-  //   const genres = data?.genres.map((genre) => genre.id)
-
-  const directors = crew?.filter((c) => c.job === 'Director');
-  const writers = crew?.filter(
-    (w) => w.job === 'Screenplay' || w.job === 'Writer' || w.job === 'Story',
-  );
-
-  // const formDate = () => {
-  //   const originalDate = '2018-12-23T01:55:29+00:00'
-  //   const date = new Date(originalDate)
-
-  //   const options = { day: '2-digit', month: 'short', year: 'numeric' }
-  //   const formattedDate = date.toLocaleDateString('en-US', options)
-
-  //   console.log('formatted date', formattedDate)
-  // }
 
   return (
     <>

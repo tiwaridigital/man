@@ -1,6 +1,6 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  // font-family: "Roboto", sans-serif;
+  // font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Avenir, sans-serif;
   font-size: 16px;
   line-height: 1;
   font-weight: 500;
@@ -19,6 +19,26 @@
   --pink: #da2f68;
   --orange: #f89e00;
   --gradient: linear-gradient(98.37deg, #f89e00 0.99%, #da2f68 100%);
+
+  --primary-color: #faca2e;
+  --eye-pupil-color: #050505;
+  --bg-color: #fff;
+  --text-color: #000;
+  --fs-heading: 36px;
+  --fs-text: 26px;
+  --fs-button: 18px;
+  --fs-icon: 30px;
+  --pupil-size: 30px;
+  --eye-size: 80px;
+  --button-padding: 15px 30px;
+
+  @media only screen and (max-width: 567px) {
+    --fs-heading: 30px;
+    --fs-text: 22px;
+    --fs-button: 16px;
+    --fs-icon: 24px;
+    --button-padding: 12px 24px;
+  }
 }
 
 * {
@@ -30,10 +50,6 @@
 body {
   background-color: var(--black);
 }
-
-// ::-webkit-scrollbar {
-//   display: none;
-// }
 
 .chapters-wrapper::-webkit-scrollbar {
   display: auto !important;
@@ -115,3 +131,5 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+// not found

@@ -11,7 +11,6 @@ const ChaptersList = ({ chapters }) => {
     const searchText = e.target.value;
     setSearch(searchText);
     const results = getSearchResults(searchText);
-    console.log('chapter results', results);
     setSearchedChapters(results);
 
     if (searchText.length === 0) {
@@ -20,7 +19,6 @@ const ChaptersList = ({ chapters }) => {
   };
 
   const getSearchResults = (search) => {
-    console.log('chapter search', search);
     return chapters.filter((x) => {
       const chapterNumber = x.title.split(' ');
       return search === chapterNumber[1];

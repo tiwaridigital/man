@@ -11,12 +11,11 @@ export const convertImage = async (buffer, format) => {
       })
       .toBuffer();
   } catch (err) {
-    console.log('Error converting image', err);
+    console.error('Error converting image', err);
   }
 };
 
 export const imageUpload = async (imageBuffer = '', type, url) => {
-  console.log('uploadImage called', type);
   const FormData = require('form-data');
   let data = new FormData();
   data.append('image', type === 'base64' ? imageBuffer : url);
@@ -31,7 +30,6 @@ export const imageUpload = async (imageBuffer = '', type, url) => {
     url: 'https://api.imgur.com/3/upload',
     headers: {
       Authorization: 'Bearer 80a8d3e2afa3486e87d47ed2fecdde4f7c7e4218',
-      // ...data.getHeaders(),
     },
     data: data,
   };
@@ -39,13 +37,10 @@ export const imageUpload = async (imageBuffer = '', type, url) => {
   return axios
     .request(config)
     .then((response) => {
-      // console.log('response')
-      // console.log(JSON.stringify(response.data))
       return JSON.stringify(response.data);
     })
     .catch((error) => {
-      console.log('error');
-      console.log(error);
+      console.error(error);
     });
 };
 
@@ -85,20 +80,16 @@ export const cloudFlareR2 = async (fileName, imageUrl, convert) => {
   });
 
   const { url } = await response.json();
-  console.log('response url', url);
 
   const uploaded = await fetch(url, {
     method: 'PUT',
     body: convert ? convertedImageBuffer : bufferResult,
   });
-
-  // console.log('uploaded', uploaded)
 };
 
 export const bunnyCDNUpload = async (fileName, imageUrl) => {
   // Fetch the image buffer from the URL
   const { data } = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-  console.log('axios buffer', data);
   // pass imageBuffer in data
   let config = {
     method: 'PUT',
@@ -117,6 +108,6 @@ export const bunnyCDNUpload = async (fileName, imageUrl) => {
       console.log('uploaded', response.data);
     })
     .catch((err) => {
-      console.log('error uploading', err);
+      console.errpr('error uploading', err);
     });
 };

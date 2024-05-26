@@ -20,21 +20,16 @@ const SingleChapter = ({ chapter }) => {
   const paramsArr = params.slug.split('-');
   const parentPath = paramsArr.slice(0, paramsArr.length - 2).join('-');
 
-  console.log('parentPath', parentPath);
-  console.log('chapterData', chapter);
-
   const currentPathArr = currentPath.split('-'); // split on basis of '-' so that, it can be replaced with selected chapter.
   // Prev & Next Page URL
   const prevPage = currentPath.replace(
     currentPathArr[currentPathArr.length - 1],
-    String(currentPathArr[currentPathArr.length - 1] - 1), // didn't had to convert to number because '-' sign is alreadt converting it to number.
+    String(currentPathArr[currentPathArr.length - 1] - 1), // didn't had to convert to number because '-' sign is already converting it to number.
   );
   const nextPage = currentPath.replace(
     currentPathArr[currentPathArr.length - 1],
     String(Number(currentPathArr[currentPathArr.length - 1]) + 1),
   );
-
-  console.log('nextPage', nextPage);
 
   const chaptersArr = [...Array(chapter.totalEpisodes)]; // Create an empty Array equals to total Episodes
   // Insert React Select Objects into this Array
@@ -46,9 +41,7 @@ const SingleChapter = ({ chapter }) => {
     chaptersArr[idx] = obj;
   });
 
-  console.log('chaptersArr', chaptersArr);
   const handleimgAspectRatio = (e, idx) => {
-    console.log('idx', idx, e.currentTarget.naturalHeight);
     setImgHeight((prevImgHeights) => [
       ...prevImgHeights,
       { idx: idx, height: e.currentTarget.naturalHeight },
@@ -58,12 +51,6 @@ const SingleChapter = ({ chapter }) => {
       { idx: idx, width: e.currentTarget.naturalWidth },
     ]);
   };
-
-  useEffect(() => {
-    // Your logic to set image height and width after loading
-    // console.log('imgHeight', imgHeight)
-    // console.log('imgWidth', imgWidth)
-  }, [imgHeight, imgWidth]);
 
   const handleSelectedChapter = (e) => {
     const selectedOption = e.target.options.selectedIndex; // gets selected chapter

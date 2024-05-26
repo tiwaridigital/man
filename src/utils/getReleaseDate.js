@@ -83,7 +83,6 @@ Oct 21, 23
   // Initialize variables to store the chapter and release date
   let chapter1Text = null
   let releaseDate = null
-  console.log('chapter1Text', chapter1Text)
 
   // Iterate through the lines to find "Chapter 1" and its release date
   for (let i = 0; i < lines.length; i++) {
@@ -98,8 +97,6 @@ Oct 21, 23
 
   // Check if "Chapter 1" was found and display it along with the release date
   if (chapter1Text) {
-    console.log('chapter1Text', chapter1Text)
-    console.log('Release Date:', releaseDate)
     return releaseDate
   } else {
     console.log('Chapter 1 not found.')

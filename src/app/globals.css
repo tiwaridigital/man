@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: Avenir, sans-serif;
   font-size: 16px;
   line-height: 1;
   font-weight: 500;
@@ -22,6 +23,10 @@
   --pink: #da2f68;
   --orange: #f89e00;
   --gradient: linear-gradient(98.37deg, #f89e00 0.99%, #da2f68 100%);
+}
+
+body {
+  font-family: "Avenir", sans-serif !important;
 }
 
 #root {

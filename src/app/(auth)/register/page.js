@@ -1,17 +1,16 @@
-import Register from '@/components/auth/Register/Register'
-import { verifyCookie } from '@/lib/cookies'
-import { redirect } from 'next/navigation'
-import React from 'react'
+import Register from '@/components/auth/Register/Register';
+import { verifyCookie } from '@/lib/cookies';
+import { redirect } from 'next/navigation';
+import React from 'react';
 
 const Page = async () => {
-  const isUserLoggedIn = await verifyCookie()
-  console.log('isUserLoggedIn', isUserLoggedIn)
+  const isUserLoggedIn = await verifyCookie();
 
   if (isUserLoggedIn.user.hasOwnProperty('userId')) {
     // User is logged in
-    redirect('/admin')
+    redirect('/admin');
   }
-  return <Register />
-}
+  return <Register />;
+};
 
-export default Page
+export default Page;

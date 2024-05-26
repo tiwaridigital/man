@@ -58,7 +58,6 @@ const Header = () => {
   };
 
   const openMobileMenu = () => {
-    console.log('openMobileMenu');
     setMobileMenu(true);
     setShowSearch(false);
   };
@@ -100,28 +99,6 @@ const Header = () => {
         </div>
 
         <ul className="menuItems">
-          {/*{menuItems.map((menu, idx) => (*/}
-          {/*  <>*/}
-          {/*    {menu.type === 'search' ? (*/}
-          {/*      <li*/}
-          {/*        key={idx}*/}
-          {/*        className="menuItem"*/}
-          {/*        onClick={() => {*/}
-          {/*          menu.type === 'search' && setShowSearch(!showSearch);*/}
-          {/*          setMobileMenu(false);*/}
-          {/*        }}*/}
-          {/*      >*/}
-          {/*        {menu.name}*/}
-          {/*      </li>*/}
-          {/*    ) : (*/}
-          {/*      <li className="menuItem" key={idx}>*/}
-          {/*        <Link href={'/explore'} className="block" key={idx}>*/}
-          {/*          {menu.name}*/}
-          {/*        </Link>*/}
-          {/*      </li>*/}
-          {/*    )}*/}
-          {/*  </>*/}
-          {/*))}*/}
           <li className="menuItem">
             <Link href={'/explore'}>Explore</Link>
           </li>
@@ -157,7 +134,7 @@ const Header = () => {
             <div className="searchInput">
               <input
                 type="text"
-                placeholder="Search for a movie or tv show...."
+                placeholder="Search a manga of your choice...."
                 onKeyUp={handleSearchQuery}
                 onChange={(e) => setQuery(e.target.value)}
               />

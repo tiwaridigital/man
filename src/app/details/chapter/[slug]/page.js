@@ -21,7 +21,6 @@ export async function generateMetadata({ params }, parent) {
 
 const Page = async ({ params }) => {
   const chapterData = await fetchSingleChapter(params.slug);
-
   return (
     <div>
       <SingleChapter chapter={chapterData} />

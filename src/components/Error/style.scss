@@ -1,0 +1,136 @@
+@import '../../mixins.scss';
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+  text-align: center;
+}
+
+.error-page {
+  margin: 0 auto;
+
+  &__heading {
+    &-title {
+      text-transform: capitalize;
+      font-size: var(--fs-heading);
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+
+    &-desciption {
+      margin-top: 10px;
+      font-size: var(--fs-text);
+      font-weight: 200;
+      margin-top: 25px;
+    }
+  }
+
+  &__button {
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgb(41, 72, 255);
+    font-size: var(--fs-button);
+    font-weight: 200;
+    padding: var(--button-padding);
+    border-radius: 15px;
+    box-shadow: 0px 7px 0px -2px rgb(41, 72, 255);
+    transition: all 0.3s ease-in-out;
+    text-transform: capitalize;
+
+    &:hover {
+      box-shadow: none;
+      background-color: rgb(41, 72, 255);
+      color: #fff;
+    }
+  }
+}
+
+.eyes {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.eye {
+  width: var(--eye-size);
+  height: var(--eye-size);
+  background-color: rgb(41, 72, 255);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+
+  &__pupil {
+    width: var(--pupil-size);
+    height: var(--pupil-size);
+    background-color: var(--eye-pupil-color);
+    border-radius: 50%;
+    animation: movePupil 2s infinite ease-in-out;
+    transform-origin: center center;
+
+    /*
+      To reverse the animation of the right eye, uncomment this.
+      */
+    // &--right {
+    // 	animation-direction: reverse;
+    // }
+  }
+
+  @keyframes movePupil {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(-10px, -10px);
+    }
+    50% {
+      transform: translate(10px, 10px);
+    }
+    75% {
+      transform: translate(-10px, 10px);
+    }
+  }
+}
+
+.error-heading-container {
+  p {
+    color: white;
+    margin-top: -30px;
+  }
+}
+
+.error-heading {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  color: rgb(41, 72, 255);
+  text-align: center !important;
+  margin-top: 120px !important;
+  font-size: 150px !important;
+  height: initial !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.015em;
+  line-height: 1.2;
+  text-align: left;
+  margin-right: 0px;
+  width: auto;
+  margin-bottom: 0px;
+  position: relative;
+  margin-left: 0px;
+  color: rgb(41, 72, 255);
+  margin-top: -30px !important;
+
+  .font-white {
+    color: white !important;
+  }
+
+  @include md {
+    font-size: 320px !important;
+  }
+}
+
+.error-description {
+  color: white !important;
+  line-height: 32px !important;
+  margin-top: 0 !important;
+}

@@ -22,11 +22,9 @@ const IncompleteUpload = () => {
     const id = 'hcPd9DU4IcfM8v35xRW8go';
     const query = `*[_type == "incompleteManga" && _id == "${id}"]`;
     const mangaResult = await sanityClient.fetch(query);
-    console.log('manga result', mangaResult);
   };
 
   const handleDataFetching_Insertion = async (mangaResult) => {
-    console.log('handleSources');
     /*
      * First Fetch The Manga Using fetchDataServerAction Function, which is a => Server Action
      * i.e. function based on 'use server' method -> where you can call other server functions
@@ -47,15 +45,12 @@ const IncompleteUpload = () => {
   };
 
   const createChapters = async (detail_manga, mangaResult, chapterImages) => {
-    console.log('mangaResult', mangaResult);
-    console.log('detail_manga', detail_manga);
     /*
      * Create Chapter Now => After Manga is Created
      */
     let chaptersArr = detail_manga.chapters
       .slice(mangaResult.completedChapters)
       .map((x, idx) => {
-        console.log('chaptersArr idx', idx);
         return {
           title: x.title,
           url: mangaResult._id,
@@ -69,12 +64,9 @@ const IncompleteUpload = () => {
         };
       });
 
-    console.log('chaptersArr', chaptersArr);
-
     let count = 0;
     for (const x of chaptersArr) {
       const idx = chaptersArr.indexOf(x); // gets current idx
-      console.log('idx', idx);
       const chapterObj = {
         _type: 'chapters',
         slug: slugify(
@@ -100,7 +92,6 @@ const IncompleteUpload = () => {
       };
 
       const chapterResult = await sanityClient.create(chapterObj);
-      console.log('chapterResult', chapterResult);
       count++;
     }
 
@@ -151,8 +142,6 @@ const InCompleteMangas = ({ handleDataFetching_Insertion }) => {
   useEffect(() => {
     fetchMangas();
   }, []);
-
-  console.log('mangas', mangas);
 
   return (
     <>
