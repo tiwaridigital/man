@@ -1,13 +1,6 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-// import { useParams } from 'react-router-dom'
-// import InfiniteScroll from 'react-infinite-scroll-component'
-import Select from 'react-select';
-
+import React, { useState, useEffect, useCallback } from 'react';
 import './style.scss';
-
-// import useFetch from '../../hooks/useFetch'
-// import { fetchMoviesFromApi } from '../../utils/api'
 import MovieCard from '../../components/movieCard/MovieCard';
 import Spinner from '../../components/spinner/Spinner';
 import ContentWrapper from '../contentWrapper/ContentWrapper';
@@ -16,22 +9,6 @@ import Status from '../filters/Status/Status';
 import DownArrow from '../../../public/assets/icons/DownArrow';
 import Added from '../filters/Added/Added';
 import Pagination from '../pagination/Pagination';
-// import Pagination from '../pagination/Pagination'
-
-let filters = {};
-
-const sortbyData = [
-  { value: 'popularity.desc', label: 'Popularity Descending' },
-  { value: 'popularity.asc', label: 'Popularity Ascending' },
-  { value: 'vote_average.desc', label: 'Rating Descending' },
-  { value: 'vote_average.asc', label: 'Rating Ascending' },
-  {
-    value: 'primary_release_date.desc',
-    label: 'Release Date Descending',
-  },
-  { value: 'primary_release_date.asc', label: 'Release Date Ascending' },
-  { value: 'original_title.asc', label: 'Title (A-Z)' },
-];
 
 const Explore = ({ manga }) => {
   const [data, setData] = useState([]);
@@ -41,11 +18,8 @@ const Explore = ({ manga }) => {
   const [sortby, setSortby] = useState(null);
   const { mediaType } = 'movies';
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [showGenres, setShowGenres] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(null);
-  const [showStatus, setShowStatus] = useState(false);
   const [selectedAdded, setSelectedAdded] = useState(null);
-  const [showAdded, setShowAdded] = useState(false);
   const [showFilters, setShowFilters] = useState({
     genres: false,
     status: false,
@@ -56,7 +30,6 @@ const Explore = ({ manga }) => {
    */
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(data?.length / itemsPerPage);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const endIdx = currentPage * itemsPerPage;
   const startIdx = endIdx - itemsPerPage;
@@ -65,68 +38,10 @@ const Explore = ({ manga }) => {
     setData([...manga]);
   }, [manga]);
 
-  // const { data: genresData } = useFetch(`/genre/${mediaType}/list`)
-
-  // const fetchInitialData = () => {
-  //   setLoading(true)
-  //   fetchMoviesFromApi(`/discover/${mediaType}`, filters).then((res) => {
-  //     setData(res)
-  //     setPageNum((prev) => prev + 1)
-  //     setLoading(false)
-  //   })
-  // }
-
-  // const fetchNextPageData = () => {
-  //   fetchMoviesFromApi(`/discover/${mediaType}?page=${pageNum}`, filters).then(
-  //     (res) => {
-  //       if (data?.results) {
-  //         setData({
-  //           ...data,
-  //           results: [...data?.results, ...res.results],
-  //         })
-  //       } else {
-  //         setData(res)
-  //       }
-  //       setPageNum((prev) => prev + 1)
-  //     }
-  //   )
-  // }
-
   useEffect(() => {
-    filters = {};
-    // setData(null)
     setPageNum(1);
     setSortby(null);
-    // setGenre(null)
-    // fetchInitialData()
   }, [mediaType]);
-
-  const onChange = (selectedItems, action) => {
-    if (action.name === 'sortby') {
-      setSortby(selectedItems);
-      if (action.action !== 'clear') {
-        filters.sort_by = selectedItems.value;
-      } else {
-        delete filters.sort_by;
-      }
-    }
-
-    if (action.name === 'genres') {
-      setGenre(selectedItems);
-      const genresLabel = genre.map((x) => x.label);
-      const temp = data.filter((item) => item.genres.includes(genresLabel));
-      if (action.action !== 'clear') {
-        // let genreId = selectedItems.map((g) => g.id)
-        // genreId = JSON.stringify(genreId).slice(1, -1)
-        // filters.with_genres = genreId
-      } else {
-        delete filters.with_genres;
-      }
-    }
-
-    setPageNum(1);
-    // fetchInitialData()
-  };
 
   const handleShowFilters = (btnName) => {
     if (btnName === 'genres') {
@@ -140,69 +55,80 @@ const Explore = ({ manga }) => {
     }
   };
 
-  const sortGenres = (e) => {
-    const filteredData = manga.filter((item) =>
-      item.genres.some((genre) => selectedGenres.includes(genre)),
-    );
-    setData(filteredData);
+  const sortGenres = useCallback(
+    (e) => {
+      const filteredData = manga.filter((item) =>
+        item.genres.some((genre) => selectedGenres.includes(genre)),
+      );
+      setData(filteredData);
 
-    if (selectedGenres.length == 0) {
-      setData([...manga]);
-    }
-  };
+      if (selectedGenres.length == 0) {
+        setData([...manga]);
+      }
+    },
+    [manga, selectedGenres, setData],
+  );
 
-  const filterStatus = (e) => {
-    const filteredData = manga.filter((item) => item.status === selectedStatus);
-    setData(filteredData);
+  const filterStatus = useCallback(
+    (e) => {
+      const filteredData = manga.filter(
+        (item) => item.status === selectedStatus,
+      );
+      setData(filteredData);
 
-    if (!selectedStatus) {
-      setData([...manga]);
-    }
-  };
+      if (!selectedStatus) {
+        setData([...manga]);
+      }
+    },
+    [manga, setData, selectedStatus],
+  );
 
-  const filterAdded = (e) => {
-    let filteredData = [];
-    if (selectedAdded === 'az') {
-      //a-z sorting
-      filteredData = manga.sort((a, b) => {
-        const nameA = a.title.toUpperCase();
-        const nameB = b.title.toUpperCase();
+  const filterAdded = useCallback(
+    (e) => {
+      let filteredData = [];
+      if (selectedAdded === 'az') {
+        //a-z sorting
+        filteredData = manga.sort((a, b) => {
+          const nameA = a.title.toUpperCase();
+          const nameB = b.title.toUpperCase();
 
-        if (nameA < nameB) {
-          return -1;
-        }
+          if (nameA < nameB) {
+            return -1;
+          }
 
-        if (nameA > nameB) {
-          return 1;
-        }
+          if (nameA > nameB) {
+            return 1;
+          }
 
-        // Names are equal
-        return 0;
-      });
-    } else if (selectedAdded === 'za') {
-      //a-z sorting
-      filteredData = manga.sort((a, b) => {
-        const nameA = a.title.toUpperCase();
-        const nameB = b.title.toUpperCase();
+          // Names are equal
+          return 0;
+        });
+      } else if (selectedAdded === 'za') {
+        //a-z sorting
+        filteredData = manga.sort((a, b) => {
+          const nameA = a.title.toUpperCase();
+          const nameB = b.title.toUpperCase();
 
-        if (nameA > nameB) {
-          return -1;
-        }
+          if (nameA > nameB) {
+            return -1;
+          }
 
-        if (nameA < nameB) {
-          return 1;
-        }
+          if (nameA < nameB) {
+            return 1;
+          }
 
-        // Names are equal
-        return 0;
-      });
-    }
-    setData(filteredData);
+          // Names are equal
+          return 0;
+        });
+      }
+      setData(filteredData);
 
-    if (!selectedAdded) {
-      setData([...manga]);
-    }
-  };
+      if (!selectedAdded) {
+        setData([...manga]);
+      }
+    },
+    [selectedAdded, manga, setData],
+  );
 
   return (
     <div className="explorePage ">

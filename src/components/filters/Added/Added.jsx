@@ -18,7 +18,7 @@ const Added = ({ selectedAdded, setSelectedAdded, onChange, show }) => {
   useEffect(() => {
     // This effect will run whenever selectedGenres changes
     onChange();
-  }, [selectedAdded]);
+  }, [selectedAdded, onChange]);
 
   return (
     <>

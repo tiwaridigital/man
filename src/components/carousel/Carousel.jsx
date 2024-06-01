@@ -1,15 +1,12 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import './style.scss';
 import dayjs from 'dayjs';
-
 import ContentWrapper from '../contentWrapper/ContentWrapper';
 import Img from '../lazyLoadImage/Img';
 import PosterFallback from '../../assets/no-poster.png';
 import CircleRating from '../circleRating/CircleRating';
 import Genres from '../genres/Genres';
 import Link from 'next/link';
-import LeftArrow from '../../../public/assets/icons/LeftArrow';
-import RightArrow from '../../../public/assets/icons/RightArrow';
 
 const Carousel = ({
   data,
@@ -18,23 +15,6 @@ const Carousel = ({
   title = 'Ujjwal Tiwari',
   carouselContainer,
 }) => {
-  // const carouselContainer = useRef(null)
-  // const { url } = useSelector((state) => state.home)
-  // const navigate = useNavigate()
-
-  // const navigation = (direction) => {
-  //   const container = carouselContainer.current
-
-  //   const scrollAmount =
-  //     direction === 'left'
-  //       ? container.scrollLeft - (container.offsetWidth + 20)
-  //       : container.scrollLeft + (container.offsetWidth + 20)
-
-  //   container.scrollTo({
-  //     left: scrollAmount,
-  //     behavior: 'smooth',
-  //   })
-  // }
   const skeletonItem = () => {
     return (
       <div className="skeletonItem">

@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import Bookmark from '../../../public/assets/icons/Bookmark';
+import React, { useState } from 'react';
 import Search from '../../../public/assets/icons/Search';
 
 const ChaptersList = ({ chapters }) => {

@@ -1,15 +1,12 @@
 import React from 'react';
 import dayjs from 'dayjs';
-
 import './style.scss';
 import Img from '../lazyLoadImage/Img';
 import CircleRating from '../circleRating/CircleRating';
 import Genres from '../genres/Genres';
-import PosterFallback from '../../assets/no-poster.png';
 import Link from 'next/link';
 
 const MovieCard = ({ data, fromSearch, mediaType, style }) => {
-  // const { url } = useSelector((state) => state.home)
   return (
     <div className={`movieCard ${style}`}>
       <Link href={`/manga/${data.slug}`}>

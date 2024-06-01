@@ -1,6 +1,6 @@
 'use client';
 import ContentWrapper from '@/components/contentWrapper/ContentWrapper';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const Login = () => {

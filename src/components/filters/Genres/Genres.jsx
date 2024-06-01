@@ -22,7 +22,7 @@ const Genres = ({ selectedGenres, setSelectedGenres, onChange, show }) => {
   useEffect(() => {
     // This effect will run whenever selectedGenres changes
     onChange();
-  }, [selectedGenres]);
+  }, [selectedGenres, onChange]);
 
   return (
     <>

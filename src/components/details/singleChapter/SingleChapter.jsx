@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ContentWrapper from '../../contentWrapper/ContentWrapper';
 import './style.scss';
 import BreadCrumb from '@/components/breadCrumb/BreadCrumb';
@@ -149,34 +149,19 @@ const SingleChapter = ({ chapter }) => {
                   className={`backdrop-img ${
                     idx > 0 ? 'md:w-[800px]' : 'md:w-full'
                   } mb-6`}
-                  // style={{
-                  //   width: imgWidth[idx]?.width || 800,
-                  //   height: imgHeight[idx]?.height || 500,
-                  // }}
                 >
                   {/* <Img src={item.src_origin} alt='' /> */}
                   <Image
                     src={item.src_origin}
                     alt=""
-                    // fill
-                    // width={imgWidth[idx]?.width || 800}
-                    // height={imgHeight[idx]?.height || 500}
                     width={800}
                     height={500}
                     placeholder="empty"
                     blurDataURL="data:image/jpeg..."
-                    // width='0'
-                    // height='0'
-                    // sizes='80vw'
                     style={{ width: '100%', height: 'auto' }}
                     priority={idx === 0 ? true : false}
                     onLoad={(e) => handleimgAspectRatio(e, idx)}
                     unoptimized
-                    // style={{
-                    //   maxWidth: '100%',
-                    //   width: '100%',
-                    //   height: 'auto',
-                    // }}
                   />
                 </div>
               );

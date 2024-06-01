@@ -1,15 +1,8 @@
 import React from 'react';
-// import {
-//   FaFacebookF,
-//   FaInstagram,
-//   FaTwitter,
-//   FaLinkedin,
-// } from 'react-icons/fa';
-
 import ContentWrapper from '../contentWrapper/ContentWrapper';
-import logo from '/public/logo.svg';
 import './style.scss';
 import Link from 'next/link';
+
 const Footer = () => {
   const menu = [
     {
@@ -35,21 +28,6 @@ const Footer = () => {
             </li>
           ))}
         </ul>
-
-        {/* <div className="socialIcons">
-          <span className="icon">
-            <FaFacebookF />
-          </span>
-          <span className="icon">
-            <FaInstagram />
-          </span>
-          <span className="icon">
-            <FaTwitter />
-          </span>
-          <span className="icon">
-            <FaLinkedin />
-          </span>
-        </div> */}
       </ContentWrapper>
     </footer>
   );

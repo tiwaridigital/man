@@ -20,7 +20,6 @@ const BannerSkelton = () => {
         </ContentWrapper>
       </div>
     </div>
-    // <p className='text-[100px]'>This is a Loader</p>
   );
 };
 

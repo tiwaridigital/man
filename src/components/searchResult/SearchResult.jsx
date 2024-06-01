@@ -2,7 +2,6 @@
 import React from 'react';
 import ContentWrapper from '../../components/contentWrapper/ContentWrapper';
 import Spinner from '../../components/spinner/Spinner';
-
 import './style.scss';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -11,6 +10,7 @@ import client from '../../../client';
 import SEARCH_MANGA_QUERY from '@/graphql/client/manga/SearchMangaQuery.gql';
 import { useSearchParams } from 'next/navigation';
 import Error404 from '../Error/Error404';
+
 const SearchResult = () => {
   const params = useSearchParams().get('s');
   const [data, setData] = useState(null);

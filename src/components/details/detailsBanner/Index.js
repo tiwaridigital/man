@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
-
 import './style.scss';
 import Genres from '../../genres/Genres';
 import CircleRating from '../../circleRating/CircleRating';
@@ -34,23 +33,6 @@ const DetailsBanner = ({ manga }) => {
     setChapters([...arr]);
   };
 
-  const downloadImage = () => {
-    // Replace 'image_url' with the actual URL of the image you want to download.
-    const image_url =
-      'https://cdn.toonily.com/chapters/manga_601d7ee072504/0bc51bcbe6d2b758ae9f5ab5ba298da5/Who%20Made%20Me%20a%20Princess_00.jpg';
-
-    // Create a temporary anchor element.
-    const anchor = document.createElement('a');
-    anchor.href = image_url;
-    anchor.download = 'downloaded_image.jpg'; // Specify the desired filename.
-
-    // Trigger a click event on the anchor to start the download.
-    anchor.click();
-
-    // Cleanup: remove the anchor element.
-    document.body.removeChild(anchor);
-  };
-
   return (
     <>
       {manga ? (
@@ -58,9 +40,6 @@ const DetailsBanner = ({ manga }) => {
           <div className="backdrop-img">
             <Image
               src={mangaBg}
-              // className='lazy-load-image-background'
-              // placeholder="blur"
-              // blurDataURL={mangaBg.src}
               sizes="100vw"
               fill
               alt=""

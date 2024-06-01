@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Select from 'react-select';
 
 const Modal = ({
   open,
   setOpen,
   options,
-  onChange,
   setSrcUrl,
   setSelectedSrc,
   fetchData,
@@ -37,7 +36,6 @@ const Modal = ({
                         <Select
                           options={options}
                           placeholder="Select Source..."
-                          // onChange={onChange}
                           onChange={(e) => setSelectedSrc(e.value)}
                         />
                       </div>

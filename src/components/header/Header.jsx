@@ -20,23 +20,6 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  useEffect(() => {
-    window.addEventListener('scroll', controlNavbar);
-
-    return () => {
-      window.removeEventListener('scroll', controlNavbar);
-    };
-  }, [lastScrollY]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  const menuItems = [
-    { name: 'Movies', type: 'movie' },
-    { name: 'TV Shows', type: 'tv' },
-    { name: <Search width={20} height={20} />, type: 'search' },
-  ];
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
@@ -51,6 +34,24 @@ const Header = () => {
     }
     setLastScrollY(window.scrollY);
   };
+
+  useEffect(() => {
+    window.addEventListener('scroll', controlNavbar);
+
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY, controlNavbar]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  const menuItems = [
+    { name: 'Movies', type: 'movie' },
+    { name: 'TV Shows', type: 'tv' },
+    { name: <Search width={20} height={20} />, type: 'search' },
+  ];
 
   const openSearch = () => {
     setShowSearch(!showSearch);
