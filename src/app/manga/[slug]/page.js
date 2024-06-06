@@ -12,11 +12,11 @@ export async function generateMetadata({ params, searchParams }, parent) {
   // const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: `${manga.title} - Manga Story`,
+    title: `${manga.title} Manga Online Free - Manga Story`,
     openGraph: {
-      images: ['/some-specific-page-image.jpg', manga.coverImage],
+      images: [manga.coverImage],
     },
-    description: manga.description.slice(0, 160),
+    description: `${manga.title} - ${manga.description.slice(0, 160)}`,
   };
 }
 
