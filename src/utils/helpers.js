@@ -31,6 +31,12 @@ export const tagsMaker = (title) => {
   );
 };
 
+export const metaKeywordsMaker = (title) => {
+  return `read ${title.toLowerCase()}, ${title} english, ${title} eng,
+      download
+      ${title} eng, read ${title} online`
+}
+
 export const getFileExtension = (file) => {
   const fileSplit = file.split('.');
   const fileExtension = fileSplit[fileSplit.length - 1];

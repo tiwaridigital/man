@@ -3,6 +3,7 @@ import React from 'react';
 import fetchSingleManga from '../../../utils/data/fetchSingleManga';
 import DetailsBanner from '@/components/details/detailsBanner/Index';
 import BreadCrumb from '@/components/breadCrumb/BreadCrumb';
+import { metaKeywordsMaker, tagsMaker } from '@/utils/helpers';
 
 export async function generateMetadata({ params, searchParams }, parent) {
   // fetch data
@@ -17,6 +18,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
       images: [manga.coverImage],
     },
     description: `${manga.title} - ${manga.description.slice(0, 160)}`,
+    keywords:  metaKeywordsMaker(manga.title)
   };
 }
 

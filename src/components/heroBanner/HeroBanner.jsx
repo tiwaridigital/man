@@ -25,11 +25,9 @@ const HeroBanner = () => {
 
   return (
     <div className="heroBanner">
-      {/* {!loading && ( */}
       <div className="backdrop-img">
         <Img src={background} alt="backdrop" />
       </div>
-      {/* )} */}
       <div className="opacity-layer"></div>
 
       <ContentWrapper>

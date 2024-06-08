@@ -3,6 +3,7 @@ import React from 'react';
 import SingleChapter from '@/components/details/singleChapter/SingleChapter';
 import fetchSingleChapter from '@/utils/data/fetchSingleChapter';
 import fetchSingleManga from '@/utils/data/fetchSingleManga';
+import { tagsMaker } from '@/utils/helpers';
 export async function generateMetadata({ params }, parent) {
   // fetch data
   const chapterData = await fetchSingleChapter(params.slug);
