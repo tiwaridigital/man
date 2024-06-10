@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97be58df-c36a-43f4-8816-ccf94011f924" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/details/chapter/[slug]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/details/chapter/[slug]/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/manga/[slug]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/manga/[slug]/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/heroBanner/HeroBanner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/heroBanner/HeroBanner.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="97be58df-c36a-43f4-8816-ccf94011f924" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -151,7 +145,7 @@
       <workItem from="1707231771866" duration="44000" />
       <workItem from="1707237914256" duration="2839000" />
       <workItem from="1717700666004" duration="899000" />
-      <workItem from="1717873842351" duration="336000" />
+      <workItem from="1717873842351" duration="521000" />
     </task>
     <servers />
   </component>
