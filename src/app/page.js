@@ -6,7 +6,12 @@ import MangaCardsContainer from '@/components/mangaCardsContainer/MangaCardsCont
 
 export const metadata = {
   title: 'Manga - Best Comics, High Quality Comics & Manga',
+  description:
+    'Read manga online free at MangaStory, mangadex, update fastest, synthesized 24h free with high-quality images. We hope to bring you happy moments',
+  keywords:
+    'read manga online, asuratoon manga, mangadex, read manhua, manga online, free manga, manga reader, manga scans, manga raw, manga, manhwa, manhua, mangastory, mangastory.org',
 };
+
 export default async function Home() {
   noStore();
   const data = await fetchAllMangas();

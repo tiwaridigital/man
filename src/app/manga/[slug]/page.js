@@ -13,7 +13,12 @@ export async function generateMetadata({ params, searchParams }, parent) {
   // const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: `${manga.title} Manga Online Free - Manga Story`,
+    metadataBase: new URL(
+      process.env.NODE_ENV !== 'production'
+        ? 'http://localhost:3000'
+        : 'https://mangastory.org',
+    ),
+    title: `${manga.title} - Manga Story`,
     openGraph: {
       images: [manga.coverImage],
     },
@@ -26,7 +31,6 @@ const Page = async ({ params }) => {
   const manga = await fetchSingleManga(params.slug);
   return (
     <div>
-      {/*<DetailsBannerDex />*/}
       <DetailsBanner manga={manga} />
     </div>
   );
