@@ -3,7 +3,7 @@ import './globals.css';
 import '../index.scss';
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
-
+import { Analytics } from '@vercel/analytics/react';
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({
   subsets: ['latin'],
@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Header />
         {children}
+        <Analytics />
         <Footer />
       </body>
     </html>
